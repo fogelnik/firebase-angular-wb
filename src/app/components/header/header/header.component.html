@@ -1,0 +1,54 @@
+<div class="header" >
+  <div class="header__wrapper">
+    <div class="header__content">
+      <div class="header__top">
+        <ul class="header__top-menu">
+          <li class="header__top-menu-geo">
+         <span class="header__top-menu-geo-icon">
+
+         </span>
+            <span>Минск</span>
+          </li>
+          <li class="header__top-menu-sale-on-wb">
+            Продавайте на Wildberries
+          </li>
+          <li class="header__top-menu-work-in-wb">
+            Работа в Wildberries
+          </li>
+        </ul>
+        <div class="header__top-menu-country">
+          <span>BYN</span>
+        </div>
+
+      </div>
+      <div class="header__bottom">
+        <div class="header__bottom-block-burger">
+          <h1>wildberries</h1>
+          <div class="header__bottom-block-burger-menu">
+            <span class="burger-line-1"></span>
+            <span class="burger-line-2"></span>
+            <span class="burger-line-3"></span>
+          </div>
+        </div>
+        <div class="header__bottom-block-search">
+          <input class="header__bottom-block-search-input" type="search" placeholder="Найти на Wildberries">
+        </div>
+        <div  class="header__bottom-block-nav" >
+          <div  *ngIf="isAuthenticated ? true : false" class="header__bottom-block-nav-orders" >
+            Заказы
+          </div>
+          <div class="header__bottom-block-nav-addresses">
+            {{isAuthenticated ? 'Избранное' : 'Адреса'}}
+          </div>
+
+          <div class="header__bottom-block-nav-sign-in" >
+            {{isAuthenticated ? 'Профиль' : 'Войти'}}
+          </div>
+          <div class="header__bottom-block-nav-basket">
+              Корзина
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

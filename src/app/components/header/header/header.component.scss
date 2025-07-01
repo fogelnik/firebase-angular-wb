@@ -1,0 +1,294 @@
+/* Указываем box sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Убираем внутренние отступы */
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+/* Убираем внешние отступы */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Выставляем основные настройки по-умолчанию для body */
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+/* Элементы a, у которых нет класса, сбрасываем до дефолтных стилей */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Упрощаем работу с изображениями */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Указываем понятную периодичность в потоке данных у article*/
+article > * + * {
+  margin-top: 1em;
+}
+
+/* Наследуем шрифты для инпутов и кнопок */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Удаляем все анимации и переходы для людей, которые предпочитай их не использовать */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.header{
+  background-image: url("https://static-basket-01.wbbasket.ru/vol2/site/i/v3/header/background_oblaka_2025.webp");
+  position: fixed;
+  width: 100%;
+  z-index: 99;
+
+  &__wrapper{
+    max-width: 1440px;
+    padding: 15px 40px;
+    margin: 0 auto;
+  }
+  &__top{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  &__top-menu{
+    display: flex;
+    align-items: center;
+  }
+
+  &__top-menu-geo{
+    display: flex;
+    align-items: center;
+    margin-right: 120px;
+    color: white;
+  }
+  &__top-menu-geo-icon{
+    margin-right: 7px;
+    color: #ce8df6;
+  }
+  &__top-menu-geo-icon img{
+    width: 18px;
+    filter: invert(1);
+  }
+
+
+  &__top-menu-sale-on-wb{
+    color: #ce8df6;
+    margin: 0 20px 0 220px;
+    cursor: pointer;
+    transition: .2s;
+  }
+  &__top-menu-sale-on-wb:hover{
+    color: #faeffd;
+  }
+  &__top-menu-work-in-wb{
+    color: #ce8df6;
+    cursor: pointer;
+    transition: .2s;
+  }
+  &__top-menu-work-in-wb:hover{
+    color: #f9eeff;
+  }
+  &__top-menu-country{
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    background-color: #963af5;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+  }
+  &__top-menu-country img{
+    width: 18px;
+    margin-right: 5px;
+  }
+
+  &__bottom-block-burger{
+    display: flex;
+    align-items: center;
+  }
+  &__bottom-block-burger h1{
+    color: white;
+    margin-right: 20px;
+    cursor: pointer;
+  }
+  &__bottom-block-burger-menu{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid #d58ef1;
+    width: 58px;
+    height: 58px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .2s;
+  }
+  &__bottom-block-burger-menu:hover{
+    border: 1px solid #ffffff;
+  }
+  .burger-line-1{
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    margin: 0 auto;
+    border-radius: 5px;
+  }
+  .burger-line-2{
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    margin: 8px auto;
+    border-radius: 5px;
+  }
+  .burger-line-3{
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    margin: 0 auto;
+    border-radius: 5px;
+  }
+
+  &__bottom-block-search-input{
+    width: 750px;
+    padding: 20px;
+    border: 0;
+    border-radius: 10px;
+    outline: none;
+  }
+  &__bottom-block-nav{
+    display: flex;
+    align-items: center;
+  }
+  &__bottom-block-nav span:hover{
+    color: #fef1ff;
+    cursor: pointer;
+  }
+  &__bottom-block-nav-addresses{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__bottom-block-nav-addresses img{
+    width: 28px;
+    margin-bottom: 5px;
+    filter: invert(1);
+  }
+  &__bottom-block-nav-sign-in{
+    position: relative;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__bottom-block-nav-sign-in img{
+    width: 28px;
+    margin-bottom: 5px;
+    filter: invert(1);
+  }
+  &__bottom-block-nav-basket{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__bottom-block-nav-basket img{
+    width: 28px;
+    margin-bottom: 5px;
+    filter: invert(1);
+  }
+  &__bottom-block-nav-addresses{
+    cursor: pointer;
+    color: #e9acef;
+    margin-right: 20px;
+    transition: .2s;
+  }
+  &__bottom-block-nav-addresses:hover{
+    color: #fef1ff;
+  }
+  &__bottom-block-nav-sign-in{
+    cursor: pointer;
+    color: #e9acef;
+    margin-right: 20px;
+    transition: .2s;
+  }
+
+  &__bottom-block-nav-basket{
+    position: relative;
+    cursor: pointer;
+    color: #e9acef;
+    margin-right: 20px;
+    transition: .2s;
+  }
+  &__bottom-block-nav-orders{
+    cursor: pointer;
+    color: #e9acef;
+    margin-right: 20px;
+    transition: .2s;
+  }
+  &__bottom-block-nav-orders:hover{
+    color: #fef1ff;
+  }
+  &__bottom-block-nav-basket-count{
+    position: absolute;
+    right: 11px;
+    top: -5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    color: white;
+    font-size: 11px;
+    background-color: orangered;
+  }
+  &__bottom-block-nav-basket:hover{
+    color: #fef1ff;
+  }
+
+  &__bottom{
+    display: flex;
+    justify-content: space-between;
+  }
+}

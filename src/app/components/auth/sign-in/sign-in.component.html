@@ -1,0 +1,26 @@
+<div class="sign-in">
+  <div class="sign-in__page">
+    <div class="sign-in__block">
+      <div class="sign-in__block-title">
+        <h2>Войти или создать профиль</h2>
+      </div>
+      <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="sign-in__form">
+        <div class="sign-in__email-wrapper">
+          <input class="sign-in__form-email" type="email" placeholder="Email" formControlName="email">
+        </div>
+        <div class="sign-in__password-wrapper">
+          <input type="password" class="sign-in__form-password" placeholder="Password" formControlName="password">
+        </div>
+        <button type="submit" class="sign-in__form-btn">Вход</button>
+      </form>
+      <div class="sign-in__additional-features">
+        <button class="sign-in__btn-in-google" (click)="onSignInWithGoogle()" >Вход через Google</button>
+        <p>
+          У вас нет аккаунта?
+        </p>
+        <button class="sign-in__btn-sign-up" [routerLink]="['/auth/sign-up']" >Регистрация</button>
+        <a class="sign-in__link-forgot-password" [routerLink]="['/auth/forgot-password']">Восстановить пароль</a>
+      </div>
+    </div>
+  </div>
+</div>

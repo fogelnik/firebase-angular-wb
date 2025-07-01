@@ -1,0 +1,230 @@
+/* Указываем box sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Убираем внутренние отступы */
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+/* Убираем внешние отступы */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Выставляем основные настройки по-умолчанию для body */
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+/* Элементы a, у которых нет класса, сбрасываем до дефолтных стилей */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Упрощаем работу с изображениями */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Указываем понятную периодичность в потоке данных у article*/
+article > * + * {
+  margin-top: 1em;
+}
+
+/* Наследуем шрифты для инпутов и кнопок */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Удаляем все анимации и переходы для людей, которые предпочитай их не использовать */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.sign-in{
+
+  &__block{
+    display: flex;
+    flex-direction: column;
+    background-color: #fbfbfb;
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 400px;
+    margin: 50px auto;
+  }
+  &__block-title{
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  &__form{
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__alert-danger{
+    background-color: rgba(223, 0, 0, 0.37);
+    padding: 10px 15px;
+    text-align: center;
+    border: 1px solid #8a0000;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  &__form-btn{
+    cursor: pointer;
+    border: 0;
+    padding:10px 15px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px #b3b1b1;
+    transition: .2s;
+    margin-bottom: 15px;
+  }
+  &__form-btn:hover{
+    background-color: #d8d8d8;
+  }
+  &__additional-features{
+    display: flex;
+    flex-direction: column;
+  }
+  &__additional-features p{
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  &__btn-in-google{
+    cursor: pointer;
+    border: 0;
+    padding:10px 15px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px #b3b1b1;
+    transition: .2s;
+    margin-bottom: 20px;
+  }
+  &__btn-in-google:hover{
+    background-color: #d8d8d8;
+  }
+  &__btn-sign-up{
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #ae01ab;
+    border: 0;
+    padding:10px 15px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px #e42ce4;
+    transition: .2s;
+  }
+  &__btn-sign-up:hover{
+    background-color: #950293;
+  }
+  &__link-forgot-password{
+    text-decoration: none;
+    color: #950293;
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    cursor: pointer;
+  }
+  &__link-forgot-password:hover{
+    color: #e602e3;
+  }
+
+  &__password-wrapper {
+    position: relative;
+  }
+  &__form-email{
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    outline: none;
+    width: 100%;
+  }
+  &__form-password {
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    outline: none;
+    width: 100%;
+  }
+  &__show-password {
+    position: absolute;
+    top: 35%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  &__eye-icon {
+    font-size: 18px;
+  }
+  &__email-wrapper {
+    position: relative;
+  }
+  &__clear-email {
+    position: absolute;
+    top: 37%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #ccc;
+  }
+  &__clear-email:hover {
+    color: #999;
+  }
+  &__form-email{
+    color: #0b0b0b;
+    border: 2px solid #8707ff;
+    border-radius: 10px;
+    padding: 10px 25px;
+    background: transparent;
+    margin-top: 10px;
+    margin-bottom: 15px;
+  }
+  &__form-email:active{
+    box-shadow: 2px 2px 15px #8707ff inset;
+    border: 2px solid #6201ba;
+  }
+
+}

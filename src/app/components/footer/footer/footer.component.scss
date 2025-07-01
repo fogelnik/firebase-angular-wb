@@ -1,0 +1,108 @@
+.footer{
+  background-color: #ebecf0;
+  padding: 40px 20px 72px ;
+  text-align: center;
+  color: #0b0b0b;
+
+
+
+  &__wrapper{
+    max-width: 1440px;
+    padding: 15px 40px;
+    margin: 0 auto;
+  }
+  &__container-top{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+  }
+  &__container-top-block{
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-right: 100px;
+  }
+  &__container-top-block-qr{
+    width: 150px;
+    height: 150px;
+  }
+  &__container-top-block h4{
+    margin-bottom: 20px;
+  }
+  &__container-top-block span{
+    cursor: pointer;
+    margin-bottom: 10px;
+    color: #858594;
+    font-size: 14px;
+  }
+  &__container-top-block span:hover{
+    color: #a63afb;
+  }
+
+  &__container-bottom{
+    display: flex;
+    justify-content: space-between;
+  }
+  &__container-bottom-block-info{
+    max-width: 800px;
+    margin-right: 100px;
+    text-align: left;
+  }
+  &__container-bottom-block-info span{
+    color: #858594;
+    font-size: 14px;
+  }
+  &__container-bottom-block span{
+    color: #858594;
+    font-size: 14px;
+  }
+  &__container-bottom-block-link{
+    display: flex;
+    margin-top: 20px;
+    cursor: pointer;
+  }
+  &__container-bottom-block-link div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 36px;
+    width: 36px;
+    background-color: #fdfdfd;
+    margin-right: 10px;
+    border-radius: 10px;
+  }
+
+  &__container-bottom-block-link-youtube img{
+    width: 24px;
+    filter: grayscale(1);
+    transition: .1s;
+  }
+  &__container-bottom-block-link-youtube img:hover{
+    filter: grayscale(0);
+  }
+  &__container-bottom-block-link-telegram img{
+    width: 20px;
+    filter: grayscale(1);
+    transition: .1s;
+  }
+  &__container-bottom-block-link-telegram img:hover{
+    filter: grayscale(0);
+  }
+  &__container-bottom-block-link-ok-ru img{
+    width: 24px;
+    filter: grayscale(1);
+    transition: .1s;
+  }
+  &__container-bottom-block-link-ok-ru img:hover{
+    filter: grayscale(0);
+  }
+  &__container-bottom-block-link-vk img{
+    width: 24px;
+    filter: grayscale(1);
+    transition: .1s;
+  }
+  &__container-bottom-block-link-vk img:hover{
+    filter: grayscale(0);
+  }
+}
