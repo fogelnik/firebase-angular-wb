@@ -13,7 +13,16 @@ export class SignUpComponent {
 
   authForm!: FormGroup; //форма является группой реактивных форм
 
+  errorMessage: string = '';
+  serverError: string = '';
 
+
+  get email(): string{
+    return this.authForm.controls['email'].value
+  }
+  get password(): string{
+    return this.authForm.controls['password'].value
+  }
 
   constructor(private router: Router, private authService: AuthService) {
     this.initForm();
@@ -27,12 +36,26 @@ export class SignUpComponent {
   }
 
   onSubmit() {
-    if(this.authForm.invalid) return
+    if(this.authForm.invalid) return;
 
     const {email, password} = this.authForm.value
     this.authService.signUpWithEmail(email, password)
       .then(() => this.redirectToDashboard())
-      .catch(error => console.error('error:', error))
+      .catch(error => {
+        // console.error('Email sign-in error:', error);
+        if(error instanceof Error){
+          if(error.message.includes('auth/invalid-email')){
+            this.serverError = 'Некорректная почта';
+          }else if(error.message.includes('auth/user-not-found')){
+            this.serverError = 'Пользователь не найден';
+          }else if(error.message.includes('auth/wrong-password')){
+            this.serverError = 'Неверный пароль';
+          }else {
+            this.serverError = 'Ошибка входа. Попробуйте ещё раз.';
+          }
+          this.errorMessage = this.serverError;
+        }
+      })
   }
 
   onSignInWithGoogle() {

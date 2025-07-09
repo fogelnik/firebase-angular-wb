@@ -1,0 +1,124 @@
+<div class="profile">
+  <div class="profile__wrapper">
+      <ul class="profile__nav">
+        <li>Главная</li>
+        <li>Заказы</li>
+        <li>Покупки</li>
+        <li>Избранное</li>
+        <li>Баланс</li>
+        <li>Отзывы и вопросы</li>
+        <li>Еще разделы</li>
+      </ul>
+
+    <div class="profile__main">
+      <div class="profile__user-card">
+        <div class="profile__user-card-content">
+          <div class="profile__user-card-content-user">
+            <div class="profile__user-card-content-user-block">
+              <img class="profile__user-card-content-user-block-img" src="assets/icon/icon-user.png" alt="user">
+              <span>{{userEmail}}</span>
+              <img class="profile__user-card-content-user-block-arrow" src="assets/icon/icon-right-arrow.png" alt="arrow">
+            </div>
+            <div class="profile__user-card-content-notifications">
+              <img src="assets/icon/icon-notification.png" alt="notifications">
+            </div>
+          </div>
+          <div class="profile__user-card-content-block-sale">
+            <div class="profile__user-card-content-block-sale-wb" >
+              <div>
+                <span>WB скидка</span>
+                <img src="assets/icon/icon-right-arrow.png" alt="arrow">
+              </div>
+              <span class="profile__user-card-content-block-sale-percent">до 30%</span>
+            </div>
+            <div class="profile__user-card-content-block-sale-payment">
+                <span>
+                  Оплата при получении
+                </span>
+              <span>
+                До 1 130,00 р.
+              </span>
+            </div>
+          </div>
+          <div class="profile__user-card-content-finance">
+            <span class="profile__user-card-content-title"> Финансы </span>
+            <div class="profile__user-card-content-finance-methods">
+              <span>Способы оплаты</span>
+            </div>
+            <div class="profile__user-card-content-finance-details">
+              <span>Реквизиты</span>
+            </div>
+          </div>
+
+          <div class="profile__user-card-content-finance-control">
+            <span class="profile__user-card-content-finance-control-title">
+              Управление
+            </span>
+            <div class="profile__user-card-content-finance-control-settings">
+              <span>Настройки</span>
+            </div>
+            <div class="profile__user-card-content-finance-control-devices">
+              <span>Ваши устройства</span>
+            </div>
+          </div>
+          <div class="profile__user-card-content-sign-out-btn">
+            <button  (click)="onSignOut()">
+              Выйти
+            </button>
+          </div>
+
+        </div>
+      </div>
+      <div class="profile__main-content">
+        <div class="profile__main-content-balance">
+          <span>0.00 р</span>
+          <span>Баланс</span>
+        </div>
+        <div class="profile__main-content-services">
+          <div class="profile__main-content-favorites">
+            <div>
+              <span>Избранное</span>
+              <span>16 товаров</span>
+            </div>
+          </div>
+          <div class="profile__main-content-purchases">
+            <div>
+              <span>Покупки</span>
+              <span>Смотреть</span>
+            </div>
+          </div>
+          <div class="profile__main-content-grade">
+            <div>
+              <span>Ждут оценки</span>
+              <span>8 товаров</span>
+            </div>
+          </div>
+        </div>
+        <div class="profile__main-content-help">
+          <span class="profile__main-content-help-title">
+            Сервис и помощь
+          </span>
+
+          <div class="profile__main-content-help-blocks">
+              <div>
+                <span>Написать в поддержку</span>
+              </div>
+            <div>
+              <span>Вернуть товар</span>
+            </div>
+            <div>
+              <span>Частые вопросы</span>
+            </div>
+          </div>
+        </div>
+        <div class="profile__main-content-viewing">
+          <span class="profile__main-content-viewing-title">
+            Недавно смотрели
+          </span>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

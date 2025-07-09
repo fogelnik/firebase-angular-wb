@@ -35,4 +35,8 @@ export class AuthService {
   logOut(){
     return signOut(this.auth)
   }
+
+  getCurrentUserEmail(): string | null {
+    return this.auth.currentUser?.email ?? null;
+  }
 }

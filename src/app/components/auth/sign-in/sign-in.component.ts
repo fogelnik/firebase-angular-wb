@@ -6,6 +6,8 @@ import {AuthService} from '../../../services/auth.service';
 
 
 
+
+
 @Component({
   selector: 'app-sign-in',
   standalone: false,
@@ -15,7 +17,16 @@ import {AuthService} from '../../../services/auth.service';
 export class SignInComponent {
 
   authForm!: FormGroup; //форма является группой реактивных форм
-  errorMessage: string = ''
+  errorMessage: string = '';
+  serverError: string = '';
+
+    get email(): string{
+      return this.authForm.controls['email'].value;
+    }
+    get password(): string{
+      return this.authForm.controls['password'].value;
+    }
+
 
   constructor(private router: Router, private authService: AuthService) {
     this.initForm();
@@ -35,13 +46,28 @@ export class SignInComponent {
 
     this.authService.signInWithEmail(email, password)
       .then(() => this.redirectToDashboard())
-      .catch(error => console.error('Email sign-in error:', error))
+      .catch(error => {
+        // console.error('Email sign-in error:', error);
+        if(error instanceof Error){
+          if(error.message.includes('auth/invalid-email')){
+            this.serverError = 'Некорректная почта';
+
+          }else if(error.message.includes('auth/user-not-found')){
+            this.serverError = 'Пользователь не найден';
+          }else if(error.message.includes('auth/wrong-password')){
+            this.serverError = 'Неверный пароль';
+          }else {
+            this.serverError = 'Ошибка входа. Попробуйте ещё раз.';
+          }
+          this.errorMessage = this.serverError;
+        }
+      })
   }
 
   onSignInWithGoogle() {
     this.authService.signInWithGoogle()
       .then(() => this.redirectToDashboard())
-      .catch(error => console.error('Google sign-in error', error))
+      .catch(error => console.error('error:', error))
   }
 
   redirectToDashboard() {

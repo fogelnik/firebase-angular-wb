@@ -79,6 +79,7 @@ select {
 
 .sign-in{
 
+
   &__block{
     display: flex;
     flex-direction: column;
@@ -87,6 +88,8 @@ select {
     padding: 30px;
     max-width: 400px;
     margin: 50px auto;
+
+    font-family: "Forum", sans-serif;
   }
   &__block-title{
     margin-bottom: 20px;
@@ -114,9 +117,17 @@ select {
     transition: .2s;
     margin-bottom: 15px;
   }
+
+
   &__form-btn:hover{
     background-color: #d8d8d8;
   }
+
+  &__form-btn:disabled{
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
   &__additional-features{
     display: flex;
     flex-direction: column;
@@ -167,7 +178,7 @@ select {
   }
   &__form-email{
     padding: 12px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
@@ -175,13 +186,22 @@ select {
     width: 100%;
   }
   &__form-password {
+    position: relative;
     padding: 12px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
     outline: none;
     width: 100%;
+  }
+  &__error{
+    position: absolute;
+    top: 52px;
+    left: 2px;
+    color: #e74c3c;
+    font-size: 12px;
+    margin: 0 0 5px;
   }
   &__show-password {
     position: absolute;
@@ -212,19 +232,6 @@ select {
   }
   &__clear-email:hover {
     color: #999;
-  }
-  &__form-email{
-    color: #0b0b0b;
-    border: 2px solid #8707ff;
-    border-radius: 10px;
-    padding: 10px 25px;
-    background: transparent;
-    margin-top: 10px;
-    margin-bottom: 15px;
-  }
-  &__form-email:active{
-    box-shadow: 2px 2px 15px #8707ff inset;
-    border: 2px solid #6201ba;
   }
 
 }

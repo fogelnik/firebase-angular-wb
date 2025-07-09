@@ -9,11 +9,13 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 import { FooterComponent } from './components/footer/footer/footer.component';
 import { HeaderComponent } from './components/header/header/header.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    WelcomePageComponent
+    WelcomePageComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

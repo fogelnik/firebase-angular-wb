@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {WelcomePageComponent} from './components/welcome-page/welcome-page.component';
 import {AuthGuard, redirectUnauthorizedTo} from '@angular/fire/auth-guard';
-import {Auth} from '@angular/fire/auth';
+import {UserProfileComponent} from './components/user-profile/user-profile.component';
+
+
 
 const redirectToLogin = () => redirectUnauthorizedTo('/auth/sign-in')
 
@@ -20,6 +22,19 @@ const routes: Routes = [
     path: 'dashboard',
     loadChildren: () => import('./components/dashboard/dashboard.module')
       .then(m => m.DashboardModule),
+      canActivate: [AuthGuard],
+      data: {
+        authGuardPipe: redirectToLogin
+      }
+  },
+  {
+    path: 'profile',
+    component: UserProfileComponent,
+
+    canActivate: [AuthGuard],
+    data: {
+      authGuardPipe: redirectToLogin
+    }
   }
 ];
 

@@ -1,6 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {Auth, signOut, user} from "@angular/fire/auth";
-import {Router} from '@angular/router';
+import { Router} from '@angular/router';
 import {AuthService} from '../../../services/auth.service';
 
 @Component({
@@ -11,11 +10,8 @@ import {AuthService} from '../../../services/auth.service';
 })
 export class HomeComponent {
 
-    protected readonly user = user;
-
     private router = inject(Router)
     private authService = inject(AuthService)
-
 
     onSignOut() {
       this.authService.logOut()

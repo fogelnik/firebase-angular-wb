@@ -8,13 +8,21 @@
       <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="sign-up__form">
         <div class="sign-up__email-wrapper">
           <input class="sign-up__form-email" type="email" placeholder="Email" formControlName="email">
+          <div class="sign-up__error" *ngIf="authForm.get('email')?.invalid && authForm.get('email')?.touched">
+            Введите email
+          </div>
         </div>
         <div class="sign-up__password-wrapper">
           <input type="password" class="sign-up__form-password" placeholder="Password" formControlName="password">
-
+          <div class="sign-up__error" *ngIf="authForm.get('password')?.invalid && authForm.get('password')?.touched">
+            Пароль обязателен
+          </div>
         </div>
-        <button type="submit" class="sign-up__form-btn">Регистрация</button>
+        <button type="submit" class="sign-up__form-btn" [disabled]="!authForm.valid">Регистрация</button>
       </form>
+      <div class="sign-up__alert-danger" *ngIf="errorMessage">
+        {{errorMessage}}
+      </div>
       <div class="sign-up__additional-features">
         <button class="sign-up__btn-in-google" (click)="onSignInWithGoogle()" >Регистрация через Google</button>
         <p>

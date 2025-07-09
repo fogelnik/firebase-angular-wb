@@ -4,15 +4,27 @@
       <div class="sign-in__block-title">
         <h2>Войти или создать профиль</h2>
       </div>
+
       <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="sign-in__form">
         <div class="sign-in__email-wrapper">
           <input class="sign-in__form-email" type="email" placeholder="Email" formControlName="email">
+          <div class="sign-in__error" *ngIf="authForm.get('email')?.invalid && authForm.get('email')?.touched">
+            Введите email
+          </div>
         </div>
         <div class="sign-in__password-wrapper">
           <input type="password" class="sign-in__form-password" placeholder="Password" formControlName="password">
+          <div class="sign-in__error" *ngIf="authForm.get('password')?.invalid && authForm.get('password')?.touched">
+            Пароль обязателен
+          </div>
         </div>
-        <button type="submit" class="sign-in__form-btn">Вход</button>
+        <button type="submit" class="sign-in__form-btn" [disabled]="!authForm.valid">Вход</button>
       </form>
+
+      <div class="sign-in__alert-danger" *ngIf="errorMessage">
+        {{errorMessage}}
+      </div>
+
       <div class="sign-in__additional-features">
         <button class="sign-in__btn-in-google" (click)="onSignInWithGoogle()" >Вход через Google</button>
         <p>

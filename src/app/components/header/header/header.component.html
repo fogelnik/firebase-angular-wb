@@ -5,7 +5,7 @@
         <ul class="header__top-menu">
           <li class="header__top-menu-geo">
          <span class="header__top-menu-geo-icon">
-
+            <img src="assets/icon-location.png">
          </span>
             <span>Минск</span>
           </li>
@@ -35,16 +35,20 @@
         </div>
         <div  class="header__bottom-block-nav" >
           <div  *ngIf="isAuthenticated ? true : false" class="header__bottom-block-nav-orders" >
+            <img src="assets/icon/icon-logistics.png">
             Заказы
           </div>
           <div class="header__bottom-block-nav-addresses">
+            <img src="assets/icon-location.png">
             {{isAuthenticated ? 'Избранное' : 'Адреса'}}
           </div>
 
-          <div class="header__bottom-block-nav-sign-in" >
+          <div class="header__bottom-block-nav-sign-in" (click)="navigateUser()" >
+            <img src="assets/user.png" alt="User">
             {{isAuthenticated ? 'Профиль' : 'Войти'}}
           </div>
           <div class="header__bottom-block-nav-basket">
+            <img src="assets/icon/icons8-shopping-cart-32.png" alt="Shopping">
               Корзина
           </div>
         </div>

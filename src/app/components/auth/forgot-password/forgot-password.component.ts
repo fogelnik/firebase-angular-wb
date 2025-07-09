@@ -17,6 +17,10 @@ export class ForgotPasswordComponent {
   router = inject(Router)
   isPasswordResetEmailSent: boolean = false;
 
+  get email(): string{
+    return this.form.controls['email'].value
+  }
+
   form!: FormGroup;
   constructor() {
     this.initForm();
@@ -29,15 +33,18 @@ export class ForgotPasswordComponent {
   }
 
   onSubmit() {
-    if(this.form.invalid)
-      return;
+    if(this.form.invalid) return
 
     sendPasswordResetEmail(this.auth, this.form.value.email)
       .then(response => {
         this.isPasswordResetEmailSent = true
       })
       .catch(error => {
-
+        if(error instanceof Error){
+          if(error.message.includes('auth/invalid-email')){
+            this.errorMessage = 'Некорректная почта';
+          }
+        }
       })
   }
 

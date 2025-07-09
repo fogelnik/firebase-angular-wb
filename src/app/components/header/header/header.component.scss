@@ -103,6 +103,9 @@ select {
     align-items: center;
     margin-right: 120px;
     color: white;
+
+    font-family: "Roboto", sans-serif;
+    font-weight: 200;
   }
   &__top-menu-geo-icon{
     margin-right: 7px;
@@ -119,6 +122,7 @@ select {
     margin: 0 20px 0 220px;
     cursor: pointer;
     transition: .2s;
+    font-family: "Roboto", sans-serif;
   }
   &__top-menu-sale-on-wb:hover{
     color: #faeffd;
@@ -127,6 +131,7 @@ select {
     color: #ce8df6;
     cursor: pointer;
     transition: .2s;
+    font-family: "Roboto", sans-serif;
   }
   &__top-menu-work-in-wb:hover{
     color: #f9eeff;
@@ -140,6 +145,9 @@ select {
     border-radius: 10px;
     color: white;
     cursor: pointer;
+
+    font-family: "Roboto", sans-serif;
+    font-weight: 200;
   }
   &__top-menu-country img{
     width: 18px;
@@ -154,6 +162,7 @@ select {
     color: white;
     margin-right: 20px;
     cursor: pointer;
+    font-family: "Forum", sans-serif;
   }
   &__bottom-block-burger-menu{
     display: flex;
@@ -197,6 +206,8 @@ select {
     border: 0;
     border-radius: 10px;
     outline: none;
+
+    font-family: "Roboto", sans-serif;
   }
   &__bottom-block-nav{
     display: flex;
@@ -206,10 +217,24 @@ select {
     color: #fef1ff;
     cursor: pointer;
   }
+  &__bottom-block-nav-orders{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: 200;
+  }
+  &__bottom-block-nav-orders img{
+    width: 28px;
+    margin-bottom: 5px;
+    filter: invert(1);
+  }
   &__bottom-block-nav-addresses{
     display:flex;
     flex-direction: column;
     align-items: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: 200;
   }
   &__bottom-block-nav-addresses img{
     width: 28px;
@@ -221,6 +246,8 @@ select {
     display:flex;
     flex-direction: column;
     align-items: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: 200;
   }
   &__bottom-block-nav-sign-in img{
     width: 28px;
@@ -231,6 +258,8 @@ select {
     display:flex;
     flex-direction: column;
     align-items: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: 200;
   }
   &__bottom-block-nav-basket img{
     width: 28px;
@@ -251,6 +280,9 @@ select {
     color: #e9acef;
     margin-right: 20px;
     transition: .2s;
+  }
+  &__bottom-block-nav-sign-in:hover{
+    color: #fef1ff;
   }
 
   &__bottom-block-nav-basket{

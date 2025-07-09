@@ -1,0 +1,408 @@
+.profile{
+  &__wrapper{
+    max-width: 1440px;
+    padding: 15px 40px;
+    margin: 0 auto;
+  }
+  &__nav{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+  &__nav li{
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    color: #3f3e3f;
+    cursor: pointer;
+  }
+  &__nav li:hover{
+    color: #a63afb;
+  }
+  &__nav li:active{
+    color: #a63afb;
+  }
+  &__main{
+    display: flex;
+  }
+  &__user-card{
+    border-radius: 20px;
+
+    width: 50%;
+    background-color: #fdfdfd;
+  }
+  &__user-card-content{
+    padding: 25px;
+  }
+  &__user-card-content-user{
+    display: flex;
+    justify-content: space-between;
+  }
+  &__user-card-content-user-block{
+    display: flex;
+    align-items: center;
+  }
+  &__user-card-content-user-block span{
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+    margin-right: 5px;
+    transition: 0.2s;
+    cursor: pointer;
+  }
+  &__user-card-content-user-block span:hover{
+    color: #8109d5;
+  }
+  &__user-card-content-user-block-img{
+    width: 46px;
+    margin-right: 10px;
+  }
+  &__user-card-content-user-block-arrow{
+    width: 12px;
+
+  }
+  &__user-card-content-notifications img{
+    width: 26px;
+    cursor: pointer;
+  }
+
+  &__user-card-content-block-sale-percent{
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+    color: #0b0b0b;
+  }
+  &__user-card-content-block-sale-wb div{
+    display: flex;
+    align-items: center;
+  }
+  &__user-card-content-block-sale-wb{
+    color: #98989e;
+    padding: 20px;
+    background-color: #f4f4f7;
+    border-radius: 20px;
+    margin: 10px 15px 10px 0;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  &__user-card-content-block-sale-wb:hover{
+    background-color: #ededed;
+  }
+
+  &__user-card-content-block-sale-wb img{
+    width: 8px;
+    height: 8px;
+    margin-left: 5px;
+  }
+  &__user-card-content-block-sale{
+    display: flex;
+  }
+
+  &__user-card-content-block-sale-payment{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #f4f4f7;
+    border-radius: 20px;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  &__user-card-content-block-sale-payment:hover{
+    background-color: #ededed;
+  }
+  &__user-card-content-block-sale-payment span{
+    color: #98989e;
+  }
+  &__user-card-content-block-sale-payment span:nth-last-child(1){
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+    color: #0b0b0b;
+  }
+
+  &__user-card-content-finance{
+    display: flex;
+    flex-direction: column;
+  }
+  &__user-card-content-title{
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    color: #a5a5a6;
+    margin-bottom: 10px;
+  }
+  &__user-card-content-finance-methods{
+    padding: 10px;
+    background-color: #f4f4f7;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  &__user-card-content-finance-methods:hover{
+    background-color: #ededed;
+  }
+  &__user-card-content-finance-methods span{
+    color: #575757;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+  }
+
+  &__user-card-content-finance-details{
+    padding: 10px;
+    background-color: #f4f4f7;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  &__user-card-content-finance-details:hover{
+    background-color: #ededed;
+  }
+  &__user-card-content-finance-details span{
+    color: #575757;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+  }
+
+  &__user-card-content-finance-control{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+  &__user-card-content-finance-control-title{
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    color: #a5a5a6;
+    margin-bottom: 10px;
+  }
+  &__user-card-content-finance-control-settings{
+    padding: 10px;
+    background-color: #f4f4f7;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  &__user-card-content-finance-control-settings:hover{
+    background-color: #ededed;
+  }
+  &__user-card-content-finance-control-settings span{
+    color: #575757;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+  }
+  &__user-card-content-finance-control-devices{
+    padding: 10px;
+    background-color: #f4f4f7;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  &__user-card-content-finance-control-devices span{
+    color: #575757;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+  }
+  &__user-card-content-finance-control-devices:hover{
+    background-color: #ededed;
+  }
+
+  &__user-card-content-sign-out-btn{
+    display: flex;
+    justify-content: center;
+    margin: 10px 0 0 0;
+  }
+  &__user-card-content-sign-out-btn button{
+    border: 0;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #9615f0;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    transition: 0.2s;
+    cursor: pointer;
+  }
+  &__user-card-content-sign-out-btn button:hover{
+    background-color: #e6e5e5;
+    color: #8109d5;
+  }
+
+
+  //main-content
+
+  &__main-content{
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    width: 100%;
+  }
+  &__main-content-balance{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #fdfdfd;
+    border-radius: 10px;
+    cursor: pointer;
+
+  }
+  &__main-content-balance span:nth-child(1){
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+    transition: 0.2s;
+  }
+  &__main-content-balance span:nth-child(2){
+    font-family: "Inter", sans-serif;
+    color: #b3b1b1;
+  }
+
+  &__main-content-balance:hover span:nth-child(1){
+    color: #a63afb;
+  }
+
+  &__main-content-services{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+  }
+
+
+
+  &__main-content-favorites{
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #fdfdfd;
+    cursor: pointer;
+
+    width: 35%;
+  }
+
+  &__main-content-favorites:hover div span:nth-child(1){
+    color: #a63afb;
+  }
+
+  &__main-content-favorites div{
+    display: flex;
+    flex-direction: column;
+  }
+  &__main-content-favorites div span:nth-child(1){
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+    transition: 0.2s;
+  }
+  &__main-content-favorites div span:nth-child(2){
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    color: #b3b1b1;
+  }
+
+
+  &__main-content-purchases{
+    border-radius: 10px;
+    margin-left: 10px;
+    padding: 20px;
+    background-color: #fdfdfd;
+    cursor: pointer;
+
+    width: 35%;
+  }
+
+  &__main-content-purchases:hover div span:nth-child(1){
+    color: #a63afb;
+  }
+
+  &__main-content-purchases div{
+    display: flex;
+    flex-direction: column;
+  }
+  &__main-content-purchases div span:nth-child(1){
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+    transition: 0.2s;
+  }
+  &__main-content-purchases div span:nth-child(2){
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    color: #b3b1b1;
+  }
+
+
+  &__main-content-grade{
+    border-radius: 10px;
+    margin-left: 10px;
+    padding: 20px;
+    background-color: #fdfdfd;
+
+    cursor: pointer;
+
+    width: 35%;
+  }
+  &__main-content-grade:hover div span:nth-child(1){
+    color: #a63afb;
+  }
+
+  &__main-content-grade div{
+    display: flex;
+    flex-direction: column;
+  }
+  &__main-content-grade div span:nth-child(1){
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+    transition: 0.2s;
+  }
+  &__main-content-grade div span:nth-child(2){
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    color: #b3b1b1;
+  }
+
+
+  &__main-content-help{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #fdfdfd;
+    border-radius: 10px;
+    margin-bottom: 20px;
+
+  }
+  &__main-content-help-title{
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+  }
+  &__main-content-help-blocks{
+    display: flex;
+    justify-content: space-between;
+  }
+  &__main-content-help-blocks div{
+    padding: 10px;
+    background-color: #f4f4f7;
+    border-radius: 10px;
+    margin-top: 10px;
+    transition: 0.2s;
+    cursor: pointer;
+
+
+    width: 32.5%;
+  }
+  &__main-content-help-blocks div:hover{
+    background-color: #ededed;
+  }
+  &__main-content-help-blocks div span{
+    color: #575757;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+  }
+
+
+  &__main-content-viewing{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #fdfdfd;
+    border-radius: 10px;
+
+  }
+
+  &__main-content-viewing-title{
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+  }
+}
