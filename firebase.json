@@ -1,1 +1,16 @@
-{}
+{
+  "hosting": {
+    "public": "dist/firebase-angular-wb/browser",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

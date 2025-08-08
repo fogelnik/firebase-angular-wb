@@ -1,0 +1,48 @@
+
+<div class="wrapper">
+  <div class="product">
+    <div class="product__spinner-container">
+      <div *ngIf="isLoading" class="product__spinner"></div>
+    </div>
+
+    <div *ngIf="!isLoading" class="product__grid">
+    <div  class="product__card" *ngFor="let card of cards">
+      <img [src]="card.imageUrl" alt="Название товара" class="product__card-image">
+      <div class="product__card-info">
+        <div class="product__card-info-price-block">
+          <img src="assets/icon/discount.png">
+          <p class="product__card-price">{{ card.price }} p.</p>
+        </div>
+        <div class="product__card-info-block">
+          <h3 class="product__card-title">{{ card.title }}</h3> / <span class="product__card-description">{{ card.description }}</span>
+        </div>
+        <div class="product__card-info-rating">
+          <span class="product__card-info-rating-star">
+            <img src="assets/icon/icon-star.png" alt="star">
+          </span>
+          <span class="product__card-info-rating-num">
+            34
+          </span>
+          <span>•</span>
+          <span class="product__card-info-rating-votes">sdcds</span>
+          <span>оценки</span>
+        </div>
+        <button class="product__card-buy-button"
+                [class.in-cart]="card.isInCart"
+                (click)="toggleCart(card)"
+        >
+
+          <img *ngIf="!card.isInCart"
+               class="product__card-buy-button-img"
+               src="assets/icon/shopping-cart.png"
+               alt="Корзина"
+          >
+          <span>{{card.isInCart ? "В корзине" : " Послезавтра"}}</span>
+        </button>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+

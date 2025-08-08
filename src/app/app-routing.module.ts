@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import {WelcomePageComponent} from './components/welcome-page/welcome-page.component';
 import {AuthGuard, redirectUnauthorizedTo} from '@angular/fire/auth-guard';
 import {UserProfileComponent} from './components/user-profile/user-profile.component';
+import {ProductComponent} from './components/product/product.component';
+import {BasketComponent} from './components/basket/basket.component';
 
 
 
@@ -35,6 +37,14 @@ const routes: Routes = [
     data: {
       authGuardPipe: redirectToLogin
     }
+  },
+  {
+    path: 'product',
+    component: ProductComponent,
+  },
+  {
+    path: 'basket',
+    component: BasketComponent,
   }
 ];
 

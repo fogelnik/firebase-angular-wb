@@ -40,7 +40,11 @@ export class SignUpComponent {
 
     const {email, password} = this.authForm.value
     this.authService.signUpWithEmail(email, password)
-      .then(() => this.redirectToDashboard())
+      .then(userCredential => {
+        const uid = userCredential.user.uid;
+        console.log('user:', uid)
+       this.redirectToDashboard();
+      })
       .catch(error => {
         // console.error('Email sign-in error:', error);
         if(error instanceof Error){
@@ -60,7 +64,11 @@ export class SignUpComponent {
 
   onSignInWithGoogle() {
     this.authService.signInWithGoogle()
-      .then(() => this.redirectToDashboard())
+      .then(userCredential => {
+        const uid = userCredential.user.uid;
+        console.log('user:', uid)
+        this.redirectToDashboard();
+      })
       .catch(error => console.error('error:', error))
   }
 

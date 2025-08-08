@@ -23,7 +23,7 @@
       </div>
       <div class="header__bottom">
         <div class="header__bottom-block-burger">
-          <h1>wildberries</h1>
+          <h1 (click)="navigateToWelcomePage()">wildberries</h1>
           <div class="header__bottom-block-burger-menu">
             <span class="burger-line-1"></span>
             <span class="burger-line-2"></span>
@@ -47,9 +47,11 @@
             <img src="assets/user.png" alt="User">
             {{isAuthenticated ? 'Профиль' : 'Войти'}}
           </div>
-          <div class="header__bottom-block-nav-basket">
-            <img src="assets/icon/icons8-shopping-cart-32.png" alt="Shopping">
+          <div class="header__bottom-block-nav-basket" (click)="navigateBasket()">
+            <img src="assets/icon/shopping-cart.png" alt="Shopping">
               Корзина
+
+            <span *ngIf="count > 0" class="header__bottom-block-nav-basket-count">{{count}}</span>
           </div>
         </div>
       </div>

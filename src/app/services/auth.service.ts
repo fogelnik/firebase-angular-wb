@@ -4,7 +4,7 @@ import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider, sendPasswordResetEmail,
   signInWithEmailAndPassword,
-  signInWithPopup, signOut
+  signInWithPopup, signOut, user
 } from '@angular/fire/auth';
 
 
@@ -25,7 +25,7 @@ export class AuthService {
   }
 
   signUpWithEmail(email: string, password: string){
-    return createUserWithEmailAndPassword(this.auth, email, password);
+    return createUserWithEmailAndPassword(this.auth, email, password)
   }
 
   resetPassword(email: string){
@@ -39,4 +39,9 @@ export class AuthService {
   getCurrentUserEmail(): string | null {
     return this.auth.currentUser?.email ?? null;
   }
+
+  getCurrentUserUid(): string | null {
+    return this.auth.currentUser?.uid ?? null;
+  }
+
 }

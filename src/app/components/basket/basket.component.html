@@ -1,0 +1,72 @@
+<div class="wrapper">
+ <div class="basket">
+
+   <div *ngIf="itemCount === 0" class="basket__null">
+     <h3>В корзине пока пусто</h3>
+     <span>Загляните на главную — собрали там товары, которые могут вам понравиться</span>
+     <button (click)="goToMain()">Перейти на главную</button>
+   </div>
+   <div class="basket__content">
+
+   </div>
+   <div *ngIf="itemCount > 0" class="basket__cards-block">
+     <h2 class="basket__cards-title">Корзина</h2>
+     <div class="basket__card" *ngFor="let product of basket; let i = index">
+       <div class="basket__card-content">
+         <div class="basket__card-content-img">
+           <img [src]="product.imageUrl" alt="товар">
+         </div>
+         <div class="basket__card-content-description">
+           <span class="basket__card-content-description-title">{{product.title}}</span>
+           <span class="basket__card-content-description-color">{{product.price}}</span>
+           <div class="basket__card-content-description-btn">
+             <img class="basket__card-content-description-btn-favorites" src="assets/icon/icon-heart-basket.png" alt="избранное">
+             <img class="basket__card-content-description-btn-delete" (click)="removeItem(i)" src="assets/icon/icon-trash.png" alt="удалить">
+           </div>
+         </div>
+       </div>
+       <div class="basket__card-count">
+
+         <div class="basket__card-count-minus"
+              (click)="decrementItemCount(i)"
+         >-</div>
+
+         <span class="basket__card-count-num">{{ product.itemCount }}</span>
+         <div class="basket__card-count-plus"
+         (click)="addItem(i)"
+         >+</div>
+       </div>
+       <div class="basket__card-sum">
+         {{(product.price * product.itemCount).toFixed(2)}} р.
+       </div>
+     </div>
+   </div>
+
+
+   <div *ngIf="itemCount > 0" class="basket__sum-block">
+     <span class="basket__sum-block-delivery">
+       Доставка и пункт выдачи
+     </span>
+     <span class="basket__sum-block-payment">
+       Оплата картой
+     </span>
+     <span class="basket__sum-block-product-sum">Товары, {{itemCount}} шт.</span>
+     <div class="basket__sum-block-total-price">
+       <h3>Итого</h3>
+       <h3>{{ (sum).toFixed(2) }} р.</h3>
+     </div>
+     <div class="basket__sum-block-btn">
+       <button type="submit">Заказать</button>
+     </div>
+     <div class="basket__sum-block-rules">
+       <div class="basket__sum-block-rules-icon">
+         <img src="assets/icon/icon-check.png">
+       </div>
+       <div class="basket__sum-block-rules-info">
+         Соглашаюсь с <span>правилами пользования торговой площадки </span> и <span>возврата</span>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+

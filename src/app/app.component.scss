@@ -1,7 +1,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%; /* Задаем полную высоту */
+  height: 100%;
 }
 
 .app {
@@ -20,7 +20,8 @@ app-header {
 
 .content {
   margin-top: 150px;
-  height: 100vh;
+  margin-bottom: 50px;
+  flex: 1;
 }
 
 app-footer {

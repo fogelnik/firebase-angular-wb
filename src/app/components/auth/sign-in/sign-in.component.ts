@@ -3,6 +3,7 @@ import {Component, inject} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from '../../../services/auth.service';
+import {BasketService} from '../../../services/basket.service';
 
 
 
@@ -28,7 +29,7 @@ export class SignInComponent {
     }
 
 
-  constructor(private router: Router, private authService: AuthService) {
+  constructor(private router: Router, private authService: AuthService, private basketService: BasketService) {
     this.initForm();
   }
 
@@ -45,7 +46,12 @@ export class SignInComponent {
     const {email, password} = this.authForm.value
 
     this.authService.signInWithEmail(email, password)
-      .then(() => this.redirectToDashboard())
+      .then(userCredential => {
+        const uid = userCredential.user.uid;
+        this.basketService.setAuthState(uid);
+        console.log('user:', uid)
+        this.redirectToDashboard();
+      })
       .catch(error => {
         // console.error('Email sign-in error:', error);
         if(error instanceof Error){
@@ -66,7 +72,12 @@ export class SignInComponent {
 
   onSignInWithGoogle() {
     this.authService.signInWithGoogle()
-      .then(() => this.redirectToDashboard())
+      .then(userCredential => {
+        const uid = userCredential.user.uid;
+        this.basketService.setAuthState(uid);
+        console.log('user:', uid)
+        this.redirectToDashboard();
+      })
       .catch(error => console.error('error:', error))
   }
 
