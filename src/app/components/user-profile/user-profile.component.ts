@@ -25,7 +25,7 @@ export class UserProfileComponent {
   onSignOut() {
     this.authService.logOut()
       .then(() => {
-        this.basketService.isAuthenticated = false;
+        this.basketService.resetAuthState()
         this.router.navigate(['auth/sign-in'])
         console.log('isAuthenticated:', this.basketService.isAuthenticated)
       })

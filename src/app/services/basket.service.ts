@@ -4,6 +4,8 @@ import {HttpClient} from '@angular/common/http';
 import {AuthService} from './auth.service';
 import {Observable} from 'rxjs';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,48 +17,58 @@ export class BasketService {
   private dbUrl = 'https://training-wb-angular-fire-proj-default-rtdb.firebaseio.com';
   isAuthenticated = false;
 
-
   constructor(
     private http: HttpClient,
     private authService: AuthService
   ) {
-      const uid = this.authService.getCurrentUserUid();
-      if(uid){
-        this.loadCartFromFirebase(uid);
-      }
+    const uid = this.authService.getCurrentUserUid()
+    if(uid){
+      this.loadCartFromFirebase(uid)
+    }else {
+      this.getItems()
+    }
   }
 
   setAuthState(uid: string){
-   this.isAuthenticated = !!uid;
-   this.uid = uid;
+    this.isAuthenticated = !!uid;
+    this.uid = uid;
 
-   if(this.isAuthenticated && uid){
-     this.loadCartFromFirebase(uid).subscribe(cart => {
-       this.items = cart || [];
-     })
-   }else {
-     this.items = this.getItemsFromLocalStorage()
-   }
+    if(this.isAuthenticated){
+      this.loadCartFromFirebase(uid).subscribe(cart => {
+        this.items = cart || [];
+        this.itemCount = this.items.length;
+      });
+    }else {
+      this.items = this.getItemsFromLocalStorage();
+      this.itemCount = this.items.length;
+    }
+
+    // if(this.isAuthenticated && uid){
+    //   this.loadCartFromFirebase(uid).subscribe(cart => {
+    //     this.items = cart || [];
+    //   })
+    // }else {
+    //   this.items = this.getItemsFromLocalStorage()
+    // }
   }
+
 
   addToCart(product: Product){
     this.items.push(product);
     this.itemCount = this.items.length;
-    this.saveToLocalStorage();
 
-    console.log('Добавлен товар:', product);
-    console.log('Авторизован:', this.isAuthenticated);
+    if(this.isAuthenticated && this.uid){
 
-    if(this.isAuthenticated){
-      const uid = this.authService.getCurrentUserUid();
-      console.log('UID:', uid);
-      if (uid) {
-        this.saveCartToFirebase(uid);
-      }else {
-        console.warn('UID не найден, сохраняем в localStorage');
-        this.saveToLocalStorage()
-      }
+      this.saveCartToFirebase(this.uid);
+      console.log('UID найден, сохаранено на firebase:', this.uid);
+
+    }else {
+      console.warn('UID не найден, сохраняем в localStorage');
+      this.saveToLocalStorage()
     }
+    console.log('Добавлен товар:', product);
+    console.log('товаров в корзине:', this.items.length)
+    console.log('Авторизован:', this.isAuthenticated);
   }
 
   getItemsFromLocalStorage(): Product[] {
@@ -64,65 +76,61 @@ export class BasketService {
     return data ? JSON.parse(data) : [];
   }
 
-  getItems(){
-   const saveCart = localStorage.getItem('cart');
-   return saveCart ? JSON.parse(saveCart) : [];
+  getItems(): Product [] {
+    const cartFromLS = localStorage.getItem('cart');
+    this.items = cartFromLS ? JSON.parse(cartFromLS) : [];
+    return this.items;
   }
 
-  getItemsCount(){
-    return this.getItems().length;
+  getItemCount(): number{
+    return this.items.length
   }
 
-  removeFromCart(index: number){
-    this.items.splice(index, 1);
-    this.itemCount = this.items.length
-    this.saveToLocalStorage();
-
-    console.log("Продукт удален из карзины:", index)
-
-    const uid = this.authService.getCurrentUserUid();
-    if (uid) {
-      this.saveCartToFirebase(uid);
-    }
-
-  }
-
-  updateCart(updatedItems: Product[]) {
+  updateCart(updatedItems: Product[]){
     this.items = updatedItems;
     this.itemCount = updatedItems.length;
-    this.saveToLocalStorage();
 
-    const uid = this.authService.getCurrentUserUid();
-    if (uid) {
-      const url = `${this.dbUrl}/carts/${uid}.json`;
-      this.http.put(url, this.items).subscribe(() => {
-        console.log('Корзина обновлена в Firebase');
-      });
+    if(this.isAuthenticated && this.uid){
+      this.saveCartToFirebase(this.uid)
+    }else {
+      this.saveToLocalStorage()
     }
   }
 
-  private saveCartToFirebase(uid: string) {
-    const url = `${this.dbUrl}/carts/${uid}.json`;
-    this.http.put(url, this.items).subscribe(() => {
-      console.log('Корзина сохранена в Firebase');
-    });
-  }
-
-  loadCartFromFirebase(uid: string): Observable<Product[]> {
-    const url = `${this.dbUrl}/carts/${uid}.json`;
-    return this.http.get<Product[]>(url);
-  }
-
-  private saveToLocalStorage() {
+  saveToLocalStorage() {
     localStorage.setItem('cart', JSON.stringify(this.items))
   }
 
-  // private loadCartFromLocalStorage() {
-  //   const saveCart = localStorage.getItem('cart');
-  //   if(saveCart){
-  //     this.items = JSON.parse(saveCart) as Product[]
+  saveCartToFirebase( uid: string){
+    this.http.put(`${this.dbUrl}/carts/${uid}.json`, this.items).subscribe({
+      next: () => console.log('Корзина сохранена в Firebase'),
+      error: err => console.error('Ошибка сохранения в Firebase:', err)
+    })
+  }
+
+  loadCartFromFirebase(uid: string): Observable<Product[]>{
+    const url = `${this.dbUrl}/carts/${uid}.json`;
+    return this.http.get<Product[]>(url)
+  }
+
+  // removeFromCart(index: number){
+  //   this.items.splice(index, 1);
+  //   this.itemCount = this.items.length
+  //   // this.saveToLocalStorage();
+  //
+  //   console.log("Продукт удален из карзины:", index)
+  //
+  //   const uid = this.authService.getCurrentUserUid();
+  //   if (uid) {
+  //     this.saveCartToFirebase(uid);
   //   }
+  //
   // }
 
-
+  resetAuthState() {
+    this.isAuthenticated = false;
+    this.uid = null;
+    this.items = this.getItemsFromLocalStorage();
+    this.itemCount = this.items.length
+  }
 }

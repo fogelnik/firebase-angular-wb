@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit{
   }
 
   get count(): number{
-    return this.basketService.itemCount
+    return this.basketService.getItemCount()
   }
 
   navigateUser(){

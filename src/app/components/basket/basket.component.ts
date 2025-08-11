@@ -21,27 +21,25 @@ export class BasketComponent implements OnInit{
   }
 
   ngOnInit() {
+
     const uid = this.authService.getCurrentUserUid();
+
     if(uid){
       this.basketService.loadCartFromFirebase(uid).subscribe(cart => {
-        if(cart) {
-          this.basket = cart.map(item => ({
-            ...item,
-            itemCount: item.itemCount
-          }));
-          this.itemCount = this.basket.length;
-          this.calculateTotalPrice();
-        }else {
-          this.basket = [];
-        }
-      })
+        this.basket = (cart || []).map(item => ({
+          ...item,
+          itemCount: item.itemCount || 1
+        }))
+        this.itemCount = this.basket.length;
+        this.calculateTotalPrice()
+      });
     }else {
-      this.basket = this.basketService.getItems().map((item: Product) => ({
+      this.basket = this.basketService.getItemsFromLocalStorage().map(item => ({
         ...item,
         itemCount: item.itemCount || 1
       }));
-      this.itemCount = this.basketService.getItemsCount();
-      this.calculateTotalPrice()
+      this.itemCount = this.basket.length;
+      this.calculateTotalPrice();
     }
   }
 
@@ -55,9 +53,10 @@ export class BasketComponent implements OnInit{
 
   removeItem(index: number){
     this.basket.splice(index, 1);
-    this.basketService.removeFromCart(index);
-    this.calculateTotalPrice()
+    this.basketService.updateCart(this.basket);
     this.itemCount = this.basket.length;
+    this.calculateTotalPrice()
+    console.log("Продукт удален из карзины:", index)
   }
 
   goToMain() {
@@ -69,7 +68,7 @@ export class BasketComponent implements OnInit{
       this.basket[index].itemCount -= 1;
       this.sum = this.sum - Number(this.basket[index].price)
 
-      this.basketService.updateCart(this.basket);
+      // this.basketService.updateCart(this.basket);
     }
   }
 
@@ -77,7 +76,7 @@ export class BasketComponent implements OnInit{
     this.basket[index].itemCount += 1;
     this.sum = this.sum + Number(this.basket[index].price)
 
-    this.basketService.updateCart(this.basket);
+    // this.basketService.updateCart(this.basket);
   }
 
 }
