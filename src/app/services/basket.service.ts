@@ -3,6 +3,7 @@ import {Product} from '../components/product';
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from './auth.service';
 import {Observable} from 'rxjs';
+import {user} from '@angular/fire/auth';
 
 
 

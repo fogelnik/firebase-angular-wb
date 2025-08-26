@@ -3,6 +3,7 @@ import {BasketService} from '../../services/basket.service';
 import {Router} from '@angular/router';
 import {Product} from '../product';
 import {AuthService} from '../../services/auth.service';
+import {Auth, onAuthStateChanged} from '@angular/fire/auth';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class BasketComponent implements OnInit{
   basket: Product[] = []
   sum: number = 0;
 
-  constructor(private basketService: BasketService, private router: Router, private authService : AuthService) {
+  constructor(private basketService: BasketService, private router: Router, private authService : AuthService, private auth: Auth) {
   }
 
   ngOnInit() {
@@ -52,6 +53,7 @@ export class BasketComponent implements OnInit{
   }
 
   removeItem(index: number){
+    const confirmed = confirm('Удалить товар из корзины?')
     this.basket.splice(index, 1);
     this.basketService.updateCart(this.basket);
     this.itemCount = this.basket.length;

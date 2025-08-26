@@ -8,12 +8,23 @@
       <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="sign-in__form">
         <div class="sign-in__email-wrapper">
           <input class="sign-in__form-email" type="email" placeholder="Email" formControlName="email">
+          <span
+            class="sign-in__form-email-clear"
+            *ngIf="authForm.get('email')?.value?.length > 0"
+            (click)="clearEmail()"
+          >
+            ❌
+          </span>
+
           <div class="sign-in__error" *ngIf="authForm.get('email')?.invalid && authForm.get('email')?.touched">
             Введите email
           </div>
         </div>
         <div class="sign-in__password-wrapper">
-          <input type="password" class="sign-in__form-password" placeholder="Password" formControlName="password">
+          <input [type]="showPassword ? 'text' : 'password'" class="sign-in__form-password" placeholder="Password" formControlName="password">
+          <span class="sign-in__password-toggle-visibility" *ngIf="authForm.get('password')?.value?.length > 0" (click)="togglePasswordVisibility()">
+            {{showPassword ? '🙈' : '👁️'}}
+          </span>
           <div class="sign-in__error" *ngIf="authForm.get('password')?.invalid && authForm.get('password')?.touched">
             Пароль обязателен
           </div>

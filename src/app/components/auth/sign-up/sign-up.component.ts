@@ -2,6 +2,7 @@ import {Component, inject} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from '../../../services/auth.service';
+import {BasketService} from '../../../services/basket.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -16,6 +17,8 @@ export class SignUpComponent {
   errorMessage: string = '';
   serverError: string = '';
 
+  showPassword = false;
+
 
   get email(): string{
     return this.authForm.controls['email'].value
@@ -24,7 +27,7 @@ export class SignUpComponent {
     return this.authForm.controls['password'].value
   }
 
-  constructor(private router: Router, private authService: AuthService) {
+  constructor(private router: Router, private authService: AuthService, private basketService: BasketService) {
     this.initForm();
   }
 
@@ -42,6 +45,7 @@ export class SignUpComponent {
     this.authService.signUpWithEmail(email, password)
       .then(userCredential => {
         const uid = userCredential.user.uid;
+        this.basketService.setAuthState(uid);
         console.log('user:', uid)
        this.redirectToDashboard();
       })
@@ -62,10 +66,17 @@ export class SignUpComponent {
       })
   }
 
+  togglePasswordVisibility(){
+    this.showPassword = !this.showPassword
+  }
+  clearEmail() {
+    this.authForm.get('email')?.setValue('')
+  }
   onSignInWithGoogle() {
     this.authService.signInWithGoogle()
       .then(userCredential => {
         const uid = userCredential.user.uid;
+        this.basketService.setAuthState(uid);
         console.log('user:', uid)
         this.redirectToDashboard();
       })

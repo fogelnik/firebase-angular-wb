@@ -177,6 +177,7 @@ select {
     position: relative;
   }
   &__form-email{
+    position: relative;
     padding: 12px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
@@ -184,6 +185,12 @@ select {
     font-size: 16px;
     outline: none;
     width: 100%;
+  }
+  &__form-email-clear{
+    position: absolute;
+    right: 10px;
+    top: 14px;
+    cursor: pointer;
   }
   &__form-password {
     position: relative;
@@ -194,6 +201,12 @@ select {
     font-size: 16px;
     outline: none;
     width: 100%;
+  }
+  &__password-toggle-visibility{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
   }
   &__error{
     position: absolute;

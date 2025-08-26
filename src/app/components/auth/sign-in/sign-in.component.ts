@@ -21,6 +21,8 @@ export class SignInComponent {
   errorMessage: string = '';
   serverError: string = '';
 
+  showPassword = false
+
     get email(): string{
       return this.authForm.controls['email'].value;
     }
@@ -68,6 +70,14 @@ export class SignInComponent {
           this.errorMessage = this.serverError;
         }
       })
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword
+  }
+
+  clearEmail() {
+    this.authForm.get('email')?.setValue('')
   }
 
   onSignInWithGoogle() {

@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup, signOut, user
 } from '@angular/fire/auth';
+import {Observable} from 'rxjs';
 
 
 @Injectable({
@@ -15,6 +16,7 @@ export class AuthService {
 
   private auth = inject(Auth);
   private googleProvider = new GoogleAuthProvider();
+
 
   signInWithEmail(email: string, password: string){
     return signInWithEmailAndPassword(this.auth, email, password);

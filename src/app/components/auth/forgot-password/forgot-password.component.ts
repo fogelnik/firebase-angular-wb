@@ -48,4 +48,8 @@ export class ForgotPasswordComponent {
       })
   }
 
+  clearEmail(){
+    this.form.get('email')?.setValue('');
+  }
+
 }
