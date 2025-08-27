@@ -18,6 +18,8 @@ export class BasketService {
   private dbUrl = 'https://training-wb-angular-fire-proj-default-rtdb.firebaseio.com';
   isAuthenticated = false;
 
+  public isCartReady: boolean = false;
+
   constructor(
     private http: HttpClient,
     private authService: AuthService
@@ -38,10 +40,12 @@ export class BasketService {
       this.loadCartFromFirebase(uid).subscribe(cart => {
         this.items = cart || [];
         this.itemCount = this.items.length;
+        this.isCartReady = true;
       });
     }else {
       this.items = this.getItemsFromLocalStorage();
       this.itemCount = this.items.length;
+      this.isCartReady = true;
     }
 
     // if(this.isAuthenticated && uid){
@@ -52,6 +56,8 @@ export class BasketService {
     //   this.items = this.getItemsFromLocalStorage()
     // }
   }
+
+
 
 
   addToCart(product: Product){
@@ -86,7 +92,6 @@ export class BasketService {
   getItemCount(): number{
     return this.items.length
   }
-
   updateCart(updatedItems: Product[]){
     this.items = updatedItems;
     this.itemCount = updatedItems.length;

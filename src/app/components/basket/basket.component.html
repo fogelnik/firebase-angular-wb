@@ -1,6 +1,5 @@
 <div class="wrapper">
  <div class="basket">
-
    <div *ngIf="itemCount === 0" class="basket__null">
      <h3>В корзине пока пусто</h3>
      <span>Загляните на главную — собрали там товары, которые могут вам понравиться</span>
@@ -32,6 +31,7 @@
          >-</div>
 
          <span class="basket__card-count-num">{{ product.itemCount }}</span>
+
          <div class="basket__card-count-plus"
          (click)="addItem(i)"
          >+</div>
@@ -67,6 +67,6 @@
        </div>
      </div>
    </div>
- </div>
+   </div>
 </div>
 

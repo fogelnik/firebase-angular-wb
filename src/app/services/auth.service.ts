@@ -2,11 +2,12 @@ import {inject, Injectable} from '@angular/core';
 import {
   Auth,
   createUserWithEmailAndPassword,
-  GoogleAuthProvider, sendPasswordResetEmail,
+  GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup, signOut, user
 } from '@angular/fire/auth';
 import {Observable} from 'rxjs';
+import {ThisReceiver} from '@angular/compiler';
 
 
 @Injectable({
@@ -46,5 +47,13 @@ export class AuthService {
   getCurrentUserUid(): string | null {
     return this.auth.currentUser?.uid ?? null;
   }
+
+  // getCurrentUserUid(): Promise<string | null> {
+  //   return new Promise(resolve => {
+  //     onAuthStateChanged(this.auth, user => {
+  //       resolve(user?.uid ?? null);
+  //     });
+  //   });
+  // }
 
 }

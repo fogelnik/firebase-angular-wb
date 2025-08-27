@@ -18,30 +18,36 @@ export class BasketComponent implements OnInit{
   basket: Product[] = []
   sum: number = 0;
 
+  isLoading: boolean = true;
+
   constructor(private basketService: BasketService, private router: Router, private authService : AuthService, private auth: Auth) {
   }
 
-  ngOnInit() {
-
-    const uid = this.authService.getCurrentUserUid();
-
-    if(uid){
-      this.basketService.loadCartFromFirebase(uid).subscribe(cart => {
-        this.basket = (cart || []).map(item => ({
+   ngOnInit() {
+    // this.isLoading = true;
+    onAuthStateChanged(this.auth, (user) => {
+      if(user){
+        this.basketService.loadCartFromFirebase(user.uid).subscribe(cart => {
+          this.basket = (cart || []).map(item => ({
+            ...item,
+            itemCount: item.itemCount || 1
+          }));
+          // this.itemCount = this.basket.length;
+          this.itemCount = this.basket.reduce((acc, item) => acc + item.itemCount, 0);
+          this.calculateTotalPrice()
+          // this.isLoading = false;
+        });
+      }else {
+        this.basket = this.basketService.getItemsFromLocalStorage().map(item => ({
           ...item,
           itemCount: item.itemCount || 1
-        }))
-        this.itemCount = this.basket.length;
-        this.calculateTotalPrice()
-      });
-    }else {
-      this.basket = this.basketService.getItemsFromLocalStorage().map(item => ({
-        ...item,
-        itemCount: item.itemCount || 1
-      }));
-      this.itemCount = this.basket.length;
-      this.calculateTotalPrice();
-    }
+        }));
+        // this.itemCount = this.basket.length;
+        this.itemCount = this.basket.reduce((acc, item) => acc + item.itemCount, 0);
+        this.calculateTotalPrice();
+        // this.isLoading = false;
+      }
+    });
   }
 
   calculateTotalPrice(){
@@ -68,17 +74,21 @@ export class BasketComponent implements OnInit{
   decrementItemCount(index: number){
     if(this.basket[index].itemCount > 1){
       this.basket[index].itemCount -= 1;
-      this.sum = this.sum - Number(this.basket[index].price)
+      this.sum = this.sum - Number(this.basket[index].price);
+      this.updateItemCount()
 
-      // this.basketService.updateCart(this.basket);
+      this.basketService.updateCart(this.basket);
     }
   }
 
   addItem(index: number){
     this.basket[index].itemCount += 1;
     this.sum = this.sum + Number(this.basket[index].price)
-
-    // this.basketService.updateCart(this.basket);
+    this.updateItemCount()
+    this.basketService.updateCart(this.basket);
   }
 
+  updateItemCount() {
+    this.itemCount = this.basket.reduce((acc, item) => acc + item.itemCount, 0);
+  }
 }
