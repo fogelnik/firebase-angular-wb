@@ -61,14 +61,13 @@ export class BasketService {
 
 
   addToCart(product: Product){
+
     this.items.push(product);
     this.itemCount = this.items.length;
 
     if(this.isAuthenticated && this.uid){
-
       this.saveCartToFirebase(this.uid);
       console.log('UID найден, сохаранено на firebase:', this.uid);
-
     }else {
       console.warn('UID не найден, сохраняем в localStorage');
       this.saveToLocalStorage()
@@ -90,7 +89,7 @@ export class BasketService {
   }
 
   getItemCount(): number{
-    return this.items.length
+    return this.items.reduce((acc, item) => acc + (item.itemCount || 1 ), 0);
   }
   updateCart(updatedItems: Product[]){
     this.items = updatedItems;
