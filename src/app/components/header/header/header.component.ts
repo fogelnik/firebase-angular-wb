@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {AuthService} from '../../../services/auth.service';
 import {Auth, onAuthStateChanged, user} from '@angular/fire/auth';
 import {NgIf} from '@angular/common';
 import {Router, RouterLink} from '@angular/router';
 import {BasketService} from '../../../services/basket.service';
+import {BasketComponent} from '../../basket/basket.component';
 
 @Component({
   selector: 'app-header',

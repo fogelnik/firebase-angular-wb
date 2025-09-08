@@ -14,7 +14,7 @@ import {Auth, onAuthStateChanged} from '@angular/fire/auth';
 })
 export class BasketComponent implements OnInit{
 
-  itemCount = 0
+  public itemCount = 0
   basket: Product[] = []
   sum: number = 0;
 
