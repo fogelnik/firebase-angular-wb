@@ -59,16 +59,20 @@ export class BasketComponent implements OnInit{
   }
 
   removeItem(index: number){
-    const confirmed = confirm('Удалить товар из корзины?')
+    // const confirmed = confirm('Удалить товар из корзины?')
     this.basket.splice(index, 1);
     this.basketService.updateCart(this.basket);
-    this.itemCount = this.basket.length;
+    this.updateItemCount()
     this.calculateTotalPrice()
     console.log("Продукт удален из карзины:", index)
   }
 
   goToMain() {
     this.router.navigate(['/'])
+  }
+
+  get count(): number{
+    return this.basketService.getItemCount()
   }
 
   decrementItemCount(index: number){

@@ -1,13 +1,8 @@
 import {Component, inject} from '@angular/core';
-
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from '../../../services/auth.service';
 import {BasketService} from '../../../services/basket.service';
-
-
-
-
 
 @Component({
   selector: 'app-sign-in',
