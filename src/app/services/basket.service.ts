@@ -47,18 +47,7 @@ export class BasketService {
       this.itemCount = this.items.length;
       this.isCartReady = true;
     }
-
-    // if(this.isAuthenticated && uid){
-    //   this.loadCartFromFirebase(uid).subscribe(cart => {
-    //     this.items = cart || [];
-    //   })
-    // }else {
-    //   this.items = this.getItemsFromLocalStorage()
-    // }
   }
-
-
-
 
   addToCart(product: Product){
 
@@ -118,24 +107,45 @@ export class BasketService {
     return this.http.get<Product[]>(url)
   }
 
-  // removeFromCart(index: number){
-  //   this.items.splice(index, 1);
-  //   this.itemCount = this.items.length
-  //   // this.saveToLocalStorage();
-  //
-  //   console.log("Продукт удален из карзины:", index)
-  //
-  //   const uid = this.authService.getCurrentUserUid();
-  //   if (uid) {
-  //     this.saveCartToFirebase(uid);
-  //   }
-  //
-  // }
-
   resetAuthState() {
     this.isAuthenticated = false;
     this.uid = null;
     this.items = this.getItemsFromLocalStorage();
     this.itemCount = this.items.length
   }
+
+  // syncLocalCartToFirebase(uid: string){
+  //   const localCart = this.getItemsFromLocalStorage();
+  //   if(localCart.length > 0){
+  //     this.http.put(`${this.dbUrl}/carts/${uid}.json`, localCart).subscribe({
+  //       next: () => {
+  //         localStorage.removeItem('cart');
+  //         console.log("Локальная корзина перенесена в Firebase");
+  //       },
+  //       error: err => console.error('Ошибка переноса корзины:', err)
+  //     });
+  //   }
+  // }
+
+  appendLocalCartToFirebase(uid: string){
+    const localCart = this.getItemsFromLocalStorage();
+
+    if(localCart.length === 0) return;
+    const url = `${this.dbUrl}/carts/${uid}.json`;
+
+    this.http.get<Product[]>(url).subscribe(firebaseCart => {
+      const updateCart = [...(firebaseCart || []), ...localCart];
+
+      this.http.put(url, updateCart).subscribe({
+        next: () => {
+          this.items = updateCart;
+          this.itemCount = this.getItemCount();
+          localStorage.removeItem('cart');
+          console.log("Локальная корзина перенесена в Firebase");
+        },
+        error: err => console.error('Ошибка переноса корзины:', err)
+      });
+    });
+  }
+
 }

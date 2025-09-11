@@ -27,6 +27,9 @@ export class BasketComponent implements OnInit{
     // this.isLoading = true;
     onAuthStateChanged(this.auth, (user) => {
       if(user){
+        this.basketService.appendLocalCartToFirebase(user.uid);
+        this.itemCount = this.basketService.getItemCount();
+
         this.basketService.loadCartFromFirebase(user.uid).subscribe(cart => {
           this.basket = (cart || []).map(item => ({
             ...item,

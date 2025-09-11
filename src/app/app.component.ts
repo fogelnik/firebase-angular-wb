@@ -16,7 +16,7 @@ export class AppComponent implements OnInit{
   ngOnInit() {
     onAuthStateChanged(this.auth, (user) => {
       if(user){
-        this.basketService.setAuthState(user.uid)
+        this.basketService.setAuthState(user.uid);
       }else {
         this.basketService.resetAuthState();
       }
