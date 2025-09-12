@@ -1,11 +1,15 @@
 import {Component, inject} from '@angular/core';
 import { Router} from '@angular/router';
 import {AuthService} from '../../../services/auth.service';
+import {ProductComponent} from '../../product/product.component';
 
 @Component({
   selector: 'app-home',
-  standalone: false,
+  standalone: true,
   templateUrl: './home.component.html',
+  imports: [
+    ProductComponent
+  ],
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {

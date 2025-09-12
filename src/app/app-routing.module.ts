@@ -5,6 +5,10 @@ import {AuthGuard, redirectUnauthorizedTo} from '@angular/fire/auth-guard';
 import {UserProfileComponent} from './components/user-profile/user-profile.component';
 import {ProductComponent} from './components/product/product.component';
 import {BasketComponent} from './components/basket/basket.component';
+import {SignInComponent} from './components/auth/sign-in/sign-in.component';
+import {SignUpComponent} from './components/auth/sign-up/sign-up.component';
+import {ForgotPasswordComponent} from './components/auth/forgot-password/forgot-password.component';
+import {HomeComponent} from './components/dashboard/home/home.component';
 
 
 
@@ -16,18 +20,21 @@ const routes: Routes = [
     component: WelcomePageComponent
   },
   {
-    path: 'auth',
-    loadChildren: () => import('./components/auth/auth.module')
-      .then(m => m.AuthModule)
+   path: 'auth',
+    children: [
+      {path: '', component: SignInComponent},
+      {path: 'sign-in', component: SignInComponent},
+      {path: 'sign-up', component: SignUpComponent},
+      {path: 'forgot-password', component: ForgotPasswordComponent}
+    ]
   },
   {
     path: 'dashboard',
-    loadChildren: () => import('./components/dashboard/dashboard.module')
-      .then(m => m.DashboardModule),
-      canActivate: [AuthGuard],
-      data: {
-        authGuardPipe: redirectToLogin
-      }
+    component: HomeComponent,
+    canActivate: [AuthGuard],
+    data: {
+      authGuardPipe: redirectToLogin
+    }
   },
   {
     path: 'profile',

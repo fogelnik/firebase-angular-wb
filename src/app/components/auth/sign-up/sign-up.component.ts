@@ -1,13 +1,19 @@
 import {Component, inject} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {Router, RouterLink} from '@angular/router';
 import {AuthService} from '../../../services/auth.service';
 import {BasketService} from '../../../services/basket.service';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-sign-up',
-  standalone: false,
+  standalone: true,
   templateUrl: './sign-up.component.html',
+  imports: [
+    ReactiveFormsModule,
+    NgIf,
+    RouterLink
+  ],
   styleUrl: './sign-up.component.scss'
 })
 export class SignUpComponent {

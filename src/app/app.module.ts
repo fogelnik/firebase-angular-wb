@@ -19,7 +19,6 @@ import { BasketComponent } from './components/basket/basket.component';
 @NgModule({
   declarations: [
     AppComponent,
-    BasketComponent,
   ],
   imports: [
     HttpClientModule,
@@ -30,6 +29,7 @@ import { BasketComponent } from './components/basket/basket.component';
     WelcomePageComponent,
     UserProfileComponent,
     ProductComponent,
+    BasketComponent,
   ],
   providers: [
     provideFirebaseApp(() => initializeApp({ projectId: "training-wb-angular-fire-proj", appId: "1:226524836594:web:5b29537d8839e02304166b", storageBucket: "training-wb-angular-fire-proj.firebasestorage.app", apiKey: "AIzaSyBc4zpfYCTkfOdxzOZ-W6loEDIfXxxmX-A", authDomain: "training-wb-angular-fire-proj.firebaseapp.com", messagingSenderId: "226524836594" })),

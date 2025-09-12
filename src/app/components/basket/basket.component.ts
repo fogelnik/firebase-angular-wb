@@ -4,12 +4,17 @@ import {Router} from '@angular/router';
 import {Product} from '../product';
 import {AuthService} from '../../services/auth.service';
 import {Auth, onAuthStateChanged} from '@angular/fire/auth';
+import {NgForOf, NgIf} from '@angular/common';
 
 
 @Component({
   selector: 'app-basket',
-  standalone: false,
+  standalone: true,
   templateUrl: './basket.component.html',
+  imports: [
+    NgIf,
+    NgForOf
+  ],
   styleUrl: './basket.component.scss'
 })
 export class BasketComponent implements OnInit{
