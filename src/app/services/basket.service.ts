@@ -35,7 +35,6 @@ export class BasketService {
   setAuthState(uid: string){
     this.isAuthenticated = !!uid;
     this.uid = uid;
-
     if(this.isAuthenticated){
       this.loadCartFromFirebase(uid).subscribe(cart => {
         this.items = cart || [];
