@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Product} from '../components/product';
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from './auth.service';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {user} from '@angular/fire/auth';
 
 
@@ -31,6 +31,7 @@ export class BasketService {
       this.getItems()
     }
   }
+
 
   setAuthState(uid: string){
     this.isAuthenticated = !!uid;

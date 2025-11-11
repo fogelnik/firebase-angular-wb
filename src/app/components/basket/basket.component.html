@@ -1,5 +1,10 @@
 <div class="wrapper">
  <div class="basket">
+
+   <div class="basket__notification" *ngIf="notification">
+     {{notification}}
+   </div>
+
    <div *ngIf="itemCount === 0" class="basket__null">
      <h3>В корзине пока пусто</h3>
      <span>Загляните на главную — собрали там товары, которые могут вам понравиться</span>
@@ -53,7 +58,7 @@
      <span class="basket__sum-block-product-sum">Товары, {{count}} шт.</span>
      <div class="basket__sum-block-total-price">
        <h3>Итого</h3>
-       <h3>{{ (sum).toFixed(2) }} р.</h3>
+       <h3>{{ displayedTotal }} р.</h3>
      </div>
      <div class="basket__sum-block-btn">
        <button type="submit">Заказать</button>
@@ -67,6 +72,7 @@
        </div>
      </div>
    </div>
+
    </div>
 </div>
 

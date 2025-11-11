@@ -7,6 +7,27 @@
   font-family: "Inter", sans-serif, sans-serif;
   padding: 20px;
 
+  &__notification{
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #323232;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    z-index: 1000;
+    animation: fadeInOut 4s ease forwards;
+  }
+
+  @keyframes fadeInOut {
+    0% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+    10% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    90% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+  }
+
   &__grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -22,8 +43,8 @@
     height: 100%;
   }
   &__spinner{
-    border: 6px solid #f3f3f3;
-    border-top: 6px solid #9e1aeb;
+    border: 6px solid var(--light-color);
+    border-top: 6px solid var(--primary-color);
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -41,18 +62,34 @@
   }
 
   &__card{
+    cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-
-
-
     width: 210px;
-    border: 1px solid #eee;
+    border: 1px solid var(--light-color);
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  &__card-view-btn{
+    position: absolute;
+    width: 200px;
+    text-align: center;
+    top: 53%;
+    left: 2%;
+    padding: 8px 10px;
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 14px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.1s
+  }
+  &:hover  &__card-view-btn{
+    opacity: 1;
   }
   &__card-info-block{
     white-space: nowrap;
@@ -126,7 +163,7 @@
     font-weight: 400;
     width: 100%;
     margin: 10px 0;
-    background-color: #a63afb;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     padding: 8px 12px;
@@ -137,16 +174,26 @@
 
   &__card-buy-button.in-cart{
     background-color: #f2e5fd;
-    color: #bd4ffb;
+    color: var(--hover-primary-color);
   }
   &__card-buy-button.in-cart:hover{
     background-color: #eedcfd;
   }
   &__card-buy-button:hover{
-    background-color: #b15af6;
+    background-color: var(--hover-primary-color);
   }
-
 }
+
+.overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+}
+
 
 
 

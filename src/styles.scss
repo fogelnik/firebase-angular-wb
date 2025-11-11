@@ -1,3 +1,5 @@
+@import "margins";
+
 /* You can add global styles to this file, and also import other style files */
 /* Указываем box sizing */
 *,
@@ -76,6 +78,14 @@ select {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+:root{
+  --dark-color: #000000;
+  --light-color: #FFFFFF;
+  --primary-color: #a63afb;
+  --hover-primary-color: #b15af6;
+
 }
 
 body{

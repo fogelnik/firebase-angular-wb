@@ -23,6 +23,13 @@ export class BasketComponent implements OnInit{
   basket: Product[] = []
   sum: number = 0;
 
+  private notificationTimeout: any
+  notification: string | null = null;
+
+  displayedSums: number[] = [];
+  displayedTotal: number = 0;
+  private totalAnimationTimer: any
+
   isLoading: boolean = true;
 
   constructor(private basketService: BasketService, private router: Router, private authService : AuthService, private auth: Auth) {
@@ -30,6 +37,9 @@ export class BasketComponent implements OnInit{
 
    ngOnInit() {
     // this.isLoading = true;
+
+     this.displayedSums = this.basket.map(item => item.price * this.itemCount);
+
     onAuthStateChanged(this.auth, (user) => {
       if(user){
         this.basketService.appendLocalCartToFirebase(user.uid);
@@ -58,21 +68,85 @@ export class BasketComponent implements OnInit{
     });
   }
 
-  calculateTotalPrice(){
-    this.sum = this.basket.reduce((acc, item) => {
-      return acc + (item.price * (item.itemCount || 1));
-    }, 0);
+  calculateTotalPrice() {
+    const newTotal = this.basket.reduce((acc, item) => acc + item.price * item.itemCount, 0);
+    const target = parseFloat(newTotal.toFixed(2));
 
-    this.sum = parseFloat(this.sum.toFixed(2));
+    // Анимация для displayedTotal
+    if (this.totalAnimationTimer) {
+      clearInterval(this.totalAnimationTimer);
+    }
+
+    let current = this.displayedTotal;
+    const step = (target - current) / 20;
+    let count = 0;
+
+    this.totalAnimationTimer = setInterval(() => {
+      current += step;
+      count++;
+      this.displayedTotal = parseFloat(current.toFixed(2));
+
+      if (count >= 20) {
+        this.displayedTotal = target;
+        clearInterval(this.totalAnimationTimer);
+      }
+    }, 20);
+
+    this.sum = target;
   }
+
+  // animateSum(index: number){
+  //   const target = this.basket[index].price * this.basket[index].itemCount;
+  //   let current = this.displayedSums[index];
+  //   const step = (target - current) / 20;
+  //   let count = 0;
+  //
+  //   const interval = setInterval(() => {
+  //     current += step;
+  //     count++;
+  //     this.displayedSums[index] = parseFloat(current.toFixed(2));
+  //
+  //     if(count >= 20){
+  //       this.displayedSums[index] = parseFloat(target.toFixed(2));
+  //       clearInterval(interval);
+  //     }
+  //   },20)
+  // }
+
+
+
+  // calculateTotalPrice(){
+  //   this.sum = this.basket.reduce((acc, item) => {
+  //     return acc + (item.price * (item.itemCount || 1));
+  //   }, 0);
+  //
+  //   this.sum = parseFloat(this.sum.toFixed(2));
+  // }
 
   removeItem(index: number){
     // const confirmed = confirm('Удалить товар из корзины?')
     this.basket.splice(index, 1);
+    this.showNotification('Товар удален из корзины')
     this.basketService.updateCart(this.basket);
     this.updateItemCount()
     this.calculateTotalPrice()
     console.log("Продукт удален из карзины:", index)
+  }
+
+  showNotification(message: string) {
+
+    if (this.notificationTimeout){
+      clearTimeout(this.notificationTimeout)
+    }
+    this.notification = null;
+
+    setTimeout(() => {
+      this.notification = message;
+
+      this.notificationTimeout = setTimeout(() => {
+        this.notification = null;
+      }, 4000)
+    }, 10)
   }
 
   goToMain() {
@@ -88,6 +162,9 @@ export class BasketComponent implements OnInit{
       this.basket[index].itemCount -= 1;
       this.sum = this.sum - Number(this.basket[index].price);
       this.updateItemCount()
+      this.calculateTotalPrice();
+
+      // this.animateSum(index)
 
       this.basketService.updateCart(this.basket);
     }
@@ -99,7 +176,9 @@ export class BasketComponent implements OnInit{
     this.basketService.updateCart(this.basket);
 
     this.updateItemCount();
-    this.calculateTotalPrice();
+
+
+    // this.animateSum(index)
 
     // const product = this.basket[index];
     //
@@ -108,7 +187,7 @@ export class BasketComponent implements OnInit{
     // this.basketService.updateCart(this.basket);
     //
     // this.updateItemCount();
-    // this.calculateTotalPrice();
+    this.calculateTotalPrice();
 
 
 

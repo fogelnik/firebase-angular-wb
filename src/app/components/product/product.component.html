@@ -1,13 +1,27 @@
 
 <div class="wrapper">
   <div class="product">
+
+    <div class="product__notification" *ngIf="notification">
+      {{notification}}
+    </div>
+
     <div class="product__spinner-container">
       <div *ngIf="isLoading" class="product__spinner"></div>
     </div>
 
     <div *ngIf="!isLoading" class="product__grid">
-    <div  class="product__card" *ngFor="let card of cards">
+    <div  class="product__card" *ngFor="let card of cards;let i = index"
+          (mouseenter)="hoveredCard = card"
+          (mouseleave)="hoveredCard = null"
+          style="position: relative"
+      >
       <img [src]="card.imageUrl" alt="Название товара" class="product__card-image">
+      <button *ngIf="hoveredCard === card"
+              (click)="openQuickView(card)"
+              class="product__card-view-btn"
+      >Быстрый просмотр</button>
+
       <div class="product__card-info">
         <div class="product__card-info-price-block">
           <img src="assets/icon/discount.png">
@@ -41,6 +55,12 @@
         </button>
       </div>
     </div>
+      <div class="overlay" *ngIf="isQuickViewOpen"></div>
+      <app-quick-view
+        *ngIf="isQuickViewOpen"
+        [product]="selectedProduct"
+        (close)="isQuickViewOpen = false">
+      </app-quick-view>
     </div>
   </div>
 </div>
