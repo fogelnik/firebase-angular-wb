@@ -178,32 +178,7 @@ export class BasketComponent implements OnInit{
     this.updateItemCount();
 
 
-    // this.animateSum(index)
-
-    // const product = this.basket[index];
-    //
-    // product.itemCount = (product.itemCount || 1) + 1;
-    //
-    // this.basketService.updateCart(this.basket);
-    //
-    // this.updateItemCount();
     this.calculateTotalPrice();
-
-
-
-    // const productToAdd = { ...this.basket[index]};
-    // productToAdd.itemCount = 1;
-    //
-    // this.basket.push(productToAdd);
-    // this.updateItemCount()
-    // this.basketService.updateCart(this.basket)
-    // this.calculateTotalPrice();
-    //
-    // this.basket[index].itemCount += 1;
-    // this.sum = this.sum + Number(this.basket[index].price);
-    // this.updateItemCount()
-    //
-    // this.basketService.updateCart(this.basket);
   }
 
   updateItemCount() {

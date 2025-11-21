@@ -8,7 +8,8 @@ import { SignInComponent } from './components/auth/sign-in/sign-in.component';
 import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './components/auth/forgot-password/forgot-password.component';
 import { HomeComponent } from './components/dashboard/home/home.component';
-import {CardPageComponent} from './components/product-card/card-page/card-page.component';
+
+
 
 const redirectToLogin = () => redirectUnauthorizedTo('/auth/sign-in');
 
@@ -35,7 +36,8 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectToLogin }
   },
+
   { path: 'product', component: ProductComponent },
   { path: 'basket', component: BasketComponent },
-  {path: 'card-page', component: CardPageComponent}
+
 ];

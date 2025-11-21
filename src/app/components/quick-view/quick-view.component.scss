@@ -1,0 +1,132 @@
+.modal{
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+
+  &__content{
+    background: #fdfdfd;
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    max-width: 900px;
+    height: 70%;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  &__content-right,
+  &__content-left{
+    flex: 1; /* каждая половина занимает 50% */
+  }
+  &__content-left{
+    display: flex;
+  }
+  &__content-left img{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover; /* сохраняет пропорции */
+  }
+  &__content-right{
+    position: relative;
+    padding: 40px;
+    text-align: left;
+  }
+  &__content-right-title{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 20px;
+  }
+  &__content-right-title h2:nth-last-child(1){
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  &__content-right-price{
+    font-weight: bold;
+    margin: 15px 0;
+  }
+  &__close-btn{
+    position: absolute;
+    top: 0px;
+    right: 10px;
+
+    font-size: 36px;
+
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  &__content-right-block-btn{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 0 50px 0 0;
+  }
+  &__add-favorites{
+    position: absolute;
+    right: 0;
+    top: 10px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
+  &__content-right-block-btn button{
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 8px;
+    border: 0;
+    transition: .1s;
+  }
+  &__add-basket-btn{
+    background: #a63afb;
+    color: #ffffff;
+  }
+
+  &__add-basket-btn:hover{
+    background: #b45df8;;
+  }
+  &__bye-now{
+    background: #f2e5fd;
+    color: #a63afb;
+  }
+  &__bye-now:hover{
+    background: #edd7ff;
+  }
+
+  &__content-right-info{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    background: #fdfdfd;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 4px 2px 8px 0 rgba(34, 60, 80, 0.4);
+    transition: .1s;
+  }
+  &__content-right-info:hover{
+    color: var(--primary-color);
+  }
+
+  &__go-basket-btn{
+    background: #f2e5fd;
+    color: var(--primary-color);
+    transition: .1s;
+  }
+  &__go-basket-btn:hover{
+    background: #ead3fd;
+  }
+}

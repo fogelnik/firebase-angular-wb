@@ -1,0 +1,34 @@
+<div class="modal" *ngIf="isOpen">
+  <div class="modal__content">
+    <div class="modal__content-left">
+      <img [src]="product?.imageUrl" alt="{{product?.title}}">
+    </div>
+    <div class="modal__content-right">
+
+        <div class="modal__content-right-title">
+          <h2>{{product?.title}}</h2> /  <h2>{{product?.description}}</h2>
+        </div>
+        <h2 class="modal__content-right-price">{{product?.price}}</h2>
+        <div class="modal__content-right-block-btn">
+          <ng-container *ngIf="!product?.isInCart; else inCartBlock">
+            <button class="modal__add-basket-btn" (click)="addToCart(product)"
+            >Добавить в корзину</button>
+            <button class="modal__bye-now">Купить сейчас</button>
+            <div class="modal__add-favorites">
+              <img src="assets/icon/heart.png">
+            </div>
+          </ng-container>
+
+          <ng-template  #inCartBlock>
+           <button class="modal__go-basket-btn" (click)="goToBasket()">Перейти в корзину</button>
+            <div class="modal__add-favorites">
+              <img src="assets/icon/heart.png">
+            </div>
+          </ng-template>
+
+        </div>
+        <button class="modal__close-btn" (click)="close()">&#215;</button>
+      <div class="modal__content-right-info">Больше информации о товаре</div>
+    </div>
+  </div>
+</div>

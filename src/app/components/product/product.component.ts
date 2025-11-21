@@ -4,7 +4,8 @@ import {Router} from '@angular/router';
 import {NgForOf, NgIf} from '@angular/common';
 import {Product} from '../product';
 import {BasketService} from '../../services/basket.service';
-import {QuickViewComponent} from './quick-view/quick-view.component';
+import {QuickViewComponent} from '../quick-view/quick-view.component';
+
 
 @Component({
   selector: 'app-product',
@@ -13,7 +14,7 @@ import {QuickViewComponent} from './quick-view/quick-view.component';
   imports: [
     NgForOf,
     NgIf,
-    QuickViewComponent
+    QuickViewComponent,
   ],
   styleUrl: './product.component.scss'
 })
@@ -21,13 +22,12 @@ export class ProductComponent implements OnInit{
 
   cards: Product[] = [];
   isLoading = true;
-  hoveredCard: Product | null = null;
-  selectedProduct: Product | null = null;
-  isQuickViewOpen = false;
-
   private notificationTimeout: any
   notification: string | null = null
 
+  hoveredCard: Product | null = null;
+  selectedCard: Product | null = null;
+  isQuickViewOpen = false;
 
   constructor(
     private dataService: DataService,
@@ -72,10 +72,13 @@ export class ProductComponent implements OnInit{
       }, 4000)
     }, 10)
   }
-
-  openQuickView(card: Product): void{
-    this.selectedProduct = card;
+  openQuickView(card: Product){
+    this.selectedCard = card;
     this.isQuickViewOpen = true;
+  }
+  closeQuickView(){
+    this.isQuickViewOpen = false;
+    this.selectedCard = null;
   }
 
 }

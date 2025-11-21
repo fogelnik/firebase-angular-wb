@@ -1,0 +1,57 @@
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Product} from '../product';
+import {NgIf} from '@angular/common';
+import {BasketService} from '../../services/basket.service';
+import {Router} from '@angular/router';
+
+@Component({
+  selector: 'app-quick-view',
+  imports: [
+    NgIf
+  ],
+  templateUrl: './quick-view.component.html',
+  styleUrl: './quick-view.component.scss'
+})
+export class QuickViewComponent {
+
+  private notificationTimeout: any
+  notification: string | null = null
+
+  @Input() product: Product | null = null;
+  @Input() isOpen = false;
+  @Output() closed = new EventEmitter<void>();
+
+  constructor(
+    private basketService: BasketService,
+    private router: Router
+    ) {}
+
+  close() {
+    this.closed.emit()
+  }
+
+ addToCart(product: Product | null){
+    if(!product) return;
+    product.isInCart = true;
+    this.basketService.addToCart(product)
+ }
+ goToBasket(){
+    this.router.navigate(['/basket'])
+ }
+
+  showNotification(message: string) {
+    if (this.notificationTimeout){
+      clearTimeout(this.notificationTimeout)
+    }
+    this.notification = null;
+
+    setTimeout(() => {
+      this.notification = message;
+
+      this.notificationTimeout = setTimeout(() => {
+        this.notification = null;
+      }, 4000)
+    }, 10)
+  }
+
+}

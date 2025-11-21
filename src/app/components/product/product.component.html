@@ -11,57 +11,55 @@
     </div>
 
     <div *ngIf="!isLoading" class="product__grid">
-    <div  class="product__card" *ngFor="let card of cards;let i = index"
-          (mouseenter)="hoveredCard = card"
-          (mouseleave)="hoveredCard = null"
-          style="position: relative"
+      <div  class="product__card" *ngFor="let card of cards;let i = index"
+            (mouseenter)="hoveredCard = card"
+            (mouseleave)="hoveredCard = null"
       >
-      <img [src]="card.imageUrl" alt="Название товара" class="product__card-image">
-      <button *ngIf="hoveredCard === card"
-              (click)="openQuickView(card)"
-              class="product__card-view-btn"
-      >Быстрый просмотр</button>
-
-      <div class="product__card-info">
-        <div class="product__card-info-price-block">
-          <img src="assets/icon/discount.png">
-          <p class="product__card-price">{{ card.price }} p.</p>
-        </div>
-        <div class="product__card-info-block">
-          <h3 class="product__card-title">{{ card.title }}</h3> / <span class="product__card-description">{{ card.description }}</span>
-        </div>
-        <div class="product__card-info-rating">
-          <span class="product__card-info-rating-star">
-            <img src="assets/icon/icon-star.png" alt="star">
-          </span>
-          <span class="product__card-info-rating-num">
-            34
-          </span>
-          <span>•</span>
-          <span class="product__card-info-rating-votes">sdcds</span>
-          <span>оценки</span>
-        </div>
-        <button class="product__card-buy-button"
-                [class.in-cart]="card.isInCart"
-                (click)="toggleCart(card)"
-        >
-
-          <img *ngIf="!card.isInCart"
-               class="product__card-buy-button-img"
-               src="assets/icon/shopping-cart.png"
-               alt="Корзина"
+        <img [src]="card.imageUrl" alt="{{card.title}}" class="product__card-image">
+        <div class="product__card-info">
+          <div class="product__card-info-price-block">
+            <img src="assets/icon/discount.png">
+            <p class="product__card-price">{{ card.price }} p.</p>
+          </div>
+          <div class="product__card-info-block">
+            <h3 class="product__card-title">{{ card.title }}</h3> / <span class="product__card-description">{{ card.description }}</span>
+          </div>
+          <div class="product__card-info-rating">
+            <span class="product__card-info-rating-star">
+              <img src="assets/icon/icon-star.png" alt="star">
+            </span>
+            <span class="product__card-info-rating-num">
+              34
+            </span>
+            <span>•</span>
+            <span class="product__card-info-rating-votes">sdcds</span>
+            <span>оценки</span>
+          </div>
+          <button class="product__card-buy-button"
+                  [class.in-cart]="card.isInCart"
+                  (click)="toggleCart(card); $event.stopPropagation()"
           >
-          <span>{{card.isInCart ? "В корзине" : " Послезавтра"}}</span>
-        </button>
+
+            <img *ngIf="!card.isInCart"
+                 class="product__card-buy-button-img"
+                 src="assets/icon/shopping-cart.png"
+                 alt="Корзина"
+            >
+            <span>{{card.isInCart ? "В корзине" : " Послезавтра"}}</span>
+          </button>
+        </div>
+        <button
+          *ngIf="hoveredCard === card"
+          class="product__quick-view-btn"
+          (click)="openQuickView(card); $event.stopPropagation()"
+        >Быстрый просмотр</button>
       </div>
     </div>
-      <div class="overlay" *ngIf="isQuickViewOpen"></div>
-      <app-quick-view
-        *ngIf="isQuickViewOpen"
-        [product]="selectedProduct"
-        (close)="isQuickViewOpen = false">
-      </app-quick-view>
-    </div>
+    <app-quick-view
+      [product]="selectedCard"
+      [isOpen]="isQuickViewOpen"
+      (closed)="closeQuickView()">
+    </app-quick-view>
   </div>
 </div>
 
