@@ -5,6 +5,9 @@ import {NgIf} from '@angular/common';
 import {Router, RouterLink} from '@angular/router';
 import {BasketService} from '../../../services/basket.service';
 import {BasketComponent} from '../../basket/basket.component';
+import {FormsModule} from '@angular/forms';
+import {SearchService} from '../../../services/search.service';
+
 
 @Component({
   selector: 'app-header',
@@ -12,7 +15,8 @@ import {BasketComponent} from '../../basket/basket.component';
   templateUrl: './header.component.html',
   imports: [
     NgIf,
-    RouterLink
+    RouterLink,
+    FormsModule
   ],
   styleUrl: './header.component.scss'
 })
@@ -23,13 +27,19 @@ export class HeaderComponent implements OnInit{
   constructor(
     private auth: Auth,
     private router: Router,
-    private basketService: BasketService
+    private basketService: BasketService,
+    private searchService: SearchService
   ) {}
 
   ngOnInit() {
     onAuthStateChanged(this.auth, (user) => {
       this.isAuthenticated = !!user;
     })
+  }
+
+  onSearch(event: Event){
+    const value = (event.target as HTMLInputElement).value;
+    this.searchService.setSearchTerm(value)
   }
 
   get count(): number{

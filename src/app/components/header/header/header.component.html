@@ -31,7 +31,11 @@
           </div>
         </div>
         <div class="header__bottom-block-search">
-          <input class="header__bottom-block-search-input" type="search" placeholder="Найти на Wildberries">
+          <input class="header__bottom-block-search-input"
+                 type="search"
+                 placeholder="Найти на Wildberries"
+                 (input)="onSearch($event)"
+          >
         </div>
         <div  class="header__bottom-block-nav" >
           <div  *ngIf="isAuthenticated ? true : false" class="header__bottom-block-nav-orders" >

@@ -11,7 +11,7 @@
     </div>
 
     <div *ngIf="!isLoading" class="product__grid">
-      <div  class="product__card" *ngFor="let card of cards;let i = index"
+      <div  class="product__card" *ngFor="let card of filteredCards;let i = index"
             (mouseenter)="hoveredCard = card"
             (mouseleave)="hoveredCard = null"
       >

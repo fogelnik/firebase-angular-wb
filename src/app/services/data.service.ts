@@ -11,12 +11,14 @@ export class DataService {
   constructor(public http: HttpClient) { }
 
   getCards() {
-    return this.http.get<Product[]>('https://training-wb-angular-fire-proj-default-rtdb.firebaseio.com/cards.json')
-  }
-
-  getCardsById(id: string){
-    return this.http.get<Product>(
-      `https://training-wb-angular-fire-proj-default-rtdb.firebaseio.com/cards/${id}.json`
+    return this.http.get<Product[]>('https://training-wb-angular-fire-proj-default-rtdb.firebaseio.com/cards.json'
     )
   }
+
+  getCardById(id: number): Observable<Product> {
+     return this.http.get<Product>(
+       `https://training-wb-angular-fire-proj-default-rtdb.firebaseio.com/cards/${id}.json`
+     )
+  }
+
 }

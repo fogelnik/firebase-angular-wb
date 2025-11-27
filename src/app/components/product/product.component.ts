@@ -5,6 +5,8 @@ import {NgForOf, NgIf} from '@angular/common';
 import {Product} from '../product';
 import {BasketService} from '../../services/basket.service';
 import {QuickViewComponent} from '../quick-view/quick-view.component';
+import {SearchService} from '../../services/search.service';
+
 
 
 @Component({
@@ -21,6 +23,7 @@ import {QuickViewComponent} from '../quick-view/quick-view.component';
 export class ProductComponent implements OnInit{
 
   cards: Product[] = [];
+  filteredCards: Product[] = []
   isLoading = true;
   private notificationTimeout: any
   notification: string | null = null
@@ -29,22 +32,37 @@ export class ProductComponent implements OnInit{
   selectedCard: Product | null = null;
   isQuickViewOpen = false;
 
+
+
   constructor(
     private dataService: DataService,
     private router: Router,
-    private basketService: BasketService
+    private basketService: BasketService,
+    private searchService: SearchService,
   ) {}
 
   ngOnInit() {
-    this.loadProducts()
+    this.loadProducts();
+
+    this.searchService.searchTerm$.subscribe(term => {
+      this.applyFilter(term)
+    })
   }
 
   loadProducts() {
     this.isLoading = true;
     this.dataService.getCards().subscribe((data) => {
       this.cards = data;
+      this.filteredCards = data
       this.isLoading = false;
     })
+  }
+
+  applyFilter(term: string){
+    const lowerTerm = term.toLowerCase();
+    this.filteredCards = this.cards.filter(card =>
+    card.title.toLowerCase().includes(lowerTerm) || card.description.toLowerCase().includes(lowerTerm)
+    );
   }
 
   toggleCart(card: Product): void {

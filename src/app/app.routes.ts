@@ -10,7 +10,6 @@ import { ForgotPasswordComponent } from './components/auth/forgot-password/forgo
 import { HomeComponent } from './components/dashboard/home/home.component';
 
 
-
 const redirectToLogin = () => redirectUnauthorizedTo('/auth/sign-in');
 
 export const routes: Routes = [
@@ -39,5 +38,4 @@ export const routes: Routes = [
 
   { path: 'product', component: ProductComponent },
   { path: 'basket', component: BasketComponent },
-
 ];
