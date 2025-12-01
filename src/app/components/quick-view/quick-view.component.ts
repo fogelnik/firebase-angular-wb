@@ -17,6 +17,8 @@ export class QuickViewComponent {
   private notificationTimeout: any
   notification: string | null = null
 
+  clickFavorite = false
+
   @Input() product: Product | null = null;
   @Input() isOpen = false;
   @Output() closed = new EventEmitter<void>();
@@ -63,6 +65,10 @@ export class QuickViewComponent {
     }else {
       console.error('Product ID is undefined');
     }
+  }
+
+  goToFavorites() {
+    this.clickFavorite = !this.clickFavorite
   }
 
 }

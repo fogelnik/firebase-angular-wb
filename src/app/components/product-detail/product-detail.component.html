@@ -45,6 +45,9 @@
             <button class="product__go-to-basket" (click)="goToBasket()">Перейти в корзину</button>
           </ng-template>
         </div>
+        <div class="product__block-price-favorite" (click)=" goToFavorites()">
+          <img [src]=" addFavorites ? 'assets/icon/icon-heart-basket.png' : 'assets/icon/heart-hover.png'">
+        </div>
       </div>
     </div>
   </div>

@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {DataService} from "../../services/data.service";
 import {NgIf} from '@angular/common';
 import {BasketService} from '../../services/basket.service';
-import {ThisReceiver} from '@angular/compiler';
+
 
 @Component({
   selector: 'app-product-detail',
@@ -18,6 +18,8 @@ export class ProductDetailComponent implements OnInit{
 
   product: Product | null = null;
   isAddedToBasket = false
+
+  addFavorites = false
 
   private notificationTimeout: any
   notification: string | null = null
@@ -70,5 +72,9 @@ export class ProductDetailComponent implements OnInit{
       }, 4000)
     }, 10)
     console.log('Товар добавлен в корзину')
+  }
+
+  goToFavorites() {
+    this.addFavorites = !this.addFavorites
   }
 }

@@ -140,13 +140,13 @@ export class BasketComponent implements OnInit{
 
     this.notifications.push(message);
 
-    if(this.notifications.length > 5 ){
+    if(this.notifications.length > 6 ){
       this.notifications.shift();
     }
 
     setTimeout(() => {
       this.notifications = this.notifications.filter(n  => n !== message);
-    }, 4000)
+    }, 2000)
     // if (this.notificationTimeout){
     //   clearTimeout(this.notificationTimeout)
     // }

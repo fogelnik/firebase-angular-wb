@@ -43,7 +43,7 @@
             Заказы
           </div>
           <div class="header__bottom-block-nav-addresses">
-            <img src="assets/icon-location.png">
+            <img [src]=" isAuthenticated ? 'assets/icon/icon-heart.png' : 'assets/icon-location.png' ">
             {{isAuthenticated ? 'Избранное' : 'Адреса'}}
           </div>
 

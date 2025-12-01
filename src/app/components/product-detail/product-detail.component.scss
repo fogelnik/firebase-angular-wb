@@ -134,4 +134,12 @@
   &__go-to-basket:hover{
     background: var(--hover-primary-color);
   }
+
+  &__block-price-favorite{
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  &__block-price-favorite img{
+    width: 36px;
+  }
 }

@@ -17,8 +17,8 @@
             <button class="modal__add-basket-btn" (click)="addToCart(product)"
             >Добавить в корзину</button>
             <button class="modal__bye-now">Купить сейчас</button>
-            <div class="modal__add-favorites">
-              <img src="assets/icon/heart.png">
+            <div class="modal__add-favorites" (click)="goToFavorites()">
+              <img [src]="clickFavorite ? 'assets/icon/heart-hover.png' : 'assets/icon/heart.png'">
             </div>
           </ng-container>
 
