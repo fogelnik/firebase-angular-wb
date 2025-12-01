@@ -54,4 +54,13 @@ export class QuickViewComponent {
     }, 10)
   }
 
+  openProductDetail(product: Product | null){
+    if(product && product.id != null){
+      this.router.navigate(['/product', product.id]);
+      this.close();
+    }else {
+      console.error('Product ID is undefined');
+    }
+  }
+
 }

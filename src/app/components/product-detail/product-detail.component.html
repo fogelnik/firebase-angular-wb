@@ -19,11 +19,15 @@
           <img [src]="product?.imageUrl" alt="{{product?.title}}">
         </div>
         <div class="product__block-info">
-          <span class="product__block-info-title">{{ product?.title }}</span>
+          <div class="product__block-info-title">{{ product?.title }}</div>
           <h2 class="product__block-info-desc">{{ product?.description }}</h2>
-          <p class="product__block-info-color">Цвет: {{ product?.color }}</p>
-          <p class="product__block-info-rating">Рейтинг: {{ product?.rating }}</p>
-          <p class="product__block-info-votes">Голосов: {{ product?.votes }}</p>
+          <p class="product__block-info-color">Цвет: {{ product?.color }} черный</p>
+          <div class="product__block-info-rating">
+            <img src="assets/icon/icon-star.png">
+            <span> {{product?.rating}} 4.7</span>
+            <p class="product__block-info-votes"> · {{ product?.votes }} 56 оценок</p>
+          </div>
+
         </div>
       </div>
       <div class="product__block-price">
