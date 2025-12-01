@@ -9,6 +9,9 @@
 <!--</ng-container>-->
 
 <div class="product" *ngIf="product">
+  <div class="product__notification" *ngIf="notification">
+    {{notification}}
+  </div>
   <div class="product__wrapper">
     <button class="product__btn-back" (click)="goToProduct()">
       <img src="assets/icon/back.png">

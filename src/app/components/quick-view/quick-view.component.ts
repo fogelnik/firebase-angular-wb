@@ -34,6 +34,7 @@ export class QuickViewComponent {
     if(!product) return;
     product.isInCart = true;
     this.basketService.addToCart(product)
+    this.showNotification('Товар добавлен в корзину')
  }
  goToBasket(){
     this.router.navigate(['/basket'])
@@ -52,6 +53,7 @@ export class QuickViewComponent {
         this.notification = null;
       }, 4000)
     }, 10)
+    console.log('Товар добавлен в корзину')
   }
 
   openProductDetail(product: Product | null){

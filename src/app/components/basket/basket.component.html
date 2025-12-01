@@ -1,9 +1,13 @@
 <div class="wrapper">
- <div class="basket">
 
-   <div class="basket__notification" *ngIf="notification">
-     {{notification}}
-   </div>
+  <div class="notifications">
+    <div class="notification" *ngFor="let note of notifications">
+      {{note}}
+    </div>
+  </div>
+
+
+ <div class="basket">
 
    <div *ngIf="itemCount === 0" class="basket__null">
      <h3>В корзине пока пусто</h3>

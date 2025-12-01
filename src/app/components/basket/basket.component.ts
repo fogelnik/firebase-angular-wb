@@ -24,7 +24,10 @@ export class BasketComponent implements OnInit{
   sum: number = 0;
 
   private notificationTimeout: any
-  notification: string | null = null;
+  // notification: string | null
+  notifications: string[] = [];
+
+
 
   displayedSums: number[] = [];
   displayedTotal: number = 0;
@@ -135,18 +138,27 @@ export class BasketComponent implements OnInit{
 
   showNotification(message: string) {
 
-    if (this.notificationTimeout){
-      clearTimeout(this.notificationTimeout)
+    this.notifications.push(message);
+
+    if(this.notifications.length > 5 ){
+      this.notifications.shift();
     }
-    this.notification = null;
 
     setTimeout(() => {
-      this.notification = message;
-
-      this.notificationTimeout = setTimeout(() => {
-        this.notification = null;
-      }, 4000)
-    }, 10)
+      this.notifications = this.notifications.filter(n  => n !== message);
+    }, 4000)
+    // if (this.notificationTimeout){
+    //   clearTimeout(this.notificationTimeout)
+    // }
+    // this.notification = null;
+    //
+    // setTimeout(() => {
+    //   this.notification = message;
+    //
+    //   this.notificationTimeout = setTimeout(() => {
+    //     this.notification = null;
+    //   }, 4000)
+    // }, 10)
   }
 
   goToMain() {
@@ -164,6 +176,7 @@ export class BasketComponent implements OnInit{
       this.updateItemCount()
       this.calculateTotalPrice();
 
+      this.showNotification('Товар уменьшен в количестве')
       // this.animateSum(index)
 
       this.basketService.updateCart(this.basket);
@@ -176,7 +189,7 @@ export class BasketComponent implements OnInit{
     this.basketService.updateCart(this.basket);
 
     this.updateItemCount();
-
+    this.showNotification('Товар увеличен в количестве')
 
     this.calculateTotalPrice();
   }

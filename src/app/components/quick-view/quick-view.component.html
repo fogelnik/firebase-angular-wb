@@ -1,4 +1,7 @@
 <div class="modal" *ngIf="isOpen">
+  <div class="modal__notification" *ngIf="notification">
+    {{notification}}
+  </div>
   <div class="modal__content">
     <div class="modal__content-left">
       <img [src]="product?.imageUrl" alt="{{product?.title}}">
