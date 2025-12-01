@@ -14,6 +14,7 @@
       <div  class="product__card" *ngFor="let card of filteredCards;let i = index"
             (mouseenter)="hoveredCard = card"
             (mouseleave)="hoveredCard = null"
+            (click)="openProductDetail(card)"
       >
         <img [src]="card.imageUrl" alt="{{card.title}}" class="product__card-image">
         <div class="product__card-info">

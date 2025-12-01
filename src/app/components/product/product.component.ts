@@ -49,14 +49,26 @@ export class ProductComponent implements OnInit{
     })
   }
 
-  loadProducts() {
+  // loadProducts() {
+  //   this.isLoading = true;
+  //   this.dataService.getCards().subscribe((data) => {
+  //     this.cards = data;
+  //     this.filteredCards = data
+  //     this.isLoading = false;
+  //   })
+  // }
+  loadProducts(){
     this.isLoading = true;
     this.dataService.getCards().subscribe((data) => {
-      this.cards = data;
-      this.filteredCards = data
+      this.cards = Object.keys(data).map(key => ({
+        id: Number(key),
+        ...data[key]
+      }));
+      this.filteredCards = this.cards;
       this.isLoading = false;
     })
   }
+
 
   applyFilter(term: string){
     const lowerTerm = term.toLowerCase();
@@ -97,6 +109,14 @@ export class ProductComponent implements OnInit{
   closeQuickView(){
     this.isQuickViewOpen = false;
     this.selectedCard = null;
+  }
+
+  openProductDetail(card: Product){
+    if(card && card.id != null){
+      this.router.navigate(['/product', card.id]);
+    }else {
+      console.error('Card ID is undefined')
+    }
   }
 
 }

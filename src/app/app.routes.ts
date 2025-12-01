@@ -8,6 +8,7 @@ import { SignInComponent } from './components/auth/sign-in/sign-in.component';
 import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './components/auth/forgot-password/forgot-password.component';
 import { HomeComponent } from './components/dashboard/home/home.component';
+import {ProductDetailComponent} from './components/product-detail/product-detail.component';
 
 
 const redirectToLogin = () => redirectUnauthorizedTo('/auth/sign-in');
@@ -38,4 +39,5 @@ export const routes: Routes = [
 
   { path: 'product', component: ProductComponent },
   { path: 'basket', component: BasketComponent },
+  { path: 'product/:id', component: ProductDetailComponent},
 ];

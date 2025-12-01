@@ -1,0 +1,44 @@
+<!--<ng-container *ngIf="product as p">-->
+<!--  <img [src]="p.imageUrl" alt="{{p.title}}">-->
+<!--  <h2>{{ p.title }}</h2>-->
+<!--  <p>{{ p.description }}</p>-->
+<!--  <p>Цена: {{ p.price }} p.</p>-->
+<!--  <p>Цвет: {{ p.color }}</p>-->
+<!--  <p>Рейтинг: {{ p.rating }}</p>-->
+<!--  <p>Голосов: {{ p.votes }}</p>-->
+<!--</ng-container>-->
+
+<div class="product" *ngIf="product">
+  <div class="product__wrapper">
+    <button class="product__btn-back" (click)="goToProduct()">
+      <img src="assets/icon/back.png">
+    </button>
+    <div class="product__content">
+      <div class="product__block-left">
+        <div class="product__block-img">
+          <img [src]="product?.imageUrl" alt="{{product?.title}}">
+        </div>
+        <div class="product__block-info">
+          <span class="product__block-info-title">{{ product?.title }}</span>
+          <h2 class="product__block-info-desc">{{ product?.description }}</h2>
+          <p class="product__block-info-color">Цвет: {{ product?.color }}</p>
+          <p class="product__block-info-rating">Рейтинг: {{ product?.rating }}</p>
+          <p class="product__block-info-votes">Голосов: {{ product?.votes }}</p>
+        </div>
+      </div>
+      <div class="product__block-price">
+        <h2>{{ product?.price }} p.</h2>
+        <div class="product__block-price-btns">
+          <ng-container *ngIf="!isAddedToBasket; else basketBtn">
+            <button class="add-to-basket" (click)="addToBasket(product)">Добавить в корзину</button>
+            <button class="bye-now">Купить сейчас</button>
+          </ng-container>
+
+          <ng-template #basketBtn>
+            <button class="product__go-to-basket" (click)="goToBasket()">Перейти в корзину</button>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

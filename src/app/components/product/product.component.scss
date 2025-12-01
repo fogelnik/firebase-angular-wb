@@ -164,7 +164,7 @@
     font-weight: 400;
     width: 100%;
     margin: 10px 0;
-    background-color: var(--primary-color);
+    background:var(--primary-color);
     color: white;
     border: none;
     padding: 8px 12px;
@@ -175,13 +175,13 @@
 
   &__card-buy-button.in-cart{
     background-color: #f2e5fd;
-    color: var(--hover-primary-color);
+    color: var(--primary-color);
   }
   &__card-buy-button.in-cart:hover{
-    background-color: #eedcfd;
+    background-color: #ddbff6;
   }
   &__card-buy-button:hover{
-    background-color: var(--hover-primary-color);
+    background-color: #c34fc1;
   }
 
   &__quick-view-btn{
