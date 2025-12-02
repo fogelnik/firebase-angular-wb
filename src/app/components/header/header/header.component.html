@@ -42,7 +42,9 @@
             <img src="assets/icon/icon-logistics.png">
             Заказы
           </div>
-          <div class="header__bottom-block-nav-addresses">
+          <div class="header__bottom-block-nav-addresses"
+          (click)="isAuthenticated ? goToFavorite() : null"
+          >
             <img [src]=" isAuthenticated ? 'assets/icon/icon-heart.png' : 'assets/icon-location.png' ">
             {{isAuthenticated ? 'Избранное' : 'Адреса'}}
           </div>

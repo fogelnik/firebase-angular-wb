@@ -27,6 +27,8 @@ export class BasketComponent implements OnInit{
   // notification: string | null
   notifications: string[] = [];
 
+  isFavorite = false
+
 
 
   displayedSums: number[] = [];
@@ -197,4 +199,9 @@ export class BasketComponent implements OnInit{
   updateItemCount() {
     this.itemCount = this.basket.reduce((acc, item) => acc + item.itemCount, 0);
   }
+
+  addToFavorite(index: number) {
+    this.isFavorite = !this.isFavorite
+  }
+
 }

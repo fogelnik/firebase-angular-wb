@@ -24,8 +24,8 @@
 
           <ng-template  #inCartBlock>
            <button class="modal__go-basket-btn" (click)="goToBasket()">Перейти в корзину</button>
-            <div class="modal__add-favorites">
-              <img src="assets/icon/heart.png">
+            <div class="modal__add-favorites" (click)="goToFavorites()">
+              <img [src]="clickFavorite ? 'assets/icon/heart-hover.png' : 'assets/icon/heart.png'">
             </div>
           </ng-template>
 

@@ -31,4 +31,8 @@ export class UserProfileComponent {
       })
       .catch(error => console.error('Error occurred:', error))
   }
+
+  goToProduct(){
+    this.router.navigate(['/product'])
+  }
 }

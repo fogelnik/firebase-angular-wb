@@ -6,8 +6,6 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup, signOut, user
 } from '@angular/fire/auth';
-import {Observable} from 'rxjs';
-import {ThisReceiver} from '@angular/compiler';
 
 
 @Injectable({

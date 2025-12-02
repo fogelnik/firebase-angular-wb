@@ -61,4 +61,9 @@ export class HeaderComponent implements OnInit{
   navigateToWelcomePage(){
     this.router.navigate(['/'])
   }
+
+  goToFavorite(){
+    this.router.navigate(['/favorites'])
+  }
+
 }
