@@ -7,7 +7,7 @@ html, body {
 .app {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  min-height: 100vh;
 }
 
 app-header {
@@ -19,11 +19,7 @@ app-header {
 }
 
 .content {
-  margin-top: 150px;
-  margin-bottom: 50px;
+ margin: 170px 0 50px;
   flex: 1;
 }
 
-app-footer {
-  bottom: 0;
-}

@@ -2,7 +2,8 @@ export interface Product {
   id: number;
   title: string;
   description: string;
-  imageUrl: string;
+  imageUrl?: string;
+  images?: string[]
   price: number;
   color: string;
   rating: string;
@@ -10,4 +11,7 @@ export interface Product {
   itemCount: number;
 
   isInCart: boolean;
+
+
+  currentIndex?: number;
 }

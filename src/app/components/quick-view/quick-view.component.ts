@@ -26,8 +26,8 @@ export class QuickViewComponent {
 
   constructor(
     private basketService: BasketService,
-    private favoriteService: FavoritesService,
     private router: Router,
+    private favoritesService: FavoritesService
     ) {}
 
   close() {
@@ -69,7 +69,12 @@ export class QuickViewComponent {
     }
   }
 
-  goToFavorites() {
+  addToFavorites(product: Product | null) {
+    if(!product){
+      console.warn('Продукт не найден');
+      return;
+    }
+    this.favoritesService.addToFavorites(product)
     this.clickFavorite = !this.clickFavorite
   }
 

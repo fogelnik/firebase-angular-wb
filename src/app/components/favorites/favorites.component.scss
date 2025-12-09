@@ -1,0 +1,46 @@
+.wrapper{
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.nav{
+  margin: 15px 0 30px;
+}
+.nav ul{
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+}
+.nav ul li{
+  font-weight: bold;
+  cursor: pointer;
+  transition: .2s;
+}
+.nav ul li:hover{
+  color: #950293;
+}
+.nav ul li:nth-child(4){
+  color: #950293;
+}
+
+.favorites{
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+
+  &__card{
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__card-image{
+    height: 300px;
+    width: 200px;
+  }
+  &__card-info-block{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow: hidden;
+  }
+}

@@ -32,6 +32,10 @@ export class ProductComponent implements OnInit{
   selectedCard: Product | null = null;
   isQuickViewOpen = false;
 
+  private sliderInterval: any = null;
+
+  // currentIndex = 0;
+
 
 
   constructor(
@@ -118,5 +122,37 @@ export class ProductComponent implements OnInit{
       console.error('Card ID is undefined')
     }
   }
+
+
+  // nextImage(card: Product) {
+  //   if (card.images && card.images.length) {
+  //     this.currentIndex = (this.currentIndex + 1) % card.images.length;
+  //   }
+  // }
+  //
+  // prevImage(card: Product) {
+  //   if (card.images && card.images.length) {
+  //     this.currentIndex = (this.currentIndex - 1 + card.images.length) % card.images.length;
+  //   }
+  // }
+
+  startSlider(card: Product){
+    card.currentIndex = 0;
+    if(this.sliderInterval) return;
+
+    this.sliderInterval = setInterval(() => {
+      if(card.images && card.images.length){
+        card.currentIndex = (card.currentIndex! + 1) % card.images.length;
+      }
+    }, 1000)
+  }
+
+  stopSlider() {
+    if(this.sliderInterval){
+      clearInterval(this.sliderInterval);
+      this.sliderInterval = null;
+    }
+  }
+
 
 }

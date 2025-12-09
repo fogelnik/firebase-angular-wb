@@ -1,1 +1,36 @@
-<p>favorites works!</p>
+<div class="wrapper">
+  <div class="nav">
+    <ul>
+      <li>Главная</li>
+      <li>Заказы</li>
+      <li>Покупки</li>
+      <li>Избранное</li>
+      <li>Блаланс</li>
+      <li>Отзывы и вопросы</li>
+      <li>Еще разделы</li>
+    </ul>
+  </div>
+  <div class="favorites" *ngIf="favorites.length > 0; else emptyBlock">
+    <div class="favorites__card" *ngFor="let product of favorites">
+      <div class="favorites__card-image">
+        <img [src]="product.imageUrl" alt="{{product.title}}">
+      </div>
+      <div class="favorites__card-info">
+        <p class="favorites__card-price">{{ product.price }} p.</p>
+        <div class="favorites__card-info-block">
+          <h3 class="favorites__card-title">{{ product.title }}</h3>
+          /
+          <p class="favorites__card-description">{{ product.description }}</p>
+        </div>
+      </div>
+      <button class="favorites__add-btn">
+        Послезавтра
+      </button>
+    </div>
+  </div>
+
+  <ng-template #emptyBlock>
+    <p>У вас пока нет избранных товаров</p>
+  </ng-template>
+
+</div>
