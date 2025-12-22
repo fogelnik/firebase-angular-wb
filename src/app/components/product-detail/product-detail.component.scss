@@ -1,3 +1,29 @@
+
+.product__spinner-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.product__spinner{
+  border: 6px solid var(--light-color);
+  border-top: 6px solid var(--primary-color);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 300px auto;
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
 .product{
 
   &__notification{
@@ -26,6 +52,7 @@
     padding: 15px 0;
     margin: 0 auto;
   }
+
   &__btn-back{
     width: 50px;
     height: 50px;
@@ -42,6 +69,33 @@
     display: flex;
     flex: 1;
   }
+  &__block-thumbs{
+    display: flex;
+    flex-direction: column;
+    margin-right: 15px;
+  }
+  .thumb{
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    transition: border-color 0.2s;
+  }
+
+  &__block-all-img{
+    display: flex;
+    margin-bottom: 20px;
+  }
+  .all-img{
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+    cursor: pointer;
+    border: 1px solid #dddddd;
+  }
+
+
   &__block-img{
   }
   &__block-img img{

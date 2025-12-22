@@ -2,14 +2,15 @@ import {Component, OnInit} from '@angular/core';
 import {Product} from "../product";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DataService} from "../../services/data.service";
-import {NgIf} from '@angular/common';
+import {NgForOf, NgIf} from '@angular/common';
 import {BasketService} from '../../services/basket.service';
 
 
 @Component({
   selector: 'app-product-detail',
   imports: [
-    NgIf
+    NgIf,
+    NgForOf
   ],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss'
@@ -21,8 +22,12 @@ export class ProductDetailComponent implements OnInit{
 
   addFavorites = false
 
+  selectedImage: string | null = null;
+
   private notificationTimeout: any
   notification: string | null = null
+
+  isLoading = false;
 
   constructor(
       private route: ActivatedRoute,
@@ -32,15 +37,23 @@ export class ProductDetailComponent implements OnInit{
   ) {}
 
   ngOnInit() {
+    this.loadCard()
+  }
+
+  loadCard() {
+    this.isLoading = true;
     const idParam = this.route.snapshot.paramMap.get('id');
     if (idParam){
       const id = Number(idParam);
       this.dataService.getCardById(id).subscribe(data => {
         this.product = data;
 
+        this.isLoading = false;
+
       })
     }
   }
+
 
   addToBasket(product: Product | null){
     if(!product) return
@@ -49,6 +62,10 @@ export class ProductDetailComponent implements OnInit{
     this.isAddedToBasket = true
     this.showNotification('Товар добавлен в корзину')
   }
+
+selectImage(img: string){
+    this.selectedImage = img
+}
 
   goToBasket(){
     this.router.navigate(['/basket'])
