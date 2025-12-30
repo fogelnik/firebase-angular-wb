@@ -58,12 +58,19 @@ export class ProductDetailComponent implements OnInit{
 
   loadCard(id: number) {
     this.isLoading = true;
+
+    this.selectedImage = null;
+    this.selectedVariant = null;
+
     this.dataService.getCardById(id).subscribe(data => {
       this.product = data;
       this.isLoading = false;
 
       if(this.product?.variants?.length){
         this.selectedVariant = this.product.variants[0];
+        this.selectedImage = this.selectedVariant.imageUrl || null;
+      }else {
+        this.selectedImage = null;
       }
 
       if(this.product?.category){
