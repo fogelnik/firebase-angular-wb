@@ -196,4 +196,44 @@
   &__block-price-favorite img{
     width: 36px;
   }
+
+  &__recommendations{
+    margin-top: 30px;
+
+    h2{
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    span{
+      color: #ae01ab;
+    }
+
+    .recommendations__flex{
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .recommendations__card{
+      width: 150px;
+      cursor: pointer;
+      text-align: center;
+
+      img{
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+
+      p{
+        font-size: 14px;
+        margin: 3px 0;
+      }
+      span{
+        font-weight: bold;
+      }
+    }
+  }
+
 }

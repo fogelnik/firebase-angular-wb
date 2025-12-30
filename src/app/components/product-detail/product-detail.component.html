@@ -2,9 +2,7 @@
   <div *ngIf="isLoading" class="product__spinner"></div>
 </div>
 
-
 <div class="product" *ngIf="product">
-
   <div class="product__notification" *ngIf="notification">
     {{notification}}
   </div>
@@ -17,7 +15,6 @@
 <!--        <div class="product__block-img">-->
 <!--          <img [src]="product?.imageUrl" alt="{{product?.title}}">-->
 <!--        </div>-->
-
         <div class="product__block-thumbs">
           <div class="thumb"
                *ngFor="let img of product?.images"
@@ -27,26 +24,26 @@
           </div>
         </div>
         <div class="product__block-img">
-          <img [src]="selectedImage || product?.imageUrl" alt="{{product.title}}">
+          <img [src]="selectedImage || product?.imageUrl" alt="{{selectedVariant?.color || product?.title}}">
         </div>
 
         <div class="product__block-info">
           <div class="product__block-info-title">{{ product?.title }}</div>
           <h2 class="product__block-info-desc">{{ product?.description }}</h2>
-          <p class="product__block-info-color">Цвет: {{ product?.color }} черный</p>
+          <p class="product__block-info-color">Цвет: {{ product?.color }}</p>
 
           <div class="product__block-all-img">
             <div class="all-img"
-                 *ngFor="let img of product?.images"
-                 (click)="selectImage(img)"
+                 *ngFor="let variant of product?.variants"
+                 (click)="selectVariant(variant)"
             >
-              <img [src]="img">
+              <img [src]="variant.imageUrl" alt="{{variant.color}}">
             </div>
           </div>
           <div class="product__block-info-rating">
             <img src="assets/icon/icon-star.png">
-            <span> {{product?.rating}} 4.7</span>
-            <p class="product__block-info-votes"> · {{ product?.votes }} 56 оценок</p>
+            <span> {{product?.rating}}</span>
+            <p class="product__block-info-votes"> · {{ product?.votes }} оценок</p>
           </div>
 
         </div>
@@ -67,6 +64,20 @@
           <img [src]=" addFavorites ? 'assets/icon/heart-hover.png' : 'assets/icon/icon-heart-basket.png'">
         </div>
       </div>
+    </div>
+
+    <div class="product__recommendations" *ngIf="recommendedProducts.length">
+      <h2>Смотрите также по катогории <span>{{product?.category}}</span></h2>
+      <div class="recommendations__flex">
+        <div class="recommendations__card"
+             *ngFor="let rec of recommendedProducts"
+             (click)="openProductDetail(rec)">
+          <img [src]="rec.imageUrl" alt="{{rec.title}}">
+          <p>{{rec.title}}</p>
+          <span>{{rec.price}} p.</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

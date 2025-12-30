@@ -153,6 +153,4 @@ export class ProductComponent implements OnInit{
       this.sliderInterval = null;
     }
   }
-
-
 }

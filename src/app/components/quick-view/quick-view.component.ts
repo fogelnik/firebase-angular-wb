@@ -3,7 +3,6 @@ import {Product} from '../product';
 import {NgIf} from '@angular/common';
 import {BasketService} from '../../services/basket.service';
 import {Router} from '@angular/router';
-import {FavoritesService} from '../../services/favorites.service';
 
 @Component({
   selector: 'app-quick-view',
@@ -27,7 +26,7 @@ export class QuickViewComponent {
   constructor(
     private basketService: BasketService,
     private router: Router,
-    private favoritesService: FavoritesService
+
     ) {}
 
   close() {
@@ -69,13 +68,5 @@ export class QuickViewComponent {
     }
   }
 
-  addToFavorites(product: Product | null) {
-    if(!product){
-      console.warn('Продукт не найден');
-      return;
-    }
-    this.favoritesService.addToFavorites(product)
-    this.clickFavorite = !this.clickFavorite
-  }
 
 }

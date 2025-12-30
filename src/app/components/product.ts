@@ -9,9 +9,17 @@ export interface Product {
   rating: string;
   votes: number;
   itemCount: number;
+  category?: string;
+  variants?: {
+    color: string;
+    imageUrl: string;
+    price?: number;
+    votes: number;
+    rating: string;
+    description: string;
+    title: string;
+  }[];
 
   isInCart: boolean;
-
-
   currentIndex?: number;
 }
