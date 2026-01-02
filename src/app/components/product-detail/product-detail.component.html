@@ -24,7 +24,8 @@
           </div>
         </div>
         <div class="product__block-img">
-          <img [src]="selectedImage || product?.imageUrl" alt="{{selectedVariant?.color || product!.title}}">
+          <img [src]="selectedImage || product?.imageUrl"
+               alt="{{selectedVariant?.color || product?.title}}">
         </div>
 
         <div class="product__block-info">

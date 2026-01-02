@@ -68,6 +68,14 @@
      <div class="basket__sum-block-btn">
        <button type="submit">Заказать</button>
      </div>
+
+     <div class="basket__clearAll">
+       <button class="basket__clearAll-btn"
+               (click)="removeAllItem()"
+       >
+         Очисть корзину
+       </button>
+     </div>
      <div class="basket__sum-block-rules">
        <div class="basket__sum-block-rules-icon">
          <img src="assets/icon/icon-check.png">
@@ -77,7 +85,6 @@
        </div>
      </div>
    </div>
-
-   </div>
+ </div>
 </div>
 

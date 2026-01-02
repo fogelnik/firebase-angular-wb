@@ -138,6 +138,17 @@ export class BasketComponent implements OnInit{
     console.log("Продукт удален из карзины:", index)
   }
 
+  removeAllItem(){
+    if (this.basket.length > 0){
+      this.basket = [];
+      this.basketService.updateCart(this.basket);
+      this.updateItemCount();
+      this.calculateTotalPrice()
+      this.showNotification('Корзина очищена');
+      console.log("Корзина полностью очищена");
+    }
+  }
+
   showNotification(message: string) {
 
     this.notifications.push(message);

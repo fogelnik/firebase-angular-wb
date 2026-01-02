@@ -87,8 +87,22 @@ export class ProductDetailComponent implements OnInit{
 
   addToBasket(product: Product | null){
     if(!product) return
-    product.isInCart = true;
-    this.basketService.addToCart(product)
+
+    const itemToAdd = this.selectedVariant
+    ? {
+      ...product,
+        imageUrl: this.selectedVariant.imageUrl,
+        color: this.selectedVariant.color ?? product.color,
+        price: this.selectedVariant.price ?? product.price,
+        description: this.selectedVariant.description ?? product.description,
+        title: this.selectedVariant.title ?? product.title,
+        rating: this.selectedVariant.rating ?? product.rating,
+        votes: this.selectedVariant.votes ?? product.votes,
+      }
+    : product;
+
+    itemToAdd.isInCart = true;
+    this.basketService.addToCart(itemToAdd)
     this.isAddedToBasket = true
     this.showNotification('Товар добавлен в корзину')
   }
