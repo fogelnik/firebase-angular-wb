@@ -66,12 +66,7 @@ export class ProductDetailComponent implements OnInit{
       this.product = data;
       this.isLoading = false;
 
-      if(this.product?.variants?.length){
-        this.selectedVariant = this.product.variants[0];
-        this.selectedImage = this.selectedVariant.imageUrl || null;
-      }else {
-        this.selectedImage = null;
-      }
+      this.selectedImage = this.product?.imageUrl || null;
 
       if(this.product?.category){
         this.loadRecommendations(this.product.category)

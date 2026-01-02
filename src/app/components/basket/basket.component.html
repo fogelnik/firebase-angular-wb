@@ -26,7 +26,8 @@
          </div>
          <div class="basket__card-content-description">
            <span class="basket__card-content-description-title">{{product.title}}</span>
-           <span class="basket__card-content-description-color">{{product.price}}</span>
+           <span class="basket__card-content-description-price">{{product.description}}</span>
+           <span class="basket__card-content-description-color">Цвет: {{product.color}}</span>
            <div class="basket__card-content-description-btn">
              <img class="basket__card-content-description-btn-favorites" (click)="addToFavorite(i)" [src]=" isFavorite? 'assets/icon/heart-hover.png' : 'assets/icon/icon-heart-basket.png' " alt="избранное">
              <img class="basket__card-content-description-btn-delete" (click)="removeItem(i)" src="assets/icon/icon-trash.png" alt="удалить">
