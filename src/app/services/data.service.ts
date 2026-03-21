@@ -22,6 +22,11 @@ export class DataService {
      )
   }
 
+  getVariantCardById(id: number): Observable<Product>{
+    return this.http.get<Product>(
+      `https://training-wb-angular-fire-proj-default-rtdb.firebaseio.com/cards/${id}/variants/${id}.json`
+    )
+  }
 
 
 }

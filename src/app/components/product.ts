@@ -11,6 +11,7 @@ export interface Product {
   itemCount: number;
   category?: string;
   variants?: {
+    id: number;
     color: string;
     imageUrl: string;
     price?: number;

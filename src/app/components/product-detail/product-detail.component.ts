@@ -56,9 +56,26 @@ export class ProductDetailComponent implements OnInit{
     this.product!.votes = variant.votes ?? this.product!.votes;
   }
 
-  loadCard(id: number) {
-    this.isLoading = true;
+  // loadCard(id: number) {
+  //   this.isLoading = true;
+  //
+  //   this.selectedImage = null;
+  //   this.selectedVariant = null;
+  //
+  //   this.dataService.getCardById(id).subscribe(data => {
+  //     this.product = data;
+  //     this.isLoading = false;
+  //
+  //     this.selectedImage = this.product?.imageUrl || null;
+  //
+  //     if(this.product?.category){
+  //       this.loadRecommendations(this.product.category)
+  //     }
+  //   })
+  // }
 
+  loadCard(id: number){
+    this.isLoading = true;
     this.selectedImage = null;
     this.selectedVariant = null;
 
@@ -66,7 +83,11 @@ export class ProductDetailComponent implements OnInit{
       this.product = data;
       this.isLoading = false;
 
-      this.selectedImage = this.product?.imageUrl || null;
+      if(this.product?.images && this.product?.images?.length > 0){
+        this.selectedImage = this.product.images[0];
+      }else {
+        this.selectedImage = this.product?.imageUrl || null;
+      }
 
       if(this.product?.category){
         this.loadRecommendations(this.product.category)

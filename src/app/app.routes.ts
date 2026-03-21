@@ -40,4 +40,5 @@ export const routes: Routes = [
   { path: 'product', component: ProductComponent },
   { path: 'basket', component: BasketComponent },
   { path: 'product/:id', component: ProductDetailComponent},
+
 ];

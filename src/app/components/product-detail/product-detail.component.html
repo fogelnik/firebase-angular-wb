@@ -15,10 +15,11 @@
 <!--        <div class="product__block-img">-->
 <!--          <img [src]="product?.imageUrl" alt="{{product?.title}}">-->
 <!--        </div>-->
-        <div class="product__block-thumbs">
+        <div class="product__block-thumbs" *ngIf="product?.images">
           <div class="thumb"
                *ngFor="let img of product?.images"
                (click)="selectImage(img)"
+               [class.active]="selectedImage === img"
           >
             <img [src]="img">
           </div>
@@ -35,10 +36,11 @@
 
           <div class="product__block-all-img">
             <div class="all-img"
-                 *ngFor="let variant of product?.variants"
-                 (click)="selectVariant(variant)"
+                 *ngFor="let img of product?.images"
+                 (click)="selectImage(img)"
+                 [class.active]="selectedImage === img"
             >
-              <img [src]="variant.imageUrl" alt="{{variant.color}}">
+              <img [src]="img">
             </div>
           </div>
           <div class="product__block-info-rating">

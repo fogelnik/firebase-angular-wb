@@ -34,9 +34,9 @@ export class ProductComponent implements OnInit{
 
   private sliderInterval: any = null;
 
+  allCards: Product[] = []
+
   // currentIndex = 0;
-
-
 
   constructor(
     private dataService: DataService,
@@ -53,21 +53,78 @@ export class ProductComponent implements OnInit{
     })
   }
 
-  // loadProducts() {
+
+  // loadProducts(){
   //   this.isLoading = true;
   //   this.dataService.getCards().subscribe((data) => {
-  //     this.cards = data;
-  //     this.filteredCards = data
+  //     this.cards = Object.keys(data).map(key => ({
+  //       id: Number(key),
+  //       ...data[key]
+  //     }));
+  //     this.filteredCards = this.cards;
+  //     this.isLoading = false;
+  //   })
+  // }
+
+  // loadProducts(){
+  //   this.isLoading = true;
+  //   this.dataService.getCards().subscribe((data) => {
+  //     this.cards = Object.keys(data).map(key => ({
+  //       id: Number(key),
+  //       ...data[key],
+  //       isInCart: false,
+  //       currentIndex: 0
+  //     }));
+  //
+  //     this.allCards = [];
+  //
+  //     this.cards.forEach(card => {
+  //       this.allCards.push(card)
+  //       if(card.variants && card.variants.length){
+  //         card.variants.forEach(variant => {
+  //           const variantCard: Product = {
+  //             ...card,
+  //             id: variant.id,
+  //             title: variant.title,
+  //             description: variant.description,
+  //             imageUrl: variant.imageUrl,
+  //             // images: [],
+  //             images: variant.imageUrl ? [variant.imageUrl] : [],
+  //             price: variant.price || card.price,
+  //             color: variant.color,
+  //             rating: variant.rating,
+  //             votes: variant.votes,
+  //             itemCount: card.itemCount,
+  //             category: card.category,
+  //             variants: [],
+  //             isInCart: false,
+  //             currentIndex: 0
+  //           };
+  //           this.allCards.push(variantCard)
+  //         })
+  //       }
+  //     });
+  //     this.filteredCards = this.allCards;
   //     this.isLoading = false;
   //   })
   // }
   loadProducts(){
     this.isLoading = true;
     this.dataService.getCards().subscribe((data) => {
-      this.cards = Object.keys(data).map(key => ({
-        id: Number(key),
-        ...data[key]
-      }));
+      this.cards = Object.keys(data).map(key => {
+        const item = data[key];
+
+        const mainImage = (item.images && item.images.length > 0) ? item.images[0] : item.imageUrl;
+
+        return {
+          ...item,
+          id: Number(key),
+          imageUrl: mainImage,
+          isInCart: false,
+          currentIndex: 0
+        };
+      });
+
       this.filteredCards = this.cards;
       this.isLoading = false;
     })
@@ -116,25 +173,9 @@ export class ProductComponent implements OnInit{
   }
 
   openProductDetail(card: Product){
-    if(card && card.id != null){
-      this.router.navigate(['/product', card.id]);
-    }else {
-      console.error('Card ID is undefined')
-    }
+    this.router.navigate(['/product', card.id], {state: {product: card}});
   }
 
-
-  // nextImage(card: Product) {
-  //   if (card.images && card.images.length) {
-  //     this.currentIndex = (this.currentIndex + 1) % card.images.length;
-  //   }
-  // }
-  //
-  // prevImage(card: Product) {
-  //   if (card.images && card.images.length) {
-  //     this.currentIndex = (this.currentIndex - 1 + card.images.length) % card.images.length;
-  //   }
-  // }
 
   startSlider(card: Product){
     card.currentIndex = 0;
