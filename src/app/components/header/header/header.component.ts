@@ -42,6 +42,7 @@ export class HeaderComponent implements OnInit{
     this.searchService.setSearchTerm(value)
   }
 
+
   get count(): number{
     return this.basketService.getItemCount()
   }

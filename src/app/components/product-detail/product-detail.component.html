@@ -34,15 +34,32 @@
           <h2 class="product__block-info-desc">{{ product?.description }}</h2>
           <p class="product__block-info-color">Цвет: {{ product?.color }}</p>
 
-          <div class="product__block-all-img">
-            <div class="all-img"
-                 *ngFor="let img of product?.images"
-                 (click)="selectImage(img)"
-                 [class.active]="selectedImage === img"
-            >
-              <img [src]="img">
-            </div>
+          <div class="product__similar-cards" *ngIf="similarCards.length" >
+              <div class="similar-card"
+                   *ngFor="let card of similarCards"
+                   (click)="openProductDetail(card)"
+                   [class.selected]="card.id === selectedSimilarCardId"
+              >
+                <img [src]="card.images && card.images.length ? card.images[0] : card.imageUrl">
+              </div>
           </div>
+
+
+<!--          <div class="product__block-all-img">-->
+<!--            <div class="all-img"-->
+<!--                 *ngFor="let img of product?.images"-->
+<!--                 (click)="selectImage(img)"-->
+<!--                 [class.active]="selectedImage === img"-->
+<!--            >-->
+<!--              <img [src]="img">-->
+<!--            </div>-->
+<!--            <div *ngIf="similarCards.length">-->
+<!--              <div *ngFor="let card of similarCards">-->
+<!--                <img [src]="card.imageUrl">-->
+<!--                <div>{{card.title}}</div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
           <div class="product__block-info-rating">
             <img src="assets/icon/icon-star.png">
             <span> {{product?.rating}}</span>
@@ -69,18 +86,19 @@
       </div>
     </div>
 
+
+
     <div class="product__recommendations" *ngIf="recommendedProducts.length">
       <h2>Смотрите также по катогории <span>{{product?.category}}</span></h2>
       <div class="recommendations__flex">
         <div class="recommendations__card"
              *ngFor="let rec of recommendedProducts"
              (click)="openProductDetail(rec)">
-          <img [src]="rec.imageUrl" alt="{{rec.title}}">
+          <img [src]="rec.images && rec.images.length ? rec.images[0] : rec.imageUrl">
           <p>{{rec.title}}</p>
           <span>{{rec.price}} p.</span>
         </div>
       </div>
-
     </div>
   </div>
 </div>

@@ -132,6 +132,15 @@ export class ProductComponent implements OnInit{
 
 
   applyFilter(term: string){
+    if(!term){
+      this.filteredCards = this.cards
+    }else {
+      const lowerTerm = term.toLowerCase();
+      this.filteredCards = this.cards.filter(card =>
+        card.title.toLowerCase().includes(lowerTerm) ||
+        card.description.toLowerCase().includes(lowerTerm)
+      );
+    }
     const lowerTerm = term.toLowerCase();
     this.filteredCards = this.cards.filter(card =>
     card.title.toLowerCase().includes(lowerTerm) || card.description.toLowerCase().includes(lowerTerm)
@@ -173,7 +182,9 @@ export class ProductComponent implements OnInit{
   }
 
   openProductDetail(card: Product){
-    this.router.navigate(['/product', card.id], {state: {product: card}});
+    this.router.navigate(['/product', card.id])
+    // this.router.navigate(['/product', card.id], {state: {product: card}});
+    //{state: {product: card}}: дополнительно передает объект товара (карточку) в состояние маршрута. Это можно использовать в новом компоненте, чтобы показать детали
   }
 
 

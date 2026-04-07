@@ -27,6 +27,10 @@ export class ProductDetailComponent implements OnInit{
 
   recommendedProducts: Product[] = [];
   selectedVariant: any | null = null;
+  similarCards: Product[] = [];
+
+  selectedSimilarCardId: number | null = null;
+
 
   constructor(
       private route: ActivatedRoute,
@@ -37,24 +41,30 @@ export class ProductDetailComponent implements OnInit{
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
+      // route - Это объект типа ActivatedRoute, который предоставляет информацию о текущем маршруте (URL), по которому зашёл пользовател
+      // paramMap: содержит все параметры URL, например id
+      // subscribe: подписываюсь — что бы выполнять код, когда параметры поменяются
+
       const idParam = params.get('id');
+      // Ищу число id из URL — например, если URL /product/123, то id = 123
       if(idParam){
         const id = Number(idParam);
+        // Преобразую его в число (Number(idParam)) и вызываю loadCard, чтобы загрузить данные о товаре
         this.loadCard(id)
       }
     })
   }
 
-  selectVariant(variant: any){
-    this.selectedVariant = variant;
-    this.selectedImage = variant.imageUrl;
-    this.product!.color = variant.color;
-    this.product!.price = variant.price ?? this.product!.price;
-    this.product!.title = variant.title ?? this.product!.title;
-    this.product!.description = variant.description ?? this.product!.description;
-    this.product!.rating = variant.rating ?? this.product!.rating;
-    this.product!.votes = variant.votes ?? this.product!.votes;
-  }
+  // selectVariant(variant: any){
+  //   this.selectedVariant = variant;
+  //   this.selectedImage = variant.imageUrl;
+  //   this.product!.color = variant.color;
+  //   this.product!.price = variant.price ?? this.product!.price;
+  //   this.product!.title = variant.title ?? this.product!.title;
+  //   this.product!.description = variant.description ?? this.product!.description;
+  //   this.product!.rating = variant.rating ?? this.product!.rating;
+  //   this.product!.votes = variant.votes ?? this.product!.votes;
+  // }
 
   // loadCard(id: number) {
   //   this.isLoading = true;
@@ -92,18 +102,37 @@ export class ProductDetailComponent implements OnInit{
       if(this.product?.category){
         this.loadRecommendations(this.product.category)
       }
+
+      if(this.product?.description){
+        this.loadSimilarCards(this.product.description, this.product.id)
+      }
+    })
+  }
+
+  loadSimilarCards(description: string, currentId: number){
+    this.dataService.getCards().subscribe(cards => {
+      this.similarCards = Object.keys(cards)
+        .map(key => ({id: Number(key), ...cards[key] }))
+        .filter(card => card.description === description && card.id !== currentId)
     })
   }
 
   loadRecommendations(category: string){
     this.dataService.getCards().subscribe(cards => {
       this.recommendedProducts = Object.keys(cards)
+        // Object.keys(cards) - получает массив всех ключей из объекта cards
+        // Ключи — это ID каждого товара, например: ["1", "2", "3"] (они — строки)
         .map(key => ({id: Number(key), ...cards[key] }))
-        .filter(card => card.category === category && card.id !==this.product?.id);
+        // Проходит по каждому ключу (ID как строка)
+        // Создает новый объект:
+        //   id: Number(key) — превращает строку ID в число.
+        //   ...cards[key] — добавляет все свойства товара из cards по этому ключу
+        .filter(card => card.category === category && card.id !== this.product?.id);
     });
   }
   openProductDetail(product: Product){
     this.router.navigate(['/product', product.id])
+    this.selectedSimilarCardId = product.id
   }
 
   addToBasket(product: Product | null){

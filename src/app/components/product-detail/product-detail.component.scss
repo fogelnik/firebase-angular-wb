@@ -26,6 +26,7 @@
 
 .product{
 
+
   &__notification{
     position: fixed;
     top: 20px;
@@ -90,6 +91,7 @@
     width: 80px;
     height: 100px;
     overflow: hidden;
+    border-radius: 10px;
 
     img{
       width: 100%;
@@ -110,6 +112,7 @@
     width: 80px;
     height: 100px;
     overflow: hidden;
+    border-radius: 10px;
 
     img{
       width: 100%;
@@ -248,23 +251,31 @@
     .recommendations__flex{
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: 30px;
       flex-wrap: wrap;
     }
 
     .recommendations__card{
-      width: 150px;
+      width: 160px;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px;
+      border-radius: 8px;
+
       cursor: pointer;
       text-align: center;
+      margin-bottom: 30px;
 
       img{
-        width: 100%;
-        height: auto;
-        border-radius: 8px;
+        width: 140px;
+        height: 180px;
+        object-fit: cover;
+        display: block;
+        border-radius: 10px;
       }
 
       p{
-        font-size: 14px;
+        font-size: 16px;
         margin: 3px 0;
       }
       span{
@@ -272,5 +283,31 @@
       }
     }
   }
+  &__similar-cards{
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start;
+    padding: 10px 20px ;
 
+
+    .similar-card{
+      cursor: pointer;
+      width: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-radius: 10px;
+      padding: 5px;
+    }
+    .similar-card.selected{
+      border: 3px solid #950293;
+    }
+    .similar-card img{
+      width: 100px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 10px;
+      display: block;
+    }
+  }
 }
