@@ -93,19 +93,31 @@ export class ProductDetailComponent implements OnInit{
       this.product = data;
       this.isLoading = false;
 
-      if(this.product?.images && this.product?.images?.length > 0){
-        this.selectedImage = this.product.images[0];
-      }else {
-        this.selectedImage = this.product?.imageUrl || null;
+      if(this.product){
+        this.selectedImage = this.product.images?.length ? this.product.images[0] : (this.product.imageUrl || null);
+
+          if(this.product.category){
+            this.loadRecommendations(this.product.category, id);
+          }
+
+          if(this.product.description){
+            this.loadSimilarCards(this.product.description, id)
+          }
       }
 
-      if(this.product?.category){
-        this.loadRecommendations(this.product.category)
-      }
-
-      if(this.product?.description){
-        this.loadSimilarCards(this.product.description, this.product.id)
-      }
+      // if(this.product?.images && this.product?.images?.length > 0){
+      //   this.selectedImage = this.product.images[0];
+      // }else {
+      //   this.selectedImage = this.product?.imageUrl || null;
+      // }
+      //
+      // if(this.product?.category){
+      //   this.loadRecommendations(this.product.category)
+      // }
+      //
+      // if(this.product?.description){
+      //   this.loadSimilarCards(this.product.description, this.product.id)
+      // }
     })
   }
 
@@ -113,22 +125,30 @@ export class ProductDetailComponent implements OnInit{
     this.dataService.getCards().subscribe(cards => {
       this.similarCards = Object.keys(cards)
         .map(key => ({id: Number(key), ...cards[key] }))
-        .filter(card => card.description === description && card.id !== currentId)
+        .filter(card => card.description === description && Number(card.id) !== currentId)
     })
   }
 
-  loadRecommendations(category: string){
+  // loadRecommendations(category: string){
+  //   this.dataService.getCards().subscribe(cards => {
+  //     this.recommendedProducts = Object.keys(cards)
+  //       // Object.keys(cards) - получает массив всех ключей из объекта cards
+  //       // Ключи — это ID каждого товара, например: ["1", "2", "3"] (они — строки)
+  //       .map(key => ({id: Number(key), ...cards[key] }))
+  //       // Проходит по каждому ключу (ID как строка)
+  //       // Создает новый объект:
+  //       //   id: Number(key) — превращает строку ID в число.
+  //       //   ...cards[key] — добавляет все свойства товара из cards по этому ключу
+  //       .filter(card => card.category === category && card.id !== this.product?.id);
+  //   });
+  // }
+  loadRecommendations(category: string, currentId: number){
     this.dataService.getCards().subscribe(cards => {
       this.recommendedProducts = Object.keys(cards)
-        // Object.keys(cards) - получает массив всех ключей из объекта cards
-        // Ключи — это ID каждого товара, например: ["1", "2", "3"] (они — строки)
         .map(key => ({id: Number(key), ...cards[key] }))
-        // Проходит по каждому ключу (ID как строка)
-        // Создает новый объект:
-        //   id: Number(key) — превращает строку ID в число.
-        //   ...cards[key] — добавляет все свойства товара из cards по этому ключу
-        .filter(card => card.category === category && card.id !== this.product?.id);
-    });
+        .filter(card => card.category === category && Number(card.id) !== currentId);
+      console.log(this.recommendedProducts)
+    })
   }
   openProductDetail(product: Product){
     this.router.navigate(['/product', product.id])

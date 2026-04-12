@@ -9,6 +9,7 @@ export interface Product {
   rating: string;
   votes: number;
   itemCount: number;
+  article: string;
   category?: string;
   variants?: {
     id: number;
