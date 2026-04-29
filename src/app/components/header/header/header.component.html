@@ -38,9 +38,11 @@
           >
         </div>
         <div  class="header__bottom-block-nav" >
-          <div  *ngIf="isAuthenticated ? true : false" class="header__bottom-block-nav-orders" >
+          <div  *ngIf="isAuthenticated" class="header__bottom-block-nav-orders" >
             <img src="assets/icon/icon-logistics.png">
-            Заказы
+            <span (click)="handleCabinetClick()">
+              {{authService.getRole() === 'seller' ? 'Кабинет' : 'Заказы'}}
+            </span>
           </div>
           <div class="header__bottom-block-nav-addresses"
           (click)="isAuthenticated ? goToFavorite() : null"
@@ -56,7 +58,6 @@
           <div class="header__bottom-block-nav-basket" (click)="navigateBasket()">
             <img src="assets/icon/shopping-cart.png" alt="Shopping">
               Корзина
-
             <span *ngIf="count > 0" class="header__bottom-block-nav-basket-count">{{count}}</span>
           </div>
         </div>

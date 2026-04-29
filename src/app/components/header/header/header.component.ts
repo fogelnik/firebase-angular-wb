@@ -28,7 +28,8 @@ export class HeaderComponent implements OnInit{
     private auth: Auth,
     private router: Router,
     private basketService: BasketService,
-    private searchService: SearchService
+    private searchService: SearchService,
+    public authService: AuthService,
   ) {}
 
   ngOnInit() {
@@ -59,6 +60,13 @@ export class HeaderComponent implements OnInit{
     this.router.navigate(['basket'])
   }
 
+  handleCabinetClick(){
+    if(this.authService.getRole() === 'seller'){
+      this.router.navigate(['seller']);
+    }else {
+      this.router.navigate(['orders']);
+    }
+  }
   navigateToWelcomePage(){
     this.router.navigate(['/'])
   }

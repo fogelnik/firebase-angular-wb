@@ -11,17 +11,6 @@ export interface Product {
   itemCount: number;
   article: string;
   category?: string;
-  variants?: {
-    id: number;
-    color: string;
-    imageUrl: string;
-    price?: number;
-    votes: number;
-    rating: string;
-    description: string;
-    title: string;
-  }[];
-
   isInCart: boolean;
   currentIndex?: number;
 }

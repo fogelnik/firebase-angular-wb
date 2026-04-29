@@ -89,6 +89,8 @@ export class ProductDetailComponent implements OnInit{
     this.selectedImage = null;
     this.selectedVariant = null;
 
+    this.selectedSimilarCardId = id;
+
     this.dataService.getCardById(id).subscribe(data => {
       this.product = data;
       this.isLoading = false;
@@ -101,7 +103,7 @@ export class ProductDetailComponent implements OnInit{
           }
 
           if(this.product.description){
-            this.loadSimilarCards(this.product.description, id)
+            this.loadSimilarCards(this.product.description)
           }
       }
 
@@ -121,11 +123,11 @@ export class ProductDetailComponent implements OnInit{
     })
   }
 
-  loadSimilarCards(description: string, currentId: number){
+  loadSimilarCards(description: string){
     this.dataService.getCards().subscribe(cards => {
       this.similarCards = Object.keys(cards)
         .map(key => ({id: Number(key), ...cards[key] }))
-        .filter(card => card.description === description && Number(card.id) !== currentId)
+        .filter(card => card.description === description);
     })
   }
 

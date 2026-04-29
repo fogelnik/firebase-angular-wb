@@ -16,6 +16,10 @@ export class DataService {
     )
   }
 
+  addProduct(userId: string, product: Partial<Product>){
+    return this.http.post(`https://training-wb-angular-fire-proj-default-rtdb.firebaseio.com/sellers/${userId}/products.json`, product);
+  }
+
   getCardById(id: number): Observable<Product> {
      return this.http.get<Product>(
        `https://training-wb-angular-fire-proj-default-rtdb.firebaseio.com/cards/${id}.json`

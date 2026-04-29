@@ -1,0 +1,122 @@
+.seller{
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  margin: 0 auto;
+
+  .invalid-field {
+    border: 1px solid #ff4d4f !important;
+    background-color: #fff2f0;
+  }
+  &__validation-error {
+    background: #ff4d4f;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    text-align: center;
+
+    animation: slideDown 0.3s ease-out;
+  }
+  @keyframes slideDown {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+
+  &__title{
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    font-family: "Roboto", sans-serif;
+  }
+
+  &__form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__form-group{
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__form-group-label{
+    margin-bottom: 5px;
+    font-family: "Roboto", sans-serif;
+  }
+  &__form-group-input{
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-family: "Roboto", sans-serif;
+  }
+
+  &__images{
+    display: flex;
+  }
+  &__add-images-input{
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    margin-right: 20px;
+  }
+
+  &__add-images-delete-item{
+    background-color: #9519f1;
+    color: var(--light-color);
+    border: 0;
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: 0.2s;
+    font-family: "Roboto", sans-serif;
+  }
+
+  &__add-images-delete-item:hover{
+    background-color: #950293;
+  }
+
+  &__add-images-btn{
+    background-color: #953af3;
+    color: var(--light-color);
+    border: 0;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: 0.2s;
+    font-family: "Roboto", sans-serif;
+  }
+
+  &__add-images-btn:hover{
+    background-color: #950293;
+  }
+
+  &__add-button{
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border: 0;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: 0.2s;
+    font-family: "Roboto", sans-serif;
+  }
+  &__add-button:hover{
+    background-color: #950293;
+  }
+  &__add-button:active{
+    scale: 1.1;
+  }
+}
