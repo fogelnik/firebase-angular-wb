@@ -57,7 +57,8 @@
           </div>
           <div class="header__bottom-block-nav-basket" (click)="navigateBasket()">
             <img src="assets/icon/shopping-cart.png" alt="Shopping">
-              Корзина
+            {{authService.getRole() === 'seller' ? 'Товары' : 'Корзина'}}
+
             <span *ngIf="count > 0" class="header__bottom-block-nav-basket-count">{{count}}</span>
           </div>
         </div>

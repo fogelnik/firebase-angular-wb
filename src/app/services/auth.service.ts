@@ -4,8 +4,9 @@ import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail,
   signInWithEmailAndPassword,
-  signInWithPopup, signOut, user
+  signInWithPopup, signOut, user, User
 } from '@angular/fire/auth';
+import {BehaviorSubject} from 'rxjs';
 
 export type UserRole = 'seller' | 'customer' | null;
 
@@ -20,6 +21,7 @@ export class AuthService {
   private userRole: UserRole = null;
   private sellerEmails = ['fogelnk777@gmail.com', 'kohnik.samp@gmail.com'];
 
+
   constructor() {
     onAuthStateChanged(this.auth, (user) => {
       if (user && user.email){
@@ -29,7 +31,6 @@ export class AuthService {
       }
     });
   }
-
 
   getRole(): UserRole{
     return this.userRole;

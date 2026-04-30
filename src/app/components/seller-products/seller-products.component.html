@@ -1,0 +1,58 @@
+<!--<div class="my-products-container">-->
+<!--  <h2>Мои добавленные товары</h2>-->
+
+<!--  <div *ngIf="products.length === 0">Вы еще не добавили ни одного товара.</div>-->
+
+<!--  <div class="products-grid">-->
+<!--    <div class="product-card" *ngFor="let product of products">-->
+<!--      <img [src]="product.imageUrl" alt="product image" width="100">-->
+<!--      <h3>{{ product.title }}</h3>-->
+<!--      <p>Артикул: {{ product.article }}</p>-->
+<!--      <p>Цена: {{ product.price }} руб.</p>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div class="product">
+  <h2 class="product__title">Мои добавленные товары товары</h2>
+
+  <div *ngIf="products.length === 0">Вы еще не добавили ни одного товара.</div>
+
+  <div class="product__grid">
+    <div class="product__card" *ngFor="let card of products">
+
+      <div class="slider">
+        <img [src]="card.imageUrl" [alt]="card.title" class="product__card-image">
+      </div>
+
+      <div class="product__card-info">
+        <div class="product__card-info-price-block">
+          <p class="product__card-price">{{ card.price }} p.</p>
+        </div>
+
+        <div class="product__card-info-block">
+          <h3 class="product__card-title">{{ card.title }}</h3> /
+          <span class="product__card-description">{{ card.description }}</span>
+        </div>
+
+<!--        <div class="product__card-info-rating">-->
+<!--          <span class="product__card-info-rating-star">-->
+<!--            <img src="assets/icon/icon-star.png" alt="star">-->
+<!--          </span>-->
+<!--          <span class="product__card-info-rating-num">{{ card.rating }}</span>-->
+<!--          <span>•</span>-->
+<!--          <span class="product__card-info-rating-votes">{{ card.votes }}</span>-->
+<!--          <span>оценки</span>-->
+<!--        </div>-->
+
+        <!-- Кнопка (просто для вида или можно добавить функцию удаления) -->
+        <button
+          class="product__card-buy-button delete-btn"
+          (click)="deleteSellerProduct(card.id); $event.stopPropagation()"
+        >
+          <span>Удалить товар</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

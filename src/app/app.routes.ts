@@ -10,6 +10,7 @@ import { ForgotPasswordComponent } from './components/auth/forgot-password/forgo
 import { HomeComponent } from './components/dashboard/home/home.component';
 import {ProductDetailComponent} from './components/product-detail/product-detail.component';
 import {SellerCabinetComponent} from './components/seller-cabinet/seller-cabinet.component';
+import {SellerProductsComponent} from './components/seller-products/seller-products.component';
 
 
 const redirectToLogin = () => redirectUnauthorizedTo('/auth/sign-in');
@@ -42,5 +43,6 @@ export const routes: Routes = [
   { path: 'basket', component: BasketComponent },
   { path: 'product/:id', component: ProductDetailComponent},
   { path: 'seller', component: SellerCabinetComponent},
+  { path: 'seller-products', component: SellerProductsComponent},
 
 ];

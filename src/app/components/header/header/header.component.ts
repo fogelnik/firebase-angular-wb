@@ -57,7 +57,14 @@ export class HeaderComponent implements OnInit{
   }
 
   navigateBasket(){
-    this.router.navigate(['basket'])
+
+    const role = this.authService.getRole();
+
+    if(role === "seller"){
+      this.router.navigate(['/seller-products']);
+    }else {
+      this.router.navigate(['basket'])
+    }
   }
 
   handleCabinetClick(){
