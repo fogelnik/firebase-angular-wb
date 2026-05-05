@@ -20,6 +20,8 @@ export class SellerProductsComponent implements OnInit{
   userId: string | null = null;
   private auth = inject(Auth)
 
+  showDeleteMessage: boolean = false;
+
   constructor(
     private dataService: DataService,
     private authService: AuthService,
@@ -42,7 +44,10 @@ export class SellerProductsComponent implements OnInit{
     if(userId && productId){
       this.dataService.deleteSellerProduct(userId, productId).subscribe(() => {
         this.products = this.products.filter(p => p.id !== productId);
-        alert('Товар удален')
+        this.showDeleteMessage = true;
+        setTimeout(() => {
+          this.showDeleteMessage = false;
+        }, 4000);
       })
     }
   }

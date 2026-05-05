@@ -1,7 +1,16 @@
 <div class="seller">
 
-  <div *ngIf="showValidationError" class="seller__validation-error">
-    Заполните всю форму
+<!--  <div class="notification" [class.notification&#45;&#45;show]='showSuccessMessage'>-->
+<!--    Товар успешно добавлен! Артикул: {{ lastArticle }}-->
+<!--  </div>-->
+  <div class="notification"
+       [ngClass]="{
+        'notification--show': showNotification,
+         'notification--success': notificationType === 'success',
+         'notification--error': notificationType === 'error'
+       }"
+  >
+    {{ notificationMessage }}
   </div>
 
   <h2 class="seller__title">Добавление нового товара</h2>
@@ -17,14 +26,14 @@
         formControlName="title">
     </div>
 
-    <div class="seller__form-group">
-      <label class="seller__form-group-label">Артикул:</label>
-      <input
-        class="seller__form-group-input"
-        [ngClass]="{'invalid-field': isInvalid('article')}"
-        type="text"
-        formControlName="article">
-    </div>
+<!--    <div class="seller__form-group">-->
+<!--      <label class="seller__form-group-label">Артикул:</label>-->
+<!--      <input-->
+<!--        class="seller__form-group-input"-->
+<!--        [ngClass]="{'invalid-field': isInvalid('article')}"-->
+<!--        type="text"-->
+<!--        formControlName="article">-->
+<!--    </div>-->
 
     <div class="seller__form-group">
       <label class="seller__form-group-label">Категория:</label>
@@ -62,15 +71,51 @@
         formControlName="description">
     </div>
 
-    <div class="seller__add-images" *ngFor="let img of imagesControls; let i = index">
-      <input
-        class="seller__add-images-input"
-        [formControl]="img"
-        [ngClass]="{'invalid-field': img.invalid && (img.touched || showValidationError)}"
-        placeholder="URL изображения">
-      <button class="seller__add-images-delete-item" type="button" (click)="removeImage(i)">Удалить</button>
+
+    <div class="seller__drop-zone"
+         (dragover)="$event.preventDefault()"
+         (drop)="onFileDropped($event)"
+         (click)="fileInput.click()">
+      <p>Перетащите фото сюда или нажмите для выбора</p>
+      <input type="file" #fileInput hidden multiple (change)="onFileSelected($event)" accept="image/*">
     </div>
-    <button class="seller__add-images-btn" type="button" (click)="addImage()">Добавить изображение</button>
+
+    <!-- Список загруженных картинок (Превью) -->
+    <div class="seller__previews">
+      <div class="seller__preview-item" *ngFor="let img of imagesBase64; let i = index">
+        <img [src]="img" alt="preview">
+        <button type="button" class="seller__preview-remove" (click)="removeImage(i)">×</button>
+      </div>
+    </div>
+
+    <div *ngIf="showValidationError && imagesBase64.length === 0" style="color: red; margin-bottom: 10px;">
+      Добавьте хотя бы одно изображение
+    </div>
+
+<!--    <div class="seller__drag-drop"-->
+<!--         (dragover)="$event.preventDefault()"-->
+<!--         (drop)="onFileDrop($event)">-->
+<!--      <p>Перетащите изображения сюда или нажмите для выбора</p>-->
+<!--      <input type="file" multiple (change)="onFileSelected($event)" accept="image/*" #fileInput hidden>-->
+<!--      <button type="button" (click)="fileInput.click()">Выбрать файлы</button>-->
+<!--    </div>-->
+
+<!--    <div class="seller__preview-grid">-->
+<!--      <div class="seller__preview-item" *ngFor="let img of imagesBase64; let i = index">-->
+<!--        <img [src]="img" class="seller__preview-img">-->
+<!--        <button type="button" (click)="removeImage(i)">×</button>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class="seller__add-images" *ngFor="let img of imagesControls; let i = index">-->
+<!--      <input-->
+<!--        class="seller__add-images-input"-->
+<!--        [formControl]="img"-->
+<!--        [ngClass]="{'invalid-field': img.invalid && (img.touched || showValidationError)}"-->
+<!--        placeholder="URL изображения">-->
+<!--      <button class="seller__add-images-delete-item" type="button" (click)="removeImage(i)">Удалить</button>-->
+<!--    </div>-->
+<!--    <button class="seller__add-images-btn" type="button" (click)="addImage()">Добавить изображение</button>-->
 
     <button
       class="seller__add-button"

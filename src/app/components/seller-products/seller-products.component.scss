@@ -1,4 +1,23 @@
 
+
+.delete-notification {
+  position: fixed;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #d101e8;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 4px;
+  transition: top 0.3s ease;
+  z-index: 9999;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+  &.show {
+    top: 20px;
+  }
+}
+
 .product {
   font-family: "Inter", sans-serif, sans-serif;
   padding: 20px;
@@ -8,6 +27,13 @@
     justify-content: center;
 
     margin-bottom: 26px ;
+  }
+
+  &__block-null{
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    margin-top: 40px;
   }
 
   &__notification{

@@ -38,9 +38,9 @@
           >
         </div>
         <div  class="header__bottom-block-nav" >
-          <div  *ngIf="isAuthenticated" class="header__bottom-block-nav-orders" >
+          <div  *ngIf="isAuthenticated" (click)="handleCabinetClick()"  class="header__bottom-block-nav-orders" >
             <img src="assets/icon/icon-logistics.png">
-            <span (click)="handleCabinetClick()">
+            <span >
               {{authService.getRole() === 'seller' ? 'Кабинет' : 'Заказы'}}
             </span>
           </div>
