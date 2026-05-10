@@ -37,20 +37,34 @@
 
     <div class="seller__form-group">
       <label class="seller__form-group-label">Категория:</label>
-      <input
+      <select
         class="seller__form-group-input"
         [ngClass]="{'invalid-field': isInvalid('category')}"
-        type="text"
         formControlName="category">
+        <option value="">Выберите категорию</option>
+        <option *ngFor="let c of category" [value]="c">{{ c }}</option>
+      </select>
+<!--      <input-->
+<!--        class="seller__form-group-input"-->
+<!--        [ngClass]="{'invalid-field': isInvalid('category')}"-->
+<!--        type="text"-->
+<!--        formControlName="category">-->
     </div>
 
     <div class="seller__form-group">
       <label class="seller__form-group-label">Цвет:</label>
-      <input
+      <select
         class="seller__form-group-input"
         [ngClass]="{'invalid-field': isInvalid('color')}"
-        type="text"
         formControlName="color">
+        <option value="">Выберите цвет</option>
+        <option *ngFor="let c of colors" [value]="c">{{ c }}</option>
+      </select>
+<!--      <input-->
+<!--        class="seller__form-group-input"-->
+<!--        [ngClass]="{'invalid-field': isInvalid('color')}"-->
+<!--        type="text"-->
+<!--        formControlName="color">-->
     </div>
 
     <div class="seller__form-group">

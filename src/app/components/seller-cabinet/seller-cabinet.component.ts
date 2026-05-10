@@ -32,6 +32,10 @@ export class SellerCabinetComponent implements OnInit{
   notificationType: 'success' | 'error' = 'success';
   showNotification: boolean = false;
 
+  colors: string[] = ['Красный', 'Синий', 'Зеленый', 'Желтый', 'Черный', 'Белый']
+  category: string[] = ['Одежда', 'Обувь', 'Электроника', 'Книги', 'Инструменты', 'Мебель']
+
+
   private triggerNotification(message: string, type: 'success' | 'error' ){
     this.notificationMessage = message;
     this.notificationType = type;
@@ -59,6 +63,7 @@ export class SellerCabinetComponent implements OnInit{
       description: ['', Validators.required],
     })
   }
+
 
   handleFiles(files: FileList){
     const fileList = Array.from(files);
@@ -168,12 +173,12 @@ export class SellerCabinetComponent implements OnInit{
       ...this.sellerForm.value,
       article: generatedArticle,
       price: +this.sellerForm.value.price,
-      images: this.imagesBase64, // Массив строк Base64
-      imageUrl: this.imagesBase64[0], // Первое фото как главное
+      images: this.imagesBase64,
+      imageUrl: this.imagesBase64[0],
       rating: '0',
       votes: 0,
       itemCount: 1,
-    };
+    }
 
     if (userId) {
       this.dataService.addProduct(userId, product).subscribe(() => {
