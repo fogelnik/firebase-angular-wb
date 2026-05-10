@@ -1,3 +1,52 @@
+
+.seller-layout{
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.form-status-panel {
+  position: absolute;
+  right: 150px;
+  top: 130px;
+  min-width: 250px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+
+  h3 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      margin-bottom: 10px;
+      color: #000;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+
+
+      &.is-ready {
+        color: #28a745;
+
+        &::before {
+          content: '✓';
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}
+
 .seller{
   display: flex;
   flex-direction: column;

@@ -1,141 +1,155 @@
-<div class="seller">
+<div class="seller-layout">
+  <div class="seller">
 
-<!--  <div class="notification" [class.notification&#45;&#45;show]='showSuccessMessage'>-->
-<!--    Товар успешно добавлен! Артикул: {{ lastArticle }}-->
-<!--  </div>-->
-  <div class="notification"
-       [ngClass]="{
+    <!--  <div class="notification" [class.notification&#45;&#45;show]='showSuccessMessage'>-->
+    <!--    Товар успешно добавлен! Артикул: {{ lastArticle }}-->
+    <!--  </div>-->
+    <div class="notification"
+         [ngClass]="{
         'notification--show': showNotification,
          'notification--success': notificationType === 'success',
          'notification--error': notificationType === 'error'
        }"
-  >
-    {{ notificationMessage }}
+    >
+      {{ notificationMessage }}
+    </div>
+
+    <h2 class="seller__title">Добавление нового товара</h2>
+
+    <form class="seller__form" [formGroup]="sellerForm" (ngSubmit)="onSubmit()">
+
+      <div class="seller__form-group">
+        <label class="seller__form-group-label">Название товара:</label>
+        <input
+          class="seller__form-group-input"
+          [ngClass]="{'invalid-field': isInvalid('title')}"
+          type="text"
+          formControlName="title">
+      </div>
+
+      <!--    <div class="seller__form-group">-->
+      <!--      <label class="seller__form-group-label">Артикул:</label>-->
+      <!--      <input-->
+      <!--        class="seller__form-group-input"-->
+      <!--        [ngClass]="{'invalid-field': isInvalid('article')}"-->
+      <!--        type="text"-->
+      <!--        formControlName="article">-->
+      <!--    </div>-->
+
+      <div class="seller__form-group">
+        <label class="seller__form-group-label">Категория:</label>
+        <select
+          class="seller__form-group-input"
+          [ngClass]="{'invalid-field': isInvalid('category')}"
+          formControlName="category">
+          <option value="">Выберите категорию</option>
+          <option *ngFor="let c of category" [value]="c">{{ c }}</option>
+        </select>
+        <!--      <input-->
+        <!--        class="seller__form-group-input"-->
+        <!--        [ngClass]="{'invalid-field': isInvalid('category')}"-->
+        <!--        type="text"-->
+        <!--        formControlName="category">-->
+      </div>
+
+      <div class="seller__form-group">
+        <label class="seller__form-group-label">Цвет:</label>
+        <select
+          class="seller__form-group-input"
+          [ngClass]="{'invalid-field': isInvalid('color')}"
+          formControlName="color">
+          <option value="">Выберите цвет</option>
+          <option *ngFor="let c of colors" [value]="c">{{ c }}</option>
+        </select>
+        <!--      <input-->
+        <!--        class="seller__form-group-input"-->
+        <!--        [ngClass]="{'invalid-field': isInvalid('color')}"-->
+        <!--        type="text"-->
+        <!--        formControlName="color">-->
+      </div>
+
+      <div class="seller__form-group">
+        <label class="seller__form-group-label">Цена:</label>
+        <input
+          class="seller__form-group-input"
+          [ngClass]="{'invalid-field': isInvalid('price')}"
+          type="text"
+          formControlName="price">
+      </div>
+
+      <div class="seller__form-group">
+        <label class="seller__form-group-label">Описание:</label>
+        <input
+          class="seller__form-group-input"
+          [ngClass]="{'invalid-field': isInvalid('description')}"
+          type="text"
+          formControlName="description">
+      </div>
+
+
+      <div class="seller__drop-zone"
+           (dragover)="$event.preventDefault()"
+           (drop)="onFileDropped($event)"
+           (click)="fileInput.click()">
+        <p>Перетащите фото сюда или нажмите для выбора</p>
+        <input type="file" #fileInput hidden multiple (change)="onFileSelected($event)" accept="image/*">
+      </div>
+
+      <!-- Список загруженных картинок (Превью) -->
+      <div class="seller__previews">
+        <div class="seller__preview-item" *ngFor="let img of imagesBase64; let i = index">
+          <img [src]="img" alt="preview">
+          <button type="button" class="seller__preview-remove" (click)="removeImage(i)">×</button>
+        </div>
+      </div>
+
+      <div *ngIf="showValidationError && imagesBase64.length === 0" style="color: red; margin-bottom: 10px;">
+        Добавьте хотя бы одно изображение
+      </div>
+
+      <!--    <div class="seller__drag-drop"-->
+      <!--         (dragover)="$event.preventDefault()"-->
+      <!--         (drop)="onFileDrop($event)">-->
+      <!--      <p>Перетащите изображения сюда или нажмите для выбора</p>-->
+      <!--      <input type="file" multiple (change)="onFileSelected($event)" accept="image/*" #fileInput hidden>-->
+      <!--      <button type="button" (click)="fileInput.click()">Выбрать файлы</button>-->
+      <!--    </div>-->
+
+      <!--    <div class="seller__preview-grid">-->
+      <!--      <div class="seller__preview-item" *ngFor="let img of imagesBase64; let i = index">-->
+      <!--        <img [src]="img" class="seller__preview-img">-->
+      <!--        <button type="button" (click)="removeImage(i)">×</button>-->
+      <!--      </div>-->
+      <!--    </div>-->
+
+      <!--    <div class="seller__add-images" *ngFor="let img of imagesControls; let i = index">-->
+      <!--      <input-->
+      <!--        class="seller__add-images-input"-->
+      <!--        [formControl]="img"-->
+      <!--        [ngClass]="{'invalid-field': img.invalid && (img.touched || showValidationError)}"-->
+      <!--        placeholder="URL изображения">-->
+      <!--      <button class="seller__add-images-delete-item" type="button" (click)="removeImage(i)">Удалить</button>-->
+      <!--    </div>-->
+      <!--    <button class="seller__add-images-btn" type="button" (click)="addImage()">Добавить изображение</button>-->
+
+      <button
+        class="seller__add-button"
+        type="submit"
+      >
+        Опубликовать товар
+      </button>
+    </form>
   </div>
 
-  <h2 class="seller__title">Добавление нового товара</h2>
-
-  <form class="seller__form" [formGroup]="sellerForm" (ngSubmit)="onSubmit()">
-
-    <div class="seller__form-group">
-      <label class="seller__form-group-label">Название товара:</label>
-      <input
-        class="seller__form-group-input"
-        [ngClass]="{'invalid-field': isInvalid('title')}"
-        type="text"
-        formControlName="title">
-    </div>
-
-<!--    <div class="seller__form-group">-->
-<!--      <label class="seller__form-group-label">Артикул:</label>-->
-<!--      <input-->
-<!--        class="seller__form-group-input"-->
-<!--        [ngClass]="{'invalid-field': isInvalid('article')}"-->
-<!--        type="text"-->
-<!--        formControlName="article">-->
-<!--    </div>-->
-
-    <div class="seller__form-group">
-      <label class="seller__form-group-label">Категория:</label>
-      <select
-        class="seller__form-group-input"
-        [ngClass]="{'invalid-field': isInvalid('category')}"
-        formControlName="category">
-        <option value="">Выберите категорию</option>
-        <option *ngFor="let c of category" [value]="c">{{ c }}</option>
-      </select>
-<!--      <input-->
-<!--        class="seller__form-group-input"-->
-<!--        [ngClass]="{'invalid-field': isInvalid('category')}"-->
-<!--        type="text"-->
-<!--        formControlName="category">-->
-    </div>
-
-    <div class="seller__form-group">
-      <label class="seller__form-group-label">Цвет:</label>
-      <select
-        class="seller__form-group-input"
-        [ngClass]="{'invalid-field': isInvalid('color')}"
-        formControlName="color">
-        <option value="">Выберите цвет</option>
-        <option *ngFor="let c of colors" [value]="c">{{ c }}</option>
-      </select>
-<!--      <input-->
-<!--        class="seller__form-group-input"-->
-<!--        [ngClass]="{'invalid-field': isInvalid('color')}"-->
-<!--        type="text"-->
-<!--        formControlName="color">-->
-    </div>
-
-    <div class="seller__form-group">
-      <label class="seller__form-group-label">Цена:</label>
-      <input
-        class="seller__form-group-input"
-        [ngClass]="{'invalid-field': isInvalid('price')}"
-        type="text"
-        formControlName="price">
-    </div>
-
-    <div class="seller__form-group">
-      <label class="seller__form-group-label">Описание:</label>
-      <input
-        class="seller__form-group-input"
-        [ngClass]="{'invalid-field': isInvalid('description')}"
-        type="text"
-        formControlName="description">
-    </div>
-
-
-    <div class="seller__drop-zone"
-         (dragover)="$event.preventDefault()"
-         (drop)="onFileDropped($event)"
-         (click)="fileInput.click()">
-      <p>Перетащите фото сюда или нажмите для выбора</p>
-      <input type="file" #fileInput hidden multiple (change)="onFileSelected($event)" accept="image/*">
-    </div>
-
-    <!-- Список загруженных картинок (Превью) -->
-    <div class="seller__previews">
-      <div class="seller__preview-item" *ngFor="let img of imagesBase64; let i = index">
-        <img [src]="img" alt="preview">
-        <button type="button" class="seller__preview-remove" (click)="removeImage(i)">×</button>
-      </div>
-    </div>
-
-    <div *ngIf="showValidationError && imagesBase64.length === 0" style="color: red; margin-bottom: 10px;">
-      Добавьте хотя бы одно изображение
-    </div>
-
-<!--    <div class="seller__drag-drop"-->
-<!--         (dragover)="$event.preventDefault()"-->
-<!--         (drop)="onFileDrop($event)">-->
-<!--      <p>Перетащите изображения сюда или нажмите для выбора</p>-->
-<!--      <input type="file" multiple (change)="onFileSelected($event)" accept="image/*" #fileInput hidden>-->
-<!--      <button type="button" (click)="fileInput.click()">Выбрать файлы</button>-->
-<!--    </div>-->
-
-<!--    <div class="seller__preview-grid">-->
-<!--      <div class="seller__preview-item" *ngFor="let img of imagesBase64; let i = index">-->
-<!--        <img [src]="img" class="seller__preview-img">-->
-<!--        <button type="button" (click)="removeImage(i)">×</button>-->
-<!--      </div>-->
-<!--    </div>-->
-
-<!--    <div class="seller__add-images" *ngFor="let img of imagesControls; let i = index">-->
-<!--      <input-->
-<!--        class="seller__add-images-input"-->
-<!--        [formControl]="img"-->
-<!--        [ngClass]="{'invalid-field': img.invalid && (img.touched || showValidationError)}"-->
-<!--        placeholder="URL изображения">-->
-<!--      <button class="seller__add-images-delete-item" type="button" (click)="removeImage(i)">Удалить</button>-->
-<!--    </div>-->
-<!--    <button class="seller__add-images-btn" type="button" (click)="addImage()">Добавить изображение</button>-->
-
-    <button
-      class="seller__add-button"
-      type="submit"
-    >
-      Опубликовать товар
-    </button>
-  </form>
+  <div class="form-status-panel">
+    <h3>Статус заполнения:</h3>
+    <ul>
+      <li [class.is-ready]="sellerForm.get('title')?.valid">Название товара</li>
+      <li [class.is-ready]="sellerForm.get('category')?.valid">Категория</li>
+      <li [class.is-ready]="sellerForm.get('color')?.valid">Цвет</li>
+      <li [class.is-ready]="sellerForm.get('price')?.valid">Цена</li>
+      <li [class.is-ready]="sellerForm.get('description')?.valid">Описание</li>
+      <li [class.is-ready]="imagesBase64.length > 0">Фотографии</li>
+    </ul>
+  </div>
 </div>
