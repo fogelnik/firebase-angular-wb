@@ -7,6 +7,7 @@ import {BasketService} from '../../../services/basket.service';
 import {BasketComponent} from '../../basket/basket.component';
 import {FormsModule} from '@angular/forms';
 import {SearchService} from '../../../services/search.service';
+import {ThisReceiver} from '@angular/compiler';
 
 
 @Component({
@@ -23,6 +24,7 @@ import {SearchService} from '../../../services/search.service';
 export class HeaderComponent implements OnInit{
 
   isAuthenticated: boolean = false;
+  isAdmin = false;
 
   constructor(
     private auth: Auth,
@@ -35,7 +37,54 @@ export class HeaderComponent implements OnInit{
   ngOnInit() {
     onAuthStateChanged(this.auth, (user) => {
       this.isAuthenticated = !!user;
+
+      const role = this.authService.getRole();
+      this.isAdmin = role === 'admin';
     })
+  }
+
+  navigateAdmin() {
+    this.router.navigate(['/admin-cabinet'])
+  }
+
+  navigateUser(){
+    this.isAuthenticated
+      ? this.router.navigate(['profile'])
+      : this.router.navigate(['auth/sign-in']);
+
+    // if(this.isAuthenticated){
+    //   this.router.navigate(['profile']);
+    // }else {
+    //   this.router.navigate(['auth/sign-in']);
+    // }
+  }
+
+  navigateBasket(){
+    const role = this.authService.getRole();
+
+    role === 'seller'
+      ? this.router.navigate(['/seller-products'])
+      : this.router.navigate(['basket'])
+
+    // if(role === "seller"){
+    //   this.router.navigate(['/seller-products']);
+    // }else {
+    //   this.router.navigate(['basket'])
+    // }
+  }
+
+  handleCabinetClick(){
+
+    const role = this.authService.getRole();
+    role === 'seller'
+      ? this.router.navigate(['seller'])
+      : this.router.navigate(['orders']);
+
+    // if(this.authService.getRole() === 'seller'){
+    //   this.router.navigate(['seller']);
+    // }else {
+    //   this.router.navigate(['orders']);
+    // }
   }
 
   onSearch(event: Event){
@@ -43,37 +92,10 @@ export class HeaderComponent implements OnInit{
     this.searchService.setSearchTerm(value)
   }
 
-
   get count(): number{
     return this.basketService.getItemCount()
   }
 
-  navigateUser(){
-    if(this.isAuthenticated){
-      this.router.navigate(['profile']);
-    }else {
-      this.router.navigate(['auth/sign-in']);
-    }
-  }
-
-  navigateBasket(){
-
-    const role = this.authService.getRole();
-
-    if(role === "seller"){
-      this.router.navigate(['/seller-products']);
-    }else {
-      this.router.navigate(['basket'])
-    }
-  }
-
-  handleCabinetClick(){
-    if(this.authService.getRole() === 'seller'){
-      this.router.navigate(['seller']);
-    }else {
-      this.router.navigate(['orders']);
-    }
-  }
   navigateToWelcomePage(){
     this.router.navigate(['/'])
   }
@@ -81,5 +103,7 @@ export class HeaderComponent implements OnInit{
   goToFavorite(){
     this.router.navigate(['/favorites'])
   }
+
+
 
 }

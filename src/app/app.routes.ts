@@ -11,6 +11,10 @@ import { HomeComponent } from './components/dashboard/home/home.component';
 import {ProductDetailComponent} from './components/product-detail/product-detail.component';
 import {SellerCabinetComponent} from './components/seller-cabinet/seller-cabinet.component';
 import {SellerProductsComponent} from './components/seller-products/seller-products.component';
+import {AdminCabinetComponent} from './components/admin-cabinet/admin-cabinet.component';
+import {AdminGuard} from './guards/admin.guard';
+import {SellerGuard} from './guards/seller.guard';
+
 
 
 const redirectToLogin = () => redirectUnauthorizedTo('/auth/sign-in');
@@ -42,7 +46,19 @@ export const routes: Routes = [
   { path: 'product', component: ProductComponent },
   { path: 'basket', component: BasketComponent },
   { path: 'product/:id', component: ProductDetailComponent},
-  { path: 'seller', component: SellerCabinetComponent},
-  { path: 'seller-products', component: SellerProductsComponent},
-
+  {
+    path: 'seller',
+    component: SellerCabinetComponent,
+    canActivate: [SellerGuard]
+  },
+  {
+    path: 'seller-products',
+    component: SellerProductsComponent,
+    canActivate: [SellerGuard]
+  },
+  {
+    path: 'admin-cabinet',
+    component: AdminCabinetComponent,
+    canActivate: [AdminGuard]
+  }
 ];

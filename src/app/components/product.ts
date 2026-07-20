@@ -6,7 +6,7 @@ export interface Product {
   images?: string[]
   price: number;
   color: string;
-  rating: string;
+  rating: number;
   votes: number;
   itemCount: number;
   article: string;

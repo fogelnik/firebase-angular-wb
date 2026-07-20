@@ -247,4 +247,37 @@
     display: flex;
     justify-content: space-between;
   }
+
+  .header__bottom-block-nav-admin {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    background: linear-gradient(135deg, #9b4dff, #7a2cff);
+    padding: 10px 16px;
+    border-radius: 10px;
+
+    color: #fff;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 10px rgba(123, 0, 255, 0.25);
+
+    img {
+      width: 22px;
+      height: 22px;
+      filter: brightness(0) invert(1);
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(123, 0, 255, 0.35);
+    }
+
+    &:active {
+      transform: scale(0.97);
+    }
+  }
 }

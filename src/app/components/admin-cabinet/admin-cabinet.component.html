@@ -1,0 +1,30 @@
+
+<div class="admin-panel">
+  <h2>Товары, ожидающие модерации</h2>
+
+  <div *ngIf="products.length === 0" class="no-products">
+    Нет товаров, ожидающих модерации.
+  </div>
+
+  <div class="admin-grid" *ngIf="products.length > 0">
+    <div class="admin-card" *ngFor="let product of products">
+      <img [src]="product.imageUrl" [alt]="product.title" class="admin-card__img">
+
+      <div class="admin-card__info">
+        <h3>{{ product.title }}</h3>
+        <p><strong>Категория:</strong> {{ product.category }}</p>
+        <p><strong>Цена:</strong> {{ product.price }} p.</p>
+        <p><strong>Описание:</strong> {{ product.description }}</p>
+
+        <p class="status-badge">
+          Статус: {{ product.status }}
+        </p>
+      </div>
+
+      <div class="admin-card__actions">
+        <button class="btn-approve" (click)="approveProduct(product)">Одобрить</button>
+        <button class="btn-reject" (click)="rejectProduct(product)">Отклонить</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -44,11 +44,9 @@
               {{authService.getRole() === 'seller' ? 'Кабинет' : 'Заказы'}}
             </span>
           </div>
-          <div class="header__bottom-block-nav-addresses"
-          (click)="isAuthenticated ? goToFavorite() : null"
-          >
-            <img [src]=" isAuthenticated ? 'assets/icon/icon-heart.png' : 'assets/icon-location.png' ">
-            {{isAuthenticated ? 'Избранное' : 'Адреса'}}
+          <div class="header__bottom-block-nav-addresses" (click)="goToFavorite()">
+            <img [src]="isAuthenticated ? 'assets/icon/icon-heart.png' : 'assets/icon-location.png'">
+            {{ isAuthenticated ? 'Избранное' : 'Адреса' }}
           </div>
 
           <div class="header__bottom-block-nav-sign-in" (click)="navigateUser()" >
@@ -60,6 +58,14 @@
             {{authService.getRole() === 'seller' ? 'Товары' : 'Корзина'}}
 
             <span *ngIf="count > 0" class="header__bottom-block-nav-basket-count">{{count}}</span>
+          </div>
+
+          <div
+            *ngIf="isAdmin"
+            class="header__bottom-block-nav-admin"
+            (click)="navigateAdmin()"
+          >
+            <span>Админ</span>
           </div>
         </div>
       </div>

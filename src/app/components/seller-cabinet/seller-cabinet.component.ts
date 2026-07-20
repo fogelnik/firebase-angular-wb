@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} fr
 import {AuthService} from '../../services/auth.service';
 import {DataService} from '../../services/data.service';
 import {NgClass, NgForOf, NgIf} from '@angular/common';
+import {SellerProduct} from '../../seller-product';
 
 
 @Component({
@@ -22,11 +23,8 @@ export class SellerCabinetComponent implements OnInit{
   // imagesControls: FormControl[] = [];
   imagesBase64: string[] = [];
   showValidationError: boolean = false;
-
   showSuccessMessage: boolean = false;
   lastArticle: string = '';
-
-
 
   notificationMessage: string = '';
   notificationType: 'success' | 'error' = 'success';
@@ -34,7 +32,6 @@ export class SellerCabinetComponent implements OnInit{
 
   colors: string[] = ['Красный', 'Синий', 'Зеленый', 'Желтый', 'Черный', 'Белый']
   category: string[] = ['Одежда', 'Обувь', 'Электроника', 'Книги', 'Инструменты', 'Мебель']
-
 
   private triggerNotification(message: string, type: 'success' | 'error' ){
     this.notificationMessage = message;
@@ -45,8 +42,6 @@ export class SellerCabinetComponent implements OnInit{
       this.showNotification = false;
     }, 4000);
   }
-
-
 
   constructor(
     private fb: FormBuilder,
@@ -95,63 +90,10 @@ export class SellerCabinetComponent implements OnInit{
     this.imagesBase64.splice(index, 1);
   }
 
-
   isInvalid(controlName: string): boolean{
     const control = this.sellerForm.get(controlName);
     return !!(control && control.invalid && (control.touched || this.showValidationError));
-
   }
-  // addImage() {
-  //   const control = new FormControl('', Validators.required);
-  //   this.imagesControls.push(control);
-  //   this.sellerForm.addControl(`images${this.imagesControls.length - 1}`, control)
-  // }
-  // removeImage(i:number){
-  //   this.sellerForm.removeControl(`images${i}`);
-  //   this.imagesControls.splice(i, 1);
-  // }
-
-  // onSubmit(){
-  //
-  //   if(this.sellerForm.invalid){
-  //     this.showValidationError = true;
-  //     this.sellerForm.markAllAsTouched();
-  //     setTimeout(() => this.showValidationError = false, 3000);
-  //     return;
-  //   }
-  //   this.showValidationError = false;
-  //
-  //   const images = this.imagesControls
-  //     .map(c => c.value.trim())
-  //     .filter(value => value != '');
-  //
-  //   const userId = this.authService.getCurrentUserUid();
-  //
-  //   const product: any = {
-  //     title: this.sellerForm.value.title,
-  //     article: this.sellerForm.value.article,
-  //     category: this.sellerForm.value.category,
-  //     color: this.sellerForm.value.color,
-  //     price: +this.sellerForm.value.price,
-  //     description: this.sellerForm.value.description,
-  //     images: images,
-  //     imageUrl: images[0],
-  //     rating: '0',
-  //     votes: 0,
-  //     itemCount: 1,
-  //   }
-  //
-  //   if (userId){
-  //     this.dataService.addProduct(userId, product).subscribe(() => {
-  //       alert('Товар успешно добавлен!');
-  //       this.sellerForm.reset();
-  //       this.imagesControls = [];
-  //       this.showValidationError = false;
-  //     })
-  //   }else{
-  //     alert('Ошибка: пользователь не авторизован');
-  //   }
-  // }
 
   onSubmit() {
     // Проверяем форму + наличие хотя бы одной картинки
@@ -164,12 +106,11 @@ export class SellerCabinetComponent implements OnInit{
     }
 
     const userId = this.authService.getCurrentUserUid();
-
     // Приставка 'SKU-' поможет визуально отличить артикул от обычного числа
     const generatedArticle = 'SKU' + Date.now();
     this.lastArticle = generatedArticle;
 
-    const product: any = {
+    const product: SellerProduct = {
       ...this.sellerForm.value,
       article: generatedArticle,
       price: +this.sellerForm.value.price,
@@ -178,6 +119,8 @@ export class SellerCabinetComponent implements OnInit{
       rating: '0',
       votes: 0,
       itemCount: 1,
+      status: 'pending',
+      sellerId: userId,
     }
 
     if (userId) {

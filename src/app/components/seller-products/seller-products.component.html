@@ -1,34 +1,42 @@
 
-<div class="delete-notification" [class.show] = 'showDeleteMessage'>
-  Товар удален
+<div class="delete-notification" [class.show]="showDeleteMessage">
+  Товар удалён
 </div>
 
 <div class="product">
-  <h2 class="product__title">Мои добавленные товары товары</h2>
+  <h2 class="product__title">Мои товары</h2>
 
-  <div class="product__block-null" *ngIf="products.length === 0">Вы еще не добавили ни одного товара.</div>
+  <div class="product__block-null" *ngIf="products.length === 0">
+    Вы ещё не добавили ни одного товара.
+  </div>
 
   <div class="product__grid">
     <div class="product__card" *ngFor="let card of products">
 
-      <div class="slider">
-        <img [src]="card.imageUrl" [alt]="card.title" class="product__card-image">
-      </div>
+      <img [src]="card.imageUrl" [alt]="card.title" class="product__card-image">
 
       <div class="product__card-info">
-        <div class="product__card-info-price-block">
-          <p class="product__card-price">{{ card.price }} p.</p>
-        </div>
+        <p class="product__card-price">{{ card.price }} p.</p>
 
-        <div class="product__card-info-block">
-          <h3 class="product__card-title">{{ card.title }}</h3> /
-          <span class="product__card-description">{{ card.description }}</span>
-        </div>
+        <h3 class="product__card-title">{{ card.title }}</h3>
+        <span class="product__card-description">{{ card.description }}</span>
+
+        <p class="status">
+          Статус:
+          <span [ngClass]="{
+            'pending': card.status === 'pending',
+            'approved': card.status === 'approved',
+            'rejected': card.status === 'rejected'
+          }">
+            {{ card.status }}
+          </span>
+        </p>
+
         <button
           class="product__card-buy-button delete-btn"
-          (click)="deleteSellerProduct(card.id); $event.stopPropagation()"
+          (click)="deleteSellerProduct(card.id!); $event.stopPropagation()"
         >
-          <span>Удалить товар</span>
+          Удалить товар
         </button>
       </div>
     </div>
