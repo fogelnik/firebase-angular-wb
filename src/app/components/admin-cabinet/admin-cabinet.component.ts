@@ -43,10 +43,15 @@ export class AdminCabinetComponent implements OnInit {
   }
 
   approveProduct(product: SellerProduct){
-    this.dataService.updateProductStatus(product.sellerId!, product.sellerId!, "approved")
+    this.dataService.updateProductStatus(product.sellerId!, product.id!, "approved")
       .subscribe(() => {
+
         this.dataService.publishToCards(product).subscribe(() => {
           alert('Товар одобрен и опубликован!');
+
+          this.dataService.productPublished$.next();
+          this.dataService.pendingChanged$.next();
+
           this.loadProducts();
         });
       })
@@ -56,6 +61,7 @@ export class AdminCabinetComponent implements OnInit {
     this.dataService.updateProductStatus(product.sellerId!, product.id!, 'rejected')
       .subscribe(() => {
         alert('Товар отклонён');
+        this.dataService.pendingChanged$.next();
         this.loadProducts();
     })
   }

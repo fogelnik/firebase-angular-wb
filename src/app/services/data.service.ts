@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Product} from '../components/product';
-import {map, Observable, switchMap} from 'rxjs';
+import {map, Observable, Subject, switchMap} from 'rxjs';
 import {ProductResponse} from '../components/productResponse';
 import {SellerProduct} from '../seller-product';
 
@@ -15,6 +15,9 @@ export class DataService {
   private baseUrl = 'https://training-wb-angular-fire-proj-default-rtdb.firebaseio.com';
 
   constructor(public http: HttpClient) { }
+
+  pendingChanged$ = new Subject<void>();
+  productPublished$ = new Subject<void>();
 
 
   getAllSellersProducts(): Observable<SellerProduct[]> {
@@ -58,12 +61,16 @@ export class DataService {
     )
   }
 
-  publishToCards(product: SellerProduct){
-    const card = {
+  publishToCards(product: SellerProduct): Observable<any>{
+
+    const id = Date.now();
+
+    const card: Product = {
+      id,
       title: product.title,
       description: product.description,
-      imageUrl: product.imageUrl,
-      images: product.images,
+      imageUrl: product.imageUrl || (product.images?.[0] ?? ''),
+      images: product.images ?? [],
       price: product.price,
       color: product.color,
       article: product.article,
@@ -71,10 +78,12 @@ export class DataService {
       rating: 0,
       votes: 0,
       itemCount: 1,
-      isInCart: false
+      isInCart: false,
+      currentIndex: 0 //?
     };
 
-    return this.http.post(`${this.baseUrl}/cards.json`, card);
+    // return this.http.post(`${this.baseUrl}/cards.json`, card);
+    return this.http.put(`${this.baseUrl}/cards/${id}.json`, card);
   }
 
   getCards(): Observable<ProductResponse> {
@@ -129,4 +138,5 @@ export class DataService {
       `${baseUrl}/sellers/${userId}/products/${productId}.json`
     )
   }
+
 }

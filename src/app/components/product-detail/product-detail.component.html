@@ -1,3 +1,4 @@
+
 <div class="product__spinner-container">
   <div *ngIf="isLoading" class="product__spinner"></div>
 </div>
@@ -40,7 +41,8 @@
                    (click)="openProductDetail(card)"
                    [class.selected]="card.id === selectedSimilarCardId"
               >
-                <img [src]="card.images && card.images.length ? card.images[0] : card.imageUrl">
+<!--                <img [src]="card.images && card.images.length ? card.images[0] : card.imageUrl">-->
+                <img [src]="card.images?.[0] || card.imageUrl">
               </div>
           </div>
 

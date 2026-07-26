@@ -51,6 +51,10 @@ export class ProductComponent implements OnInit{
     this.searchService.searchTerm$.subscribe(term => {
       this.applyFilter(term)
     })
+
+    this.dataService.productPublished$.subscribe(() => {
+      this.loadProducts()
+    })
   }
 
 

@@ -1,0 +1,116 @@
+.admin-panel {
+  padding: 20px;
+  font-family: 'Inter', sans-serif;
+
+  h2 {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #333;
+  }
+}
+
+.no-products {
+  padding: 20px;
+  background: #f7f7f7;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 18px;
+  color: #777;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.admin-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  }
+}
+
+.admin-card__img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.admin-card__info {
+  padding: 16px;
+
+  h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  p {
+    margin: 4px 0;
+    font-size: 15px;
+    color: #444;
+
+    strong {
+      color: #222;
+    }
+  }
+}
+
+.status-badge {
+  margin-top: 10px;
+  display: inline-block;
+  padding: 6px 12px;
+  background: #ff4dd2;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.admin-card__actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  border-top: 1px solid #eee;
+}
+
+.btn-approve,
+.btn-reject {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border: none;
+}
+
+.btn-approve {
+  background: linear-gradient(135deg, #9b4dff, #7a2cff);
+  color: #fff;
+  margin-right: 10px;
+
+  &:hover {
+    background: linear-gradient(135deg, #a85fff, #8a3cff);
+    transform: translateY(-2px);
+  }
+}
+
+.btn-reject {
+  background: #ff4d4d;
+  color: #fff;
+
+  &:hover {
+    background: #ff6666;
+    transform: translateY(-2px);
+  }
+}

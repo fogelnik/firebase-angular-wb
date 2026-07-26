@@ -1,3 +1,4 @@
+
 <div class="header" >
   <div class="header__wrapper">
     <div class="header__content">
@@ -62,10 +63,13 @@
 
           <div
             *ngIf="isAdmin"
-            class="header__bottom-block-nav-admin"
+            class="header__admin-btn"
             (click)="navigateAdmin()"
           >
             <span>Админ</span>
+            <span *ngIf="pendingCount > 0" class="admin-count">
+              {{ pendingCount }}
+            </span>
           </div>
         </div>
       </div>
