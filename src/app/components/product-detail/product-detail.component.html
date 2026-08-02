@@ -69,7 +69,6 @@
           </div>
 
           <div class="product__block-info-article"> Артикл: {{product?.article}}</div>
-
         </div>
       </div>
       <div class="product__block-price">
@@ -86,6 +85,52 @@
         </div>
         <div class="product__block-price-favorite" (click)=" goToFavorites()">
           <img [src]=" addFavorites ? 'assets/icon/heart-hover.png' : 'assets/icon/icon-heart-basket.png'">
+        </div>
+      </div>
+    </div>
+
+
+    <div class="product-reviews">
+
+      <h2>Отзывы покупателей</h2>
+
+      <!-- Форма добавления отзыва (только для авторизованных) -->
+      <div class="review-form" *ngIf="isAuthenticated && product">
+    <textarea
+      [(ngModel)]="newReviewText"
+      placeholder="Ваш отзыв..."
+      class="review-textarea"
+    ></textarea>
+
+        <select [(ngModel)]="newReviewRating" class="review-rating">
+          <option *ngFor="let r of [1,2,3,4,5]" [value]="r">
+            {{ r }} ★
+          </option>
+        </select>
+
+        <button (click)="addReview()" class="review-submit-btn">
+          Оставить отзыв
+        </button>
+      </div>
+
+      <!-- Если отзывов нет -->
+      <div *ngIf="reviews.length === 0" class="no-reviews">
+        Пока нет отзывов — будьте первым!
+      </div>
+
+      <!-- Список отзывов -->
+      <div class="review-list" *ngIf="reviews.length > 0">
+        <div class="review-item" *ngFor="let r of reviews">
+          <div class="review-header">
+            <strong>{{ r.userName }}</strong>
+            <span class="review-stars">{{ r.rating }} ★</span>
+          </div>
+
+          <p class="review-text">{{ r.text }}</p>
+
+          <small class="review-date">
+            {{ r.date | date:'medium' }}
+          </small>
         </div>
       </div>
     </div>

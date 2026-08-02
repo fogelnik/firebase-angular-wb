@@ -33,6 +33,17 @@ export class AuthService {
     });
   }
 
+
+  getUserId(): string | null {
+    return this.auth.currentUser?.uid ?? null;
+  }
+
+  getUserName(): string {
+    return this.auth.currentUser?.displayName
+      ?? this.auth.currentUser?.email
+      ?? 'Гость';
+  }
+
   private determineRole(email:string): UserRole{
     if(this.adminEmails.includes(email)) return "admin";
     if(this.sellerEmails.includes(email)) return 'seller';
@@ -75,4 +86,6 @@ export class AuthService {
   getCurrentUserUid(): string | null {
     return this.auth.currentUser?.uid ?? null;
   }
+
+
 }

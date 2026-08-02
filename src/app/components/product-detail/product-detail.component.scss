@@ -237,6 +237,115 @@
     width: 36px;
   }
 
+
+
+  .product-reviews {
+    margin-top: 30px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+
+  /* Заголовок */
+  .product-reviews h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  /* Форма добавления отзыва */
+  .review-form {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Поле ввода текста */
+  .review-textarea {
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    resize: none;
+  }
+
+  /* Выбор рейтинга */
+  .review-rating {
+    width: 120px;
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+  }
+
+  /* Кнопка отправки */
+  .review-submit-btn {
+    width: 160px;
+    padding: 8px 12px;
+    background: #9b4dff;
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    font-weight: 600;
+    transition: 0.2s ease;
+  }
+
+  .review-submit-btn:hover {
+    background: #a85fff;
+  }
+
+  /* Блок "нет отзывов" */
+  .no-reviews {
+    color: #777;
+    font-style: italic;
+    padding: 10px 0;
+  }
+
+  /* Список отзывов */
+  .review-list {
+    margin-top: 20px;
+  }
+
+  /* Один отзыв */
+  .review-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  /* Заголовок отзыва */
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  /* Звёзды */
+  .review-stars {
+    color: #9b4dff;
+    font-weight: 600;
+  }
+
+  /* Текст отзыва */
+  .review-text {
+    margin: 8px 0;
+    font-size: 15px;
+    color: #444;
+  }
+
+  /* Дата */
+  .review-date {
+    color: #999;
+    font-size: 13px;
+  }
+
+
   &__recommendations{
     margin-top: 30px;
 

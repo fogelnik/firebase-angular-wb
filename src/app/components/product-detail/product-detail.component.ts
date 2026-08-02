@@ -2,15 +2,20 @@ import {Component, OnInit} from '@angular/core';
 import {Product} from "../product";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DataService} from "../../services/data.service";
-import {NgForOf, NgIf} from '@angular/common';
+import {DatePipe, NgForOf, NgIf} from '@angular/common';
 import {BasketService} from '../../services/basket.service';
+import {Review} from '../review';
+import {AuthService} from '../../services/auth.service';
+import {FormsModule} from '@angular/forms';
 
 
 @Component({
   selector: 'app-product-detail',
   imports: [
     NgIf,
-    NgForOf
+    NgForOf,
+    DatePipe,
+    FormsModule
   ],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss'
@@ -31,25 +36,41 @@ export class ProductDetailComponent implements OnInit{
 
   selectedSimilarCardId: number | null = null;
 
+  reviews: Review[] = [];
+  newReviewText = '';
+  newReviewRating = 5;
+  isAuthenticated = false;
 
   constructor(
       private route: ActivatedRoute,
       private dataService: DataService,
       private basketService: BasketService,
       private router: Router,
+      private authService: AuthService,
   ) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
 
+    this.isAuthenticated = !!this.authService.getCurrentUserUid();
+
+    this.route.paramMap.subscribe(params => {
       const idParam = params.get('id');
-      // Ищу число id из URL — например, если URL /product/123, то id = 123
-      if(idParam){
-        const id = Number(idParam);
-        // Преобразую его в число (Number(idParam)) и вызываю loadCard, чтобы загрузить данные о товаре
-        this.loadCard(id)
+
+      if (!idParam) {
+        console.error('ID товара не найден в URL');
+        return;
       }
-    })
+
+      const id = Number(idParam);
+
+      if (isNaN(id)) {
+        console.error('Некорректный ID в URL:', idParam);
+        return;
+      }
+
+      this.loadCard(id);
+      this.loadReviews(id);
+    });
   }
 
   loadCard(id: number){
@@ -64,18 +85,70 @@ export class ProductDetailComponent implements OnInit{
       this.isLoading = false;
 
       if(this.product){
-        this.selectedImage = this.product.images?.length ? this.product.images[0] : (this.product.imageUrl || null);
+        this.selectedImage = this.product.images?.length
+        ? this.product.images[0]
+          : (this.product.imageUrl || null);
 
-          if(this.product.category){
-            this.loadRecommendations(this.product.category, id);
-          }
-
-          if(this.product.description){
-            this.loadSimilarCards(this.product.description)
-          }
+        if(this.product.category){
+          this.loadRecommendations(this.product.category, id);
+        }
+        if(this.product.description){
+          this.loadSimilarCards(this.product.description)
+        }
       }
     })
   }
+
+  loadReviews(productId: number){
+    this.dataService.getReviews(productId).subscribe(reviews => {
+      this.reviews = reviews;
+    })
+  }
+
+  addReview() {
+    if (!this.product) {
+      console.error('Товар не загружен');
+      return;
+    }
+
+    if (!this.product.id || isNaN(this.product.id)) {
+      console.error('Некорректный product.id:', this.product.id);
+      return;
+    }
+
+    const review: Review = {
+      id: Date.now(),
+      productId: this.product.id,
+      userId: this.authService.getUserId(),
+      userName: this.authService.getUserName(),
+      rating: this.newReviewRating,
+      text: this.newReviewText,
+      date: new Date().toISOString()
+    };
+
+    this.dataService.addReview(this.product.id, review).subscribe(() => {
+      this.reviews.push(review);
+
+      const votes = this.reviews.length;
+
+      const ratingSum = this.reviews.reduce((sum, r) => sum + r.rating, 0);
+      const rating = ratingSum / votes;
+
+      if (!this.product) {
+        console.error('product is null');
+        return;
+      }
+
+      this.dataService.updateProductRating(this.product.id, rating, votes). subscribe(() => {
+        this.product!.rating = rating;
+        this.product!.votes = votes;
+
+        this.newReviewText = '';
+        this.newReviewRating = 5;
+      })
+    })
+  }
+
 
   loadSimilarCards(description: string){
     this.dataService.getCards().subscribe(cards => {

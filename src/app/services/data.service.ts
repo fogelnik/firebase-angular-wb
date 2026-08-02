@@ -4,6 +4,7 @@ import {Product} from '../components/product';
 import {map, Observable, Subject, switchMap} from 'rxjs';
 import {ProductResponse} from '../components/productResponse';
 import {SellerProduct} from '../seller-product';
+import {Review} from '../components/review';
 
 @Injectable({
   providedIn: 'root'
@@ -138,5 +139,32 @@ export class DataService {
       `${baseUrl}/sellers/${userId}/products/${productId}.json`
     )
   }
+
+  addReview(productId: number, review: Review): Observable<any>{
+    return this.http.put(
+      `${this.baseUrl}/reviews/${productId}/${review.id}.json`,
+      review
+    );
+  }
+
+  getReviews(productId: number): Observable<Review[]>{
+    return this.http.get<any>(`${this.baseUrl}/reviews/${productId}.json`).pipe(
+      map(response => {
+        if(!response) return [];
+        return Object.keys(response).map(key => ({
+          id: Number(key),
+          ...response[key]
+        }));
+      })
+    );
+  }
+
+  updateProductRating(productId: number, rating: number, votes: number){
+    return this.http.patch(
+      `${this.baseUrl}/cards/${productId}.json`,
+      { rating, votes }
+    );
+  }
+
 
 }
