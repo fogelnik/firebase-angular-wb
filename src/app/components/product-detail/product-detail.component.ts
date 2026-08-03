@@ -41,6 +41,9 @@ export class ProductDetailComponent implements OnInit{
   newReviewRating = 5;
   isAuthenticated = false;
 
+  hoverRating = 0;
+  reviewError: string | null = null;
+
   constructor(
       private route: ActivatedRoute,
       private dataService: DataService,
@@ -73,6 +76,9 @@ export class ProductDetailComponent implements OnInit{
     });
   }
 
+  setRating(star: number){
+    this.newReviewRating = star;
+  }
   loadCard(id: number){
     this.isLoading = true;
     this.selectedImage = null;
@@ -115,6 +121,13 @@ export class ProductDetailComponent implements OnInit{
       console.error('Некорректный product.id:', this.product.id);
       return;
     }
+
+    if(!this.newReviewText || this.newReviewText.trim().length === 0){
+      this.reviewError = 'Пожалуйста, напишите отзыв перед отправкой';
+      return;
+    }
+
+    this.reviewError = null;
 
     const review: Review = {
       id: Date.now(),

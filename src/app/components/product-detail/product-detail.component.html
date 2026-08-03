@@ -101,12 +101,29 @@
       placeholder="Ваш отзыв..."
       class="review-textarea"
     ></textarea>
+        <div class="review-error" *ngIf="reviewError">
+          {{ reviewError }}
+        </div>
 
-        <select [(ngModel)]="newReviewRating" class="review-rating">
-          <option *ngFor="let r of [1,2,3,4,5]" [value]="r">
-            {{ r }} ★
-          </option>
-        </select>
+
+        <!--        <select [(ngModel)]="newReviewRating" class="review-rating">-->
+<!--          <option *ngFor="let r of [1,2,3,4,5]" [value]="r">-->
+<!--            {{ r }} ★-->
+<!--          </option>-->
+<!--        </select>-->
+
+        <div class="rating-stars">
+          <span
+            *ngFor="let star of [1,2,3,4,5]"
+            (click)="setRating(star)"
+            (mouseover)="hoverRating = star"
+            (mouseleave)="hoverRating = 0"
+            [class.filled]="star <= (hoverRating || newReviewRating)"
+          >
+            ★
+          </span>
+        </div>
+
 
         <button (click)="addReview()" class="review-submit-btn">
           Оставить отзыв
@@ -115,7 +132,7 @@
 
       <!-- Если отзывов нет -->
       <div *ngIf="reviews.length === 0" class="no-reviews">
-        Пока нет отзывов — будьте первым!
+        Пока нет отзывов!
       </div>
 
       <!-- Список отзывов -->

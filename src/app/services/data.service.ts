@@ -63,7 +63,6 @@ export class DataService {
   }
 
   publishToCards(product: SellerProduct): Observable<any>{
-
     const id = Date.now();
 
     const card: Product = {
@@ -165,6 +164,4 @@ export class DataService {
       { rating, votes }
     );
   }
-
-
 }
